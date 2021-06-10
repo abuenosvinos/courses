@@ -39,7 +39,7 @@ docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php ./vendor/bin/sim
 
 El siguiente comando es el que obtiene los cursos de la fuente original. Este comando deberá ser ejecutado diariamente para obtener las actualizaciones de información.
 
-```
+```bash
 docker exec -it course_php php bin/console app:sync-source-truth
 ```
 
@@ -52,6 +52,14 @@ En la carpeta `tests` se pueden encontrar tres formas de ejecutar el buscador:
 - `curl.txt` para ejecutarlo por consola
 - `http-requests` scripts de ejecución dentro de phpstorm
 - `postman` para importarlo en postman
+
+## Finalización
+
+Una vez finalizadas las pruebas deberás ejecutar el siguiente comando.
+
+```bash
+docker-compose -f ./docker/docker-compose.yml down
+```
 
 ## Mejoras
 
