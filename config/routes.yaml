@@ -1,0 +1,11 @@
+index:
+    path: /
+    controller: App\Course\Infrastructure\UI\Controller\IndexController::index
+
+user:
+    path: /user
+    controller: App\Course\Infrastructure\UI\Controller\UserController::index
+
+courses:
+    path: /courses
+    controller: App\Course\Infrastructure\UI\Controller\SearchController::index

@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "6ad636ab-fe80-4226-a30c-510eacab1414",
+		"name": "Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-AUTH-TOKEN",
+						"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/courses?category=Deporte&orderBy=price",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courses"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Deporte"
+						},
+						{
+							"key": "level",
+							"value": "Avanzado",
+							"disabled": true
+						},
+						{
+							"key": "priceMin",
+							"value": "100",
+							"disabled": true
+						},
+						{
+							"key": "priceMax",
+							"value": "300",
+							"disabled": true
+						},
+						{
+							"key": "orderBy",
+							"value": "price"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

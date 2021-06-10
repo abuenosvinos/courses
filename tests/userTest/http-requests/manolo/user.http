@@ -1,0 +1,4 @@
+GET http://localhost:8080/user
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..gT0KWRpZUPvYn5Pi.Q2UA32wGieoCGv3mit_Gh3uJBNj36xU.jX52q88ynWfzhGA3ZbDoYQ
+###

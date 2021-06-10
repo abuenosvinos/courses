@@ -1,0 +1,13 @@
+Course	Description	Category	Level
+Aprende a programar con Arduino y abre las puertas a la robótica	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Tech	Básico
+Programación para niñ@s con Scratch	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Tech	Básico
+Iniciación a la programación	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Tech	Básico
+Las matemáticas son divertidas	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Refuerzo	Intermedio
+Refuerzo Lengua 3º Primaria	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Refuerzo	Intermedio
+Aprende a bailar al estilo más Funky	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Deporte	Básico
+Mugendo - Básico	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Deporte	Básico
+Mugendo - Intermedio	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Deporte	Intermedio
+Mugendo - Avanzado	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Deporte	Avanzado
+Iniciación a la programación en C	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Tech	Básico
+Iniciación a la programación en Java	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Tech	Básico
+Conviértete en un gran Chef	Lorem ipsum dolor sit amet, consectetur adipiscing elit nam eros.	Habilidades	Intermedio

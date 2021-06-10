@@ -1,0 +1,5 @@
+parameters:
+    sourceTruth:
+        path: '%kernel.project_dir%/data/courses_test.txt'
+    prices:
+        url: 'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1'

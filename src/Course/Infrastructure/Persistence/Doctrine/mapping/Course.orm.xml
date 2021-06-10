@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Course\Domain\Entity\Course" table="course">
+
+        <id name="code" type="string" column="code" length="255" />
+        <field name="description" type="string" column="description" length="255" />
+        <field name="category" type="string" column="category" length="255" />
+        <field name="level" type="string" column="level" length="255" />
+        <field name="price" type="integer" column="price" />
+        <!--
+        <embedded name="category" class="App\Course\Domain\Entity\Category" use-column-prefix="false" />
+        <embedded name="level" class="App\Course\Domain\Entity\Level" use-column-prefix="false" />
+        -->
+    </entity>
+</doctrine-mapping>

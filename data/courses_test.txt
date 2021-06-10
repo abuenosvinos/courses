@@ -1,0 +1,6 @@
+Course	Description	Category	Level
+Course A	Description A	CAT1	LEV1
+Course B	Description B	CAT1	LEV2
+Course C	Description C	CAT2	LEV1
+Course D	Description D	CAT2	LEV2
+Course E	Description E	CAT2	LEV3

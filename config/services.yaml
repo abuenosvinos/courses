@@ -1,0 +1,51 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    sourceTruth.path: '%kernel.project_dir%/data/courses.txt'
+    prices.url: 'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1'
+    jwt.key: 'fj2cñlcf23v2Vf2cj45tvj43v6j4'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Domain/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Course\Infrastructure\UI\Controller\:
+        resource: '../src/Course/Infrastructure/UI/Controller/'
+        tags: ['controller.service_arguments']
+
+    App\Course\Infrastructure\ThirdParty\ThirdPartyPricesRepository:
+        arguments:
+            - '%prices.url%'
+            - '@Symfony\Contracts\HttpClient\HttpClientInterface'
+
+    App\Course\Infrastructure\FileSystem\FileSystemSourceTruthRepository:
+        arguments:
+            - '%sourceTruth.path%'
+
+    App\Course\Infrastructure\JWT\Encrypt:
+        arguments:
+            - '%jwt.key%'
+
+    App\Course\Infrastructure\JWT\Decrypt:
+        arguments:
+            - '%jwt.key%'
+
+    App\Course\Domain\Repository\CourseRepository:
+        class: 'App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository'
