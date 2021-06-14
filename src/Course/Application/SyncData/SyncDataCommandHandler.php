@@ -8,17 +8,17 @@ use App\Shared\Domain\Bus\Command\CommandHandler;
 
 final class SyncDataCommandHandler implements CommandHandler
 {
-    private SyncData $configurePlanet;
+    private SyncData $syncData;
 
-    public function __construct(SyncData $configurePlanet)
+    public function __construct(SyncData $syncData)
     {
-        $this->configurePlanet = $configurePlanet;
+        $this->syncData = $syncData;
     }
 
     public function __invoke(SyncDataCommand $command)
     {
         $courses = $command->courses();
 
-        $this->configurePlanet->__invoke($courses);
+        $this->syncData->__invoke($courses);
     }
 }
