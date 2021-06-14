@@ -29,8 +29,8 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
 
     public function findByCriteria(SearchParams $searchParams): Paginator
     {
-        $limit = 1000;
-        $page = 1;
+        $limit = $searchParams->limit();
+        $page = $searchParams->page();
 
         $query = $this->repository(Course::class)->createQueryBuilder('c');
 
