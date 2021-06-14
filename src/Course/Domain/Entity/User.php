@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Security;
+declare(strict_types = 1);
 
+namespace App\Course\Domain\Entity;
+
+use App\Shared\Domain\Aggregate\AggregateRoot;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class Admin implements UserInterface
+class User extends AggregateRoot implements UserInterface
 {
     private string $username;
     private array $roles = [];

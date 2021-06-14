@@ -2,6 +2,8 @@
 
 namespace App\Course\Infrastructure\UI\Security;
 
+use App\Course\Domain\Entity\User;
+use App\Course\Domain\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -10,6 +12,13 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * Symfony calls this method if you use features like switch_user
      * or remember_me.
@@ -23,10 +32,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      */
     public function loadUserByIdentifier(string $username)
     {
-        $admin = new Admin();
-        $admin->setUsername($username);
-        $admin->setRoles(['ROLE_ADMIN']);
-        return $admin;
+        return $this->userRepository->find($username);
     }
 
     public function loadUserByUsername(string $username)
@@ -49,7 +55,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof Admin) {
+        if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
         }
 
@@ -64,7 +70,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      */
     public function supportsClass($class)
     {
-        return Admin::class === $class || is_subclass_of($class, Admin::class);
+        return User::class === $class || is_subclass_of($class, User::class);
     }
 
     /**

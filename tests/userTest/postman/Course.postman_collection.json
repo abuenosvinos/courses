@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/search",
+			"name": "http://localhost:8080/courses",
 			"request": {
 				"method": "GET",
 				"header": [
