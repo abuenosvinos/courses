@@ -95,7 +95,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "run-tests" : "./vendor/bin/simple-phpunit",
+        "check-style": "./vendor/bin/phpcs --standard=PSR12 src tests --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1"
     },
     "conflict": {
         "symfony/symfony": "*"

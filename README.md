@@ -32,13 +32,13 @@ docker exec -it course_php php bin/console doctrine:schema:update --force --env=
 Para ejecutar la suite de pruebas ejecuta el siguiente comando.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php ./vendor/bin/simple-phpunit
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php php /var/www/composer.phar run-tests
 ```
 
 Para verificar la cálidad del código
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php ./vendor/bin/phpcs --standard=PSR12 src tests --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php php /var/www/composer.phar check-style
 ```
 
 ## Usuarios
