@@ -7,6 +7,7 @@ namespace App\Tests\Course\Infrastructure\FileSystem;
 use App\Course\Domain\DTO\Course;
 use App\Course\Infrastructure\FileSystem\FileSystemSourceTruthRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 use function Lambdish\Phunctional\first;
 
 class FileSystemSourceTruthRepositoryTest extends KernelTestCase

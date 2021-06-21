@@ -20,10 +20,12 @@ class FileSystemSourceTruthRepository implements SourceTruthRepository
     public function load(): Courses
     {
         $courses = new Courses();
-        if (($fp = fopen($this->pathFile, "r")) !== FALSE) {
+        if (($fp = fopen($this->pathFile, "r")) !== false) {
             $row = 1;
-            while (($data = fgetcsv($fp, 1000, "\t")) !== FALSE) {
-                if ($row++ == 1) continue;
+            while (($data = fgetcsv($fp, 1000, "\t")) !== false) {
+                if ($row++ == 1) {
+                    continue;
+                }
 
                 $courses->addCourse(new Course(
                     $data[0],

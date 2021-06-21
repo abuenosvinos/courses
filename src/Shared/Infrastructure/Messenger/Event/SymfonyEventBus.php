@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Messenger\Event;
 
@@ -24,7 +24,7 @@ class SymfonyEventBus implements EventBus
     public function notify(Event $event): void
     {
         try {
-            $this->bus->dispatch( (new Envelope($event))
+            $this->bus->dispatch((new Envelope($event))
                 ->with(new DispatchAfterCurrentBusStamp()));
         } catch (NoHandlerForMessageException $unused) {
             throw new EventNotRegisteredError($event);

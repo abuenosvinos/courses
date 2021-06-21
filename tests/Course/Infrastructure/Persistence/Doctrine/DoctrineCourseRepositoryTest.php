@@ -9,6 +9,7 @@ use App\Tests\Shared\Domain\CourseMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 use function Lambdish\Phunctional\apply;
 
 class DoctrineCourseRepositoryTest extends KernelTestCase

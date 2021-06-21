@@ -35,6 +35,12 @@ Para ejecutar la suite de pruebas ejecuta el siguiente comando.
 docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php ./vendor/bin/simple-phpunit
 ```
 
+Para verificar la cálidad del código
+
+```bash
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php ./vendor/bin/phpcs --standard=PSR12 src tests --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1
+```
+
 ## Usuarios
 
 Dentro de la carpeta `tests/userTest` se pueden encontrar tres formas de ejecutar el buscador: 

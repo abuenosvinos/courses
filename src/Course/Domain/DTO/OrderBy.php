@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Course\Domain\DTO;
 
@@ -8,9 +8,9 @@ use App\Shared\Domain\ValueObject\Enum;
 
 final class OrderBy extends Enum
 {
-    const CATEGORY = 'category';
-    const LEVEL = 'level';
-    const PRICE = 'price';
+    public const CATEGORY = 'category';
+    public const LEVEL = 'level';
+    public const PRICE = 'price';
 
     protected function throwExceptionForInvalidValue($value)
     {

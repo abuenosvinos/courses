@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Course\Application\SyncData;
 
@@ -26,7 +26,6 @@ final class SyncData
         $coursesDatabase = $this->courseRepository->searchAll();
         /** @var Course $coursesDatabase */
         foreach ($coursesDatabase as $courseDatabase) {
-
             $find = false;
 
             /** @var CourseDTO $course */

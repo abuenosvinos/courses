@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Tests\Shared\Infrastructure\Persistence\Doctrine;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+
 use function Lambdish\Phunctional\first;
 use function Lambdish\Phunctional\map;
 

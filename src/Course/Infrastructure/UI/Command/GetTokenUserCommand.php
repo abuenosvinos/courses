@@ -57,7 +57,6 @@ class GetTokenUserCommand extends Command
 
         if ($token) {
             $this->io->success('Token: ' . $token);
-
         } else {
             $this->io->success('No se ha podido obtener un token para el usuario indicado');
         }

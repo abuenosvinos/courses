@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Domain\ValueObject;
 
 use ReflectionClass;
+
 use function Lambdish\Phunctional\reindex;
 
 abstract class Enum
