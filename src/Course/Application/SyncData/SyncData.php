@@ -7,18 +7,24 @@ namespace App\Course\Application\SyncData;
 use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\DTO\Courses;
 use App\Course\Domain\Entity\Course;
+use App\Course\Domain\Event\CourseAdded;
+use App\Course\Domain\Event\CourseDeleted;
+use App\Course\Domain\Event\CourseModified;
 use App\Course\Domain\Repository\CourseRepository;
 use App\Course\Domain\Repository\PricesRepository;
+use App\Shared\Domain\Bus\Event\EventBus;
 
 final class SyncData
 {
     private CourseRepository $courseRepository;
     private PricesRepository $pricesRepository;
+    private EventBus $bus;
 
-    public function __construct(CourseRepository $courseRepository, PricesRepository $pricesRepository)
+    public function __construct(CourseRepository $courseRepository, PricesRepository $pricesRepository, EventBus $bus)
     {
         $this->courseRepository = $courseRepository;
         $this->pricesRepository = $pricesRepository;
+        $this->bus        = $bus;
     }
 
     public function __invoke(Courses $courses)
@@ -38,6 +44,8 @@ final class SyncData
 
             if (!$find) {
                 $this->courseRepository->delete($courseDatabase);
+
+                $this->bus->notify(...[new CourseDeleted(['course' => $courseDatabase])]);
             }
         }
 
@@ -46,6 +54,8 @@ final class SyncData
             $courseDatabase = $this->courseRepository->find($course->code());
             if (isset($courseDatabase)) {
                 $courseDatabase->syncData($course->description(), $course->category(), $course->level());
+
+                $this->bus->notify(...[new CourseAdded(['course' => $courseDatabase])]);
             } else {
                 $courseDatabase = Course::create(
                     $course->code(),
@@ -54,6 +64,8 @@ final class SyncData
                     $course->level(),
                     $this->pricesRepository->get()
                 );
+
+                $this->bus->notify(...[new CourseModified(['course' => $courseDatabase])]);
             }
             $this->courseRepository->save($courseDatabase);
         }
