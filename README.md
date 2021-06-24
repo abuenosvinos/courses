@@ -12,19 +12,19 @@ docker-compose -f ./docker/docker-compose.yml up -d --build
 Instalación de las dependencias de la aplicación.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php php /var/www/composer.phar install
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar install
 ```
 
 Creación de la base de datos.
 
 ```bash
-docker exec -it course_php php bin/console doctrine:schema:update --force
+docker exec -it docker_course_php_1 php bin/console doctrine:schema:update --force
 ```
 
 Creación de la base de datos de test.
 
 ```bash
-docker exec -it course_php php bin/console doctrine:schema:update --force --env=test
+docker exec -it docker_course_php_1 php bin/console doctrine:schema:update --force --env=test
 ```
 
 ## Pruebas
@@ -32,13 +32,13 @@ docker exec -it course_php php bin/console doctrine:schema:update --force --env=
 Para ejecutar la suite de pruebas ejecuta el siguiente comando.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php php /var/www/composer.phar run-tests
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-tests
 ```
 
 Para verificar la cálidad del código
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) course_php php /var/www/composer.phar check-style
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
 ```
 
 ## Usuarios
@@ -52,8 +52,8 @@ Dentro de la carpeta `tests/userTest` se pueden encontrar tres formas de ejecuta
 Para crear los usuarios de prueba que contienen estas urls hay que ejecutar los siguientes comandos:
 
 ```bash
-docker exec -it course_php php bin/console app:new-user abuenosvinos
-docker exec -it course_php php bin/console app:new-user manolo
+docker exec -it docker_course_php_1 php bin/console app:new-user abuenosvinos
+docker exec -it docker_course_php_1 php bin/console app:new-user manolo
 ```
 
 Se puede crear cualquier usuario que se considere.
@@ -61,7 +61,7 @@ Se puede crear cualquier usuario que se considere.
 Para obtener su clave de acceso hay que lanzar el comando:
 
 ```bash
-docker exec -it course_php php bin/console app:get-token-user abuenosvinos
+docker exec -it docker_course_php_1 php bin/console app:get-token-user abuenosvinos
 ```
 
 Dicho token deberá ser utilizado como valor de la cabecera `X-AUTH-TOKEN`
@@ -71,7 +71,7 @@ Dicho token deberá ser utilizado como valor de la cabecera `X-AUTH-TOKEN`
 El siguiente comando es el que obtiene los cursos de la fuente original. Este comando deberá ser ejecutado diariamente para obtener las actualizaciones de información.
 
 ```bash
-docker exec -it course_php php bin/console app:sync-source-truth
+docker exec -it docker_course_php_1 php bin/console app:sync-source-truth
 ```
 
 ## Ejecución
