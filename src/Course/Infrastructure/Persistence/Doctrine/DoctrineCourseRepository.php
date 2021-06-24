@@ -7,7 +7,6 @@ namespace App\Course\Infrastructure\Persistence\Doctrine;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Repository\CourseRepository;
-use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -23,9 +22,9 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         $this->remove($course);
     }
 
-    public function findById(Uuid $id): ?Course
+    public function findById(string $id): ?Course
     {
-        return $this->repository(Course::class)->find($id->value());
+        return $this->repository(Course::class)->find($id);
     }
 
     public function findByCode(string $code): ?Course

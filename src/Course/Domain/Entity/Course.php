@@ -9,14 +9,15 @@ use App\Shared\Domain\ValueObject\Uuid;
 
 final class Course extends AggregateRoot
 {
-    private Uuid $id;
+    private string $id;
     private string $code;
+    private string $slug;
     private string $description;
     private string $category;
     private string $level;
     private int $price;
 
-    private function __construct(Uuid $id, string $code, string $description, string $category, string $level, int $price)
+    private function __construct(string $id, string $code, string $description, string $category, string $level, int $price)
     {
         $this->id = $id;
         $this->code = $code;
@@ -26,7 +27,7 @@ final class Course extends AggregateRoot
         $this->price = $price;
     }
 
-    public function id(): Uuid
+    public function id(): string
     {
         return $this->id;
     }
@@ -34,6 +35,11 @@ final class Course extends AggregateRoot
     public function code(): string
     {
         return $this->code;
+    }
+
+    public function slug(): string
+    {
+        return $this->slug;
     }
 
     public function description(): string
@@ -63,7 +69,7 @@ final class Course extends AggregateRoot
         $this->level = $level;
     }
 
-    public static function create(Uuid $id, string $code, string $description, string $category, string $level, int $price)
+    public static function create(string $id, string $code, string $description, string $category, string $level, int $price)
     {
         return new self($id, $code, $description, $category, $level, $price);
     }

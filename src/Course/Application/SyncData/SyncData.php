@@ -31,6 +31,7 @@ final class SyncData
     public function __invoke(Courses $courses)
     {
         $coursesDatabase = $this->courseRepository->searchAll();
+
         /** @var Course $coursesDatabase */
         foreach ($coursesDatabase as $courseDatabase) {
             $find = false;
@@ -52,14 +53,14 @@ final class SyncData
 
         /** @var CourseDTO $course */
         foreach ($courses->courses() as $course) {
-            $courseDatabase = $this->courseRepository->find($course->code());
+            $courseDatabase = $this->courseRepository->findByCode($course->code());
             if (isset($courseDatabase)) {
                 $courseDatabase->syncData($course->description(), $course->category(), $course->level());
 
                 $this->bus->notify(...[new CourseAdded(['course' => $courseDatabase])]);
             } else {
                 $courseDatabase = Course::create(
-                    Uuid::random(),
+                    Uuid::random()->value(),
                     $course->code(),
                     $course->description(),
                     $course->category(),

@@ -16,17 +16,17 @@ final class InMemoryCourseRepository implements CourseRepository
 
     public function save(Course $course): void
     {
-        $this->courses[$course->id()->value()] = $course;
+        $this->courses[$course->id()] = $course;
     }
 
     public function delete(Course $course): void
     {
-        unset($this->courses[$course->id()->value()]);
+        unset($this->courses[$course->id()]);
     }
 
-    public function findById(Uuid $id): ?Course
+    public function findById(string $id): ?Course
     {
-        return $this->courses[$id->value()] ?? null;
+        return $this->courses[$id] ?? null;
     }
 
     public function findByCode(string $code): ?Course
