@@ -37,11 +37,13 @@ class DoctrineCourseRepositoryTest extends KernelTestCase
         $courseRepository->save($courseB);
 
         $this->assertEquals(count($courseRepository->searchAll()), 2);
-        $this->assertEquals($courseRepository->find($courseB->code()), $courseB);
+        $this->assertEquals($courseRepository->findById($courseB->id()), $courseB);
+        $this->assertEquals($courseRepository->findByCode($courseB->code()), $courseB);
 
         $courseRepository->delete($courseA);
 
         $this->assertEquals(count($courseRepository->searchAll()), 1);
-        $this->assertEquals($courseRepository->find($courseA->code()), null);
+        $this->assertEquals($courseRepository->findById($courseA->id()), null);
+        $this->assertEquals($courseRepository->findByCode($courseA->code()), null);
     }
 }

@@ -13,6 +13,7 @@ use App\Course\Domain\Event\CourseModified;
 use App\Course\Domain\Repository\CourseRepository;
 use App\Course\Domain\Repository\PricesRepository;
 use App\Shared\Domain\Bus\Event\EventBus;
+use App\Shared\Domain\ValueObject\Uuid;
 
 final class SyncData
 {
@@ -58,6 +59,7 @@ final class SyncData
                 $this->bus->notify(...[new CourseAdded(['course' => $courseDatabase])]);
             } else {
                 $courseDatabase = Course::create(
+                    Uuid::random(),
                     $course->code(),
                     $course->description(),
                     $course->category(),

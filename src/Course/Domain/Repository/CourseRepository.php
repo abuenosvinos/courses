@@ -6,6 +6,7 @@ namespace App\Course\Domain\Repository;
 
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
+use App\Shared\Domain\ValueObject\Uuid;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 interface CourseRepository
@@ -14,7 +15,9 @@ interface CourseRepository
 
     public function delete(Course $course): void;
 
-    public function find(string $code): ?Course;
+    public function findById(Uuid $id): ?Course;
+
+    public function findByCode(string $code): ?Course;
 
     public function findByCriteria(SearchParams $searchParams): Paginator;
 
