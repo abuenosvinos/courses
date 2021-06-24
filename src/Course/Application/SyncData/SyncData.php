@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace App\Course\Application\SyncData;
 
+use App\Course\Application\AddCourse\AddCourseCommand;
+use App\Course\Application\DeleteCourse\DeleteCourseCommand;
+use App\Course\Application\EditCourse\EditCourseCommand;
 use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\DTO\Courses;
 use App\Course\Domain\Entity\Course;
-use App\Course\Domain\Event\CourseAdded;
-use App\Course\Domain\Event\CourseDeleted;
-use App\Course\Domain\Event\CourseModified;
 use App\Course\Domain\Repository\CourseRepository;
 use App\Course\Domain\Repository\PricesRepository;
-use App\Shared\Domain\Bus\Event\EventBus;
-use App\Shared\Domain\ValueObject\Uuid;
+use App\Shared\Domain\Bus\Command\CommandBus;
 
 final class SyncData
 {
     private CourseRepository $courseRepository;
-    private PricesRepository $pricesRepository;
-    private EventBus $bus;
+    private CommandBus $bus;
 
-    public function __construct(CourseRepository $courseRepository, PricesRepository $pricesRepository, EventBus $bus)
+    public function __construct(CourseRepository $courseRepository, CommandBus $bus)
     {
         $this->courseRepository = $courseRepository;
-        $this->pricesRepository = $pricesRepository;
         $this->bus        = $bus;
     }
 
@@ -45,9 +42,7 @@ final class SyncData
             }
 
             if (!$find) {
-                $this->courseRepository->delete($courseDatabase);
-
-                $this->bus->notify(...[new CourseDeleted(['course' => $courseDatabase])]);
+                $this->bus->dispatch(new DeleteCourseCommand($courseDatabase->code()));
             }
         }
 
@@ -55,22 +50,20 @@ final class SyncData
         foreach ($courses->courses() as $course) {
             $courseDatabase = $this->courseRepository->findByCode($course->code());
             if (isset($courseDatabase)) {
-                $courseDatabase->syncData($course->description(), $course->category(), $course->level());
-
-                $this->bus->notify(...[new CourseAdded(['course' => $courseDatabase])]);
-            } else {
-                $courseDatabase = Course::create(
-                    Uuid::random()->value(),
+                $this->bus->dispatch(new EditCourseCommand(new CourseDTO(
                     $course->code(),
                     $course->description(),
                     $course->category(),
-                    $course->level(),
-                    $this->pricesRepository->get()
-                );
-
-                $this->bus->notify(...[new CourseModified(['course' => $courseDatabase])]);
+                    $course->level()
+                )));
+            } else {
+                $this->bus->dispatch(new AddCourseCommand(new CourseDTO(
+                    $course->code(),
+                    $course->description(),
+                    $course->category(),
+                    $course->level()
+                )));
             }
-            $this->courseRepository->save($courseDatabase);
         }
     }
 }
