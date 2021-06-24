@@ -11,7 +11,6 @@ use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\DTO\Courses;
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Repository\CourseRepository;
-use App\Course\Domain\Repository\PricesRepository;
 use App\Shared\Domain\Bus\Command\CommandBus;
 
 final class SyncData
