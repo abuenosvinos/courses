@@ -9,15 +9,14 @@ use App\Shared\Domain\ValueObject\Uuid;
 
 final class CourseMother
 {
-    public static function create(?Uuid $id = null, ?string $code = null, ?string $description = null, ?string $category = null, ?string $level = null, ?int $price = null): Course
+    public static function create(?Uuid $id = null, ?string $code = null, ?string $description = null, ?string $category = null, ?string $level = null): Course
     {
         return Course::create(
             $id ?? UuidMother::random(),
             $code ?? StringMother::random(),
             $description ?? StringMother::random(),
             $category ?? StringMother::random(),
-            $level ?? StringMother::random(),
-            $price ?? IntegerMother::random()
+            $level ?? StringMother::random()
         );
     }
 }
