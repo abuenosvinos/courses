@@ -16,6 +16,8 @@ final class Course extends AggregateRoot
     private string $description;
     private string $category;
     private string $level;
+    private \DateTime $created;
+    private \DateTime $updated;
     private Collection $prices;
 
     private function __construct(string $id, string $code, string $description, string $category, string $level)
