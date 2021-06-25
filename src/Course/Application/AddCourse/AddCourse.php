@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Course\Application\AddCourse;
 
 use App\Course\Domain\Entity\Course;
-use App\Course\Domain\Event\CourseModified;
+use App\Course\Domain\Entity\Price;
+use App\Course\Domain\Event\CourseAdded;
 use App\Course\Domain\Repository\CourseRepository;
 use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\Repository\PricesRepository;
@@ -32,11 +33,19 @@ final class AddCourse
             $courseDto->code(),
             $courseDto->description(),
             $courseDto->category(),
-            $courseDto->level(),
-            $this->pricesRepository->get()
+            $courseDto->level()
         );
+
+        $validCodes = $this->pricesRepository->validCodes();
+        foreach ($validCodes as $validCode) {
+            $course->addPrice(Price::create(
+                $this->pricesRepository->get(),
+                $validCode
+            ));
+        }
+
         $this->courseRepository->save($course);
 
-        $this->bus->notify(...[new CourseModified(['course' => $course])]);
+        $this->bus->notify(...[new CourseAdded(['course' => $course])]);
     }
 }

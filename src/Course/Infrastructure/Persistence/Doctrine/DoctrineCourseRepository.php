@@ -37,7 +37,7 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         $limit = $searchParams->limit();
         $page = $searchParams->page();
 
-        $query = $this->repository(Course::class)->createQueryBuilder('c');
+        $query = $this->repository(Course::class)->createQueryBuilder('c')->innerJoin('c.prices', 'p');
 
         if ($searchParams->category()) {
             $query = $query->andWhere('c.category = :category')->setParameter('category', $searchParams->category());
@@ -48,13 +48,19 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         }
 
         if ($searchParams->priceMin() && $searchParams->priceMax()) {
-            $query = $query->andWhere('(c.price >= :priceMin AND c.price <= :priceMax)')
+            $query = $query->andWhere('(p.value >= :priceMin AND p.value <= :priceMax)')
                 ->setParameter('priceMin', $searchParams->priceMin())
                 ->setParameter('priceMax', $searchParams->priceMax());
         }
 
         if ($searchParams->orderBy()) {
-            $query = $query->orderBy('c.' . $searchParams->orderBy()->value());
+            switch ($searchParams->orderBy()->value()) {
+                case 'price':
+                    $query = $query->orderBy('p.value');
+                    break;
+                default:
+                    $query = $query->orderBy('c.' . $searchParams->orderBy()->value());
+            }
         }
 
         $query = $query

@@ -5,8 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     sourceTruth.path: '%kernel.project_dir%/data/courses.txt'
-    prices.url: 'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1'
     jwt.key: 'fj2cñlcf23v2Vf2cj45tvj43v6j4'
+    prices.url: 'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1'
+    prices.validCodes: ['EUR','USD']
 
 services:
     # default configuration for services in *this* file
@@ -33,6 +34,7 @@ services:
     App\Course\Infrastructure\ThirdParty\ThirdPartyPricesRepository:
         arguments:
             - '%prices.url%'
+            - '%prices.validCodes%'
             - '@Symfony\Contracts\HttpClient\HttpClientInterface'
 
     App\Course\Infrastructure\FileSystem\FileSystemSourceTruthRepository:

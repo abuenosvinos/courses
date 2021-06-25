@@ -6,5 +6,7 @@ namespace App\Course\Domain\Repository;
 
 interface PricesRepository
 {
+    public function validCodes(): array;
+
     public function get(): int;
 }

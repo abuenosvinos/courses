@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Course\Domain\Entity;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
-use App\Shared\Domain\ValueObject\Uuid;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 final class Course extends AggregateRoot
 {
@@ -15,16 +16,16 @@ final class Course extends AggregateRoot
     private string $description;
     private string $category;
     private string $level;
-    private int $price;
+    private Collection $prices;
 
-    private function __construct(string $id, string $code, string $description, string $category, string $level, int $price)
+    private function __construct(string $id, string $code, string $description, string $category, string $level)
     {
         $this->id = $id;
         $this->code = $code;
         $this->description = $description;
         $this->category = $category;
         $this->level = $level;
-        $this->price = $price;
+        $this->prices = new ArrayCollection();
     }
 
     public function id(): string
@@ -57,9 +58,15 @@ final class Course extends AggregateRoot
         return $this->level;
     }
 
-    public function price(): int
+    public function prices(): Collection
     {
-        return $this->price;
+        return $this->prices;
+    }
+
+    public function addPrice(Price $price): void
+    {
+        $price->setCourse($this);
+        $this->prices->add($price);
     }
 
     public function syncData(string $description, string $category, string $level): void
@@ -69,8 +76,8 @@ final class Course extends AggregateRoot
         $this->level = $level;
     }
 
-    public static function create(string $id, string $code, string $description, string $category, string $level, int $price)
+    public static function create(string $id, string $code, string $description, string $category, string $level)
     {
-        return new self($id, $code, $description, $category, $level, $price);
+        return new self($id, $code, $description, $category, $level);
     }
 }

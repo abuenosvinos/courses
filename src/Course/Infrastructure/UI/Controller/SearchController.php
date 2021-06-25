@@ -6,6 +6,7 @@ use App\Course\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
+use App\Course\Domain\Entity\Price;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -60,12 +61,21 @@ class SearchController
         ];
         /** @var Course $course */
         foreach ($courses as $course) {
+
+            $prices = [];
+            /** @var Price $price */
+            foreach ($course->prices() as $price) {
+                $prices[] = [
+                    'price' => $price->value(),
+                    'code' => $price->code()
+                ];
+            }
             $response['results'][] = [
                 'title' => $course->code(),
                 'description' => $course->description(),
                 'category' => $course->category(),
                 'level' => $course->level(),
-                'price' => $course->price(),
+                'price' => $prices,
             ];
         }
 

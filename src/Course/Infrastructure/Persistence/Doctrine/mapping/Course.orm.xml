@@ -15,10 +15,18 @@
         <field name="description" type="text" column="description" />
         <field name="category" type="string" column="category" length="255" />
         <field name="level" type="string" column="level" length="255" />
-        <field name="price" type="integer" column="price" />
         <!--
         <embedded name="category" class="App\Course\Domain\Entity\Category" use-column-prefix="false" />
         <embedded name="level" class="App\Course\Domain\Entity\Level" use-column-prefix="false" />
         -->
+
+        <one-to-many field="prices" target-entity="App\Course\Domain\Entity\Price" mapped-by="course" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="value" direction="ASC" />
+            </order-by>
+        </one-to-many>
     </entity>
 </doctrine-mapping>
