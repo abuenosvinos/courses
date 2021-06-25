@@ -33,7 +33,7 @@ final class SyncData
             $find = false;
 
             /** @var CourseDTO $course */
-            foreach ($courses as $course) {
+            foreach ($courses->courses() as $course) {
                 if ($courseDatabase->code() === $course->code()) {
                     $find = true;
                     break;
