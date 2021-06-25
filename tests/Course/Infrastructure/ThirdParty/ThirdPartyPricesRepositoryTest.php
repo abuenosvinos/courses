@@ -14,6 +14,7 @@ class ThirdPartyPricesRepositoryTest extends TestCase
     {
         $pricesRepository = new ThirdPartyPricesRepository(
             'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1',
+            ['EUR','USD'],
             new CurlHttpClient()
         );
         $price = $pricesRepository->get();
