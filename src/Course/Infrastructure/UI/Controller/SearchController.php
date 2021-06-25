@@ -59,9 +59,9 @@ class SearchController
             'limit' => $searchParams->limit(),
             'results' => []
         ];
+
         /** @var Course $course */
         foreach ($courses as $course) {
-
             $prices = [];
             /** @var Price $price */
             foreach ($course->prices() as $price) {

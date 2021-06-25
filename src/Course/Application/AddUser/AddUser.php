@@ -6,6 +6,7 @@ namespace App\Course\Application\AddUser;
 
 use App\Course\Domain\Entity\User;
 use App\Course\Domain\Repository\UserRepository;
+use App\Shared\Domain\ValueObject\Uuid;
 
 final class AddUser
 {
@@ -18,8 +19,11 @@ final class AddUser
 
     public function __invoke(string $username)
     {
-        $user = new User();
-        $user->setUsername($username);
+        $user = User::create(
+            Uuid::random()->value(),
+            $username
+        );
+        $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
     }
 }

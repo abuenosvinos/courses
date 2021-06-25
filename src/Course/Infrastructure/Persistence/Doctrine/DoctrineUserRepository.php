@@ -17,6 +17,6 @@ final class DoctrineUserRepository extends DoctrineRepository implements UserRep
 
     public function find(string $username): ?User
     {
-        return $this->repository(User::class)->find($username);
+        return $this->repository(User::class)->findOneBy(['username' => $username]);
     }
 }
