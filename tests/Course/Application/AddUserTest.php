@@ -42,7 +42,7 @@ class AddUserTest extends KernelTestCase
             $username
         );
 
-        $user = $userRepository->find($username);
+        $user = $userRepository->findByUsername($username);
 
         $this->assertEquals($user->username(), $username);
     }

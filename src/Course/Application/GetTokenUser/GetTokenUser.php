@@ -20,7 +20,7 @@ final class GetTokenUser
 
     public function __invoke(string $username)
     {
-        $user = $this->userRepository->find($username);
+        $user = $this->userRepository->findByUsername($username);
 
         if ($user) {
             return $this->encrypt->encrypt(json_encode([

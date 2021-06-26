@@ -32,7 +32,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      */
     public function loadUserByIdentifier(string $username)
     {
-        return $this->userRepository->find($username);
+        return $this->userRepository->findByUsername($username);
     }
 
     public function loadUserByUsername(string $username)

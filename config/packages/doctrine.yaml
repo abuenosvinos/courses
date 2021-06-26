@@ -2,6 +2,7 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
+            user_id: 'App\Course\Infrastructure\Persistence\Doctrine\Type\UserIdType'
             course_id: 'App\Course\Infrastructure\Persistence\Doctrine\Type\CourseIdType'
 
         # IMPORTANT: You MUST configure your server version,
