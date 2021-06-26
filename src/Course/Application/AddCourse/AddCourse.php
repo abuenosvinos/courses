@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Course\Application\AddCourse;
 
 use App\Course\Domain\Entity\Course;
+use App\Course\Domain\Entity\CourseId;
 use App\Course\Domain\Entity\Price;
 use App\Course\Domain\Event\CourseAdded;
 use App\Course\Domain\Repository\CourseRepository;
 use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\Repository\PricesRepository;
 use App\Shared\Domain\Bus\Event\EventBus;
-use App\Shared\Domain\ValueObject\Uuid;
 
 final class AddCourse
 {
@@ -29,7 +29,7 @@ final class AddCourse
     public function __invoke(CourseDTO $courseDto)
     {
         $course = Course::create(
-            Uuid::random()->value(),
+            CourseId::random(),
             $courseDto->code(),
             $courseDto->description(),
             $courseDto->category(),

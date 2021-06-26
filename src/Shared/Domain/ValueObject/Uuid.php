@@ -18,9 +18,9 @@ class Uuid
         $this->value = $value;
     }
 
-    public static function random(): self
+    public static function random(): static
     {
-        return new self(RamseyUuid::uuid4()->toString());
+        return new static(RamseyUuid::uuid4()->toString());
     }
 
     public function value(): string

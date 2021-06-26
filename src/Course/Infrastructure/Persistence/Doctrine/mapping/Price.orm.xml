@@ -8,8 +8,9 @@
         <id name="id" column="id" type="integer">
             <generator strategy="IDENTITY"/>
         </id>
-        <!--<field name="course" type="string" column="course" length="36" />-->
-        <many-to-one field="course" target-entity="App\Course\Domain\Entity\Course" inversed-by="prices" />
+        <many-to-one field="course" target-entity="App\Course\Domain\Entity\Course" inversed-by="prices">
+            <join-column name="course_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
         <field name="value" type="integer" column="value" />
         <field name="code" type="string" column="code" length="3" />
     </entity>

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 
 final class Course extends AggregateRoot
 {
-    private string $id;
+    private CourseId $id;
     private string $code;
     private string $slug;
     private string $description;
@@ -20,7 +20,7 @@ final class Course extends AggregateRoot
     private \DateTime $updated;
     private Collection $prices;
 
-    private function __construct(string $id, string $code, string $description, string $category, string $level)
+    private function __construct(CourseId $id, string $code, string $description, string $category, string $level)
     {
         $this->id = $id;
         $this->code = $code;
@@ -30,7 +30,7 @@ final class Course extends AggregateRoot
         $this->prices = new ArrayCollection();
     }
 
-    public function id(): string
+    public function id(): CourseId
     {
         return $this->id;
     }
@@ -78,7 +78,7 @@ final class Course extends AggregateRoot
         $this->level = $level;
     }
 
-    public static function create(string $id, string $code, string $description, string $category, string $level)
+    public static function create(CourseId $id, string $code, string $description, string $category, string $level)
     {
         return new self($id, $code, $description, $category, $level);
     }

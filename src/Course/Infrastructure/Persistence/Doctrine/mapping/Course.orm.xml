@@ -7,7 +7,7 @@
 
     <entity name="App\Course\Domain\Entity\Course" table="course">
 
-        <id name="id" type="guid" column="id" length="36" />
+        <id name="id" type="course_id" column="id" length="36" />
         <field name="code" type="string" column="code" length="255" unique="true" />
         <field name="slug" type="string" column="slug" length="255" unique="true" nullable="true">
             <gedmo:slug unique="true" style="lower" updatable="false" separator="-" fields="code" />
@@ -28,7 +28,7 @@
 
         <one-to-many field="prices" target-entity="App\Course\Domain\Entity\Price" mapped-by="course" orphan-removal="true">
             <cascade>
-                <cascade-persist/>
+                <cascade-all/>
             </cascade>
             <order-by>
                 <order-by-field name="value" direction="ASC" />
