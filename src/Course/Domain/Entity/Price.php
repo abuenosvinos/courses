@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Course\Domain\Entity;
 
-use InvalidArgumentException;
+use App\Course\Domain\ValueObject\Money;
 
 class Price
 {
@@ -13,36 +13,16 @@ class Price
 
     private int $id;
     private Course $course;
-    private int $value;
-    private string $code;
+    private Money $money;
 
-    private function __construct(int $value, string $code)
+    private function __construct(Money $money)
     {
-        $this->validate($value, $code);
-
-        $this->value = $value;
-        $this->code = $code;
+        $this->money = $money;
     }
 
-    private function validate(int $value, string $code)
+    public function money(): Money
     {
-        if ($value < 0) {
-            throw new InvalidArgumentException('Price can\'t be negative');
-        }
-
-        if ($code !== self::EUR && $code !== self::USD) {
-            throw new InvalidArgumentException(sprintf('It\'s not a valid code for a Price (%s)', $code));
-        }
-    }
-
-    public function value(): int
-    {
-        return $this->value;
-    }
-
-    public function code(): string
-    {
-        return $this->code;
+        return $this->money;
     }
 
     public function setCourse(Course $course): void
@@ -50,8 +30,8 @@ class Price
         $this->course = $course;
     }
 
-    public static function create(int $value, string $code): Price
+    public static function create(Money $money): Price
     {
-        return new self($value, $code);
+        return new self($money);
     }
 }

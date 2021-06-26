@@ -12,7 +12,7 @@ abstract class Enum
 {
     protected static array $cache = [];
 
-    public function __construct(protected $value)
+    private function __construct(protected $value)
     {
         $this->ensureIsBetweenAcceptedValues($value);
     }
@@ -51,5 +51,10 @@ abstract class Enum
         if (!in_array($value, static::values(), true)) {
             $this->throwExceptionForInvalidValue($value);
         }
+    }
+
+    public static function create($value): static
+    {
+        return new static($value);
     }
 }

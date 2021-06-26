@@ -19,4 +19,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Course/Infrastructure/Persistence/Doctrine/mapping'
                 prefix: 'App\Course\Domain\Entity'
                 alias: App\Course\Domain\Entity
+            App\Course\Domain\ValueObject:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Course/Infrastructure/Persistence/Doctrine/mappingVO'
+                prefix: 'App\Course\Domain\ValueObject'
+                alias: App\Course\Domain\ValueObject
 

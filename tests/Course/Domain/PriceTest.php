@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Tests\Course\Domain;
 
 use App\Course\Domain\Entity\Price;
+use App\Course\Domain\ValueObject\Currency;
+use App\Course\Domain\ValueObject\Money;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-use function Lambdish\Phunctional\first;
 
 class PriceTest extends KernelTestCase
 {
@@ -23,23 +23,35 @@ class PriceTest extends KernelTestCase
 
     public function testValidValues()
     {
-        $price = Price::create(4, 'EUR');
+        $price = Price::create(
+            Money::create(4,
+                Currency::create('EUR')
+            )
+        );
 
-        $this->assertEquals($price->value(), 4);
-        $this->assertEquals($price->code(), 'EUR');
+        $this->assertEquals($price->money()->amount(), 4);
+        $this->assertEquals($price->money()->currency()->value(), 'EUR');
     }
 
     public function testNotValidValue()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Price::create(-4, 'EUR');
+        Price::create(
+            Money::create(-4,
+                Currency::create('EUR')
+            )
+        );
     }
 
     public function testNotValidCode()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Price::create(4, 'EUS');
+        Price::create(
+            Money::create(4,
+                Currency::create('EUX')
+            )
+        );
     }
 }
