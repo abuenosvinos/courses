@@ -6,9 +6,9 @@ namespace App\Course\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Course\Domain\Entity\CourseId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\StringType;
 
-class CourseIdType extends Type
+class CourseIdType extends StringType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -25,8 +25,13 @@ class CourseIdType extends Type
         return 'VARCHAR(36)';
     }
 
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
+    }
+
     public function getName()
     {
-        return CourseId::class;
+        return 'course_id';
     }
 }
