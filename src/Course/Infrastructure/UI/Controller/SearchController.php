@@ -20,7 +20,7 @@ class SearchController
     {
         $orderBy = null;
         try {
-            $orderBy = new OrderBy($request->query->get('orderBy', OrderBy::CATEGORY));
+            $orderBy = OrderBy::create($request->query->get('orderBy', OrderBy::CATEGORY));
         } catch (\Exception $e) {
         }
         $searchParams = new SearchParams(
@@ -66,15 +66,15 @@ class SearchController
             /** @var Price $price */
             foreach ($course->prices() as $price) {
                 $prices[] = [
-                    'price' => $price->value(),
-                    'code' => $price->code()
+                    'price' => $price->money()->amount(),
+                    'code' => $price->money()->currency()->value()
                 ];
             }
             $response['results'][] = [
                 'title' => $course->code(),
                 'description' => $course->description(),
                 'category' => $course->category(),
-                'level' => $course->level(),
+                'level' => $course->level()->name(),
                 'price' => $prices,
             ];
         }

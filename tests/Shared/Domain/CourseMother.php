@@ -6,6 +6,7 @@ namespace App\Tests\Shared\Domain;
 
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseId;
+use App\Course\Domain\Entity\CourseLevel;
 use App\Shared\Domain\ValueObject\Uuid;
 
 final class CourseMother
@@ -17,7 +18,7 @@ final class CourseMother
             $code ?? StringMother::random(),
             $description ?? StringMother::random(),
             $category ?? StringMother::random(),
-            $level ?? StringMother::random()
+            CourseLevel::create($level ?? StringMother::random())
         );
     }
 }

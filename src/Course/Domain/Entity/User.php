@@ -26,7 +26,7 @@ class User extends SharedUser
         return $this->username;
     }
 
-    public static function create(UserId $id, string $username)
+    public static function create(UserId $id, string $username): self
     {
         return new self($id, $username);
     }

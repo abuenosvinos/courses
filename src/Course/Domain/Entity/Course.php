@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace App\Course\Domain\Entity;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
+use App\Shared\Domain\Trait\Sluggable;
+use App\Shared\Domain\Trait\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 final class Course extends AggregateRoot
 {
+    use Sluggable;
+    use Timestampable;
+
     private CourseId $id;
     private string $code;
-    private string $slug;
     private string $description;
     private string $category;
-    private string $level;
-    private \DateTime $created;
-    private \DateTime $updated;
+    private CourseLevel $level;
     private Collection $prices;
 
-    private function __construct(CourseId $id, string $code, string $description, string $category, string $level)
+    private function __construct(CourseId $id, string $code, string $description, string $category, CourseLevel $level)
     {
         $this->id = $id;
         $this->code = $code;
@@ -40,11 +42,6 @@ final class Course extends AggregateRoot
         return $this->code;
     }
 
-    public function slug(): string
-    {
-        return $this->slug;
-    }
-
     public function description(): string
     {
         return $this->description;
@@ -55,7 +52,7 @@ final class Course extends AggregateRoot
         return $this->category;
     }
 
-    public function level(): string
+    public function level(): CourseLevel
     {
         return $this->level;
     }
@@ -71,14 +68,14 @@ final class Course extends AggregateRoot
         $this->prices->add($price);
     }
 
-    public function syncData(string $description, string $category, string $level): void
+    public function syncData(string $description, string $category, CourseLevel $level): void
     {
         $this->description = $description;
         $this->category = $category;
         $this->level = $level;
     }
 
-    public static function create(CourseId $id, string $code, string $description, string $category, string $level)
+    public static function create(CourseId $id, string $code, string $description, string $category, CourseLevel $level): self
     {
         return new self($id, $code, $description, $category, $level);
     }
