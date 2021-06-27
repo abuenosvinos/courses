@@ -24,7 +24,8 @@ class PriceTest extends KernelTestCase
     public function testValidValues()
     {
         $price = Price::create(
-            Money::create(4,
+            Money::create(
+                4,
                 Currency::create('EUR')
             )
         );
@@ -38,7 +39,8 @@ class PriceTest extends KernelTestCase
         $this->expectException(\InvalidArgumentException::class);
 
         Price::create(
-            Money::create(-4,
+            Money::create(
+                -4,
                 Currency::create('EUR')
             )
         );
@@ -49,7 +51,8 @@ class PriceTest extends KernelTestCase
         $this->expectException(\InvalidArgumentException::class);
 
         Price::create(
-            Money::create(4,
+            Money::create(
+                4,
                 Currency::create('EUX')
             )
         );
