@@ -6,6 +6,7 @@ use App\Course\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
+use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Domain\Entity\Price;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -62,23 +63,40 @@ class SearchController
 
         /** @var Course $course */
         foreach ($courses as $course) {
-            $prices = [];
-            /** @var Price $price */
-            foreach ($course->prices() as $price) {
-                $prices[] = [
-                    'price' => $price->money()->amount(),
-                    'code' => $price->money()->currency()->value()
-                ];
-            }
             $response['results'][] = [
                 'title' => $course->code(),
                 'description' => $course->description(),
-                'category' => $course->category(),
+                'categories' => $this->processCategories($course),
                 'level' => $course->level()->name(),
-                'price' => $prices,
+                'prices' => $this->processPrices($course),
             ];
         }
 
         return new JsonResponse($response);
+    }
+
+    private function processCategories(Course $course): array
+    {
+        $categories = [];
+        /** @var CourseCategory $category */
+        foreach ($course->categories() as $category) {
+            $categories[] = [
+                'name' => $category->name()
+            ];
+        }
+        return $categories;
+    }
+
+    private function processPrices(Course $course): array
+    {
+        $prices = [];
+        /** @var Price $price */
+        foreach ($course->prices() as $price) {
+            $prices[] = [
+                'price' => $price->money()->amount(),
+                'code' => $price->money()->currency()->value()
+            ];
+        }
+        return $prices;
     }
 }

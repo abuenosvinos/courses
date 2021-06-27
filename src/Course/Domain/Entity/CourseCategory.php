@@ -6,7 +6,7 @@ namespace App\Course\Domain\Entity;
 
 use App\Shared\Domain\Trait\Sluggable;
 
-class CourseLevel
+class CourseCategory
 {
     use Sluggable;
 

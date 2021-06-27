@@ -18,16 +18,19 @@ final class Course extends AggregateRoot
     private CourseId $id;
     private string $code;
     private string $description;
-    private string $category;
+    private Collection $categories;
     private CourseLevel $level;
     private Collection $prices;
 
-    private function __construct(CourseId $id, string $code, string $description, string $category, CourseLevel $level)
+    private function __construct(CourseId $id, string $code, string $description, array $categories, CourseLevel $level)
     {
         $this->id = $id;
         $this->code = $code;
         $this->description = $description;
-        $this->category = $category;
+        $this->categories = new ArrayCollection();
+        foreach ($categories as $category) {
+            $this->categories->add($category);
+        }
         $this->level = $level;
         $this->prices = new ArrayCollection();
     }
@@ -47,9 +50,9 @@ final class Course extends AggregateRoot
         return $this->description;
     }
 
-    public function category(): string
+    public function categories(): Collection
     {
-        return $this->category;
+        return $this->categories;
     }
 
     public function level(): CourseLevel
@@ -61,22 +64,31 @@ final class Course extends AggregateRoot
     {
         return $this->prices;
     }
-
+/*
+    public function addCategory(CourseCategory $category): void
+    {
+        //$category->setCourse($this);
+        $this->categories->add($category);
+    }
+*/
     public function addPrice(Price $price): void
     {
         $price->setCourse($this);
         $this->prices->add($price);
     }
 
-    public function syncData(string $description, string $category, CourseLevel $level): void
+    public function syncData(string $description, array $categories, CourseLevel $level): void
     {
         $this->description = $description;
-        $this->category = $category;
+        $this->categories->clear();
+        foreach ($categories as $category) {
+            $this->categories->add($category);
+        }
         $this->level = $level;
     }
 
-    public static function create(CourseId $id, string $code, string $description, string $category, CourseLevel $level): self
+    public static function create(CourseId $id, string $code, string $description, array $categories, CourseLevel $level): self
     {
-        return new self($id, $code, $description, $category, $level);
+        return new self($id, $code, $description, $categories, $level);
     }
 }

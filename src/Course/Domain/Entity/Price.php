@@ -8,9 +8,6 @@ use App\Course\Domain\ValueObject\Money;
 
 class Price
 {
-    public const EUR = 'EUR';
-    public const USD = 'USD';
-
     private int $id;
     private Course $course;
     private Money $money;

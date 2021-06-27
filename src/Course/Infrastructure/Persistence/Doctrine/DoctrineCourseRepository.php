@@ -38,26 +38,29 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         $limit = $searchParams->limit();
         $page = $searchParams->page();
 
-        $query = $this->repository(Course::class)->createQueryBuilder('c')->innerJoin('c.prices', 'p');
+        $query = $this->repository(Course::class)->createQueryBuilder('c')->leftJoin('c.prices', 'pri')->leftJoin('c.categories', 'cat')->leftJoin('c.level', 'lev');
 
         if ($searchParams->category()) {
-            $query = $query->andWhere('c.category = :category')->setParameter('category', $searchParams->category());
+            $query = $query->andWhere('cat.name = :category')->setParameter('category', $searchParams->category());
         }
 
         if ($searchParams->level()) {
-            $query = $query->andWhere('c.level = :level')->setParameter('level', $searchParams->level());
+            $query = $query->andWhere('lev.name = :level')->setParameter('level', $searchParams->level());
         }
 
         if ($searchParams->priceMin() && $searchParams->priceMax()) {
-            $query = $query->andWhere('(p.value >= :priceMin AND p.value <= :priceMax)')
+            $query = $query->andWhere('(pri.money.amount >= :priceMin AND pri.money.amount <= :priceMax)')
                 ->setParameter('priceMin', $searchParams->priceMin())
                 ->setParameter('priceMax', $searchParams->priceMax());
         }
 
         if ($searchParams->orderBy()) {
             switch ($searchParams->orderBy()->value()) {
+                case 'category':
+                    $query = $query->orderBy('cat.name');
+                    break;
                 case 'price':
-                    $query = $query->orderBy('p.value');
+                    $query = $query->orderBy('pri.money.amount');
                     break;
                 default:
                     $query = $query->orderBy('c.' . $searchParams->orderBy()->value());

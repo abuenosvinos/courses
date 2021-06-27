@@ -6,6 +6,7 @@ namespace App\Tests\Course\Application;
 
 use App\Course\Application\AddCourse\AddCourse;
 use App\Course\Domain\DTO\Course;
+use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository;
 use App\Course\Infrastructure\ThirdParty\ThirdPartyPricesRepository;
@@ -36,6 +37,7 @@ class AddCourseTest extends KernelTestCase
     public function testValidValues()
     {
         $courseRepository = new DoctrineCourseRepository($this->entityManager);
+        $courseCategoryRepository = new DoctrineCourseCategoryRepository($this->entityManager);
         $courseLevelRepository = new DoctrineCourseLevelRepository($this->entityManager);
         $pricesRepository = new ThirdPartyPricesRepository(
             'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1',
@@ -46,6 +48,7 @@ class AddCourseTest extends KernelTestCase
 
         $service = new AddCourse(
             $courseRepository,
+            $courseCategoryRepository,
             $courseLevelRepository,
             $pricesRepository,
             $eventBus
@@ -66,7 +69,7 @@ class AddCourseTest extends KernelTestCase
 
         $this->assertEquals($course->code(), $courseDto->code());
         $this->assertEquals($course->description(), $courseDto->description());
-        $this->assertEquals($course->category(), $courseDto->category());
+        $this->assertEquals(($course->categories()[0])->name(), $courseDto->category());
         $this->assertEquals($course->level()->name(), $courseDto->level());
     }
 }

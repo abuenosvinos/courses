@@ -6,6 +6,7 @@ namespace App\Tests\Course\Application;
 
 use App\Course\Application\EditCourse\EditCourse;
 use App\Course\Domain\DTO\Course as CourseDTO;
+use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository;
 use App\Shared\Domain\Bus\Event\EventBus;
@@ -35,6 +36,7 @@ class EditCourseTest extends KernelTestCase
     public function testValidValues()
     {
         $courseRepository = new DoctrineCourseRepository($this->entityManager);
+        $courseCategoryRepository = new DoctrineCourseCategoryRepository($this->entityManager);
         $courseLevelRepository = new DoctrineCourseLevelRepository($this->entityManager);
         $eventBus = $this->createMock(EventBus::class);
 
@@ -50,6 +52,7 @@ class EditCourseTest extends KernelTestCase
 
         $service = new EditCourse(
             $courseRepository,
+            $courseCategoryRepository,
             $courseLevelRepository,
             $eventBus
         );
@@ -62,7 +65,7 @@ class EditCourseTest extends KernelTestCase
 
         $this->assertEquals($course->code(), $courseDto->code());
         $this->assertEquals($course->description(), $courseDto->description());
-        $this->assertEquals($course->category(), $courseDto->category());
+        $this->assertEquals(($course->categories()[0])->name(), $courseDto->category());
         $this->assertEquals($course->level()->name(), $courseDto->level());
     }
 }
