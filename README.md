@@ -89,4 +89,5 @@ docker-compose -f ./docker/docker-compose.yml down
 ## Mejoras
 
 - Permitir marcar como favoritos los cursos
-- Establecer diferentes precios en función de diferentes monedas
+- Crear un admin para la gestión de la información
+- Crear una web para la visualización de la información

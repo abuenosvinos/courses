@@ -51,3 +51,7 @@ services:
 
     App\Course\Domain\Repository\CourseRepository:
         class: 'App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository'
+
+    App\Course\Infrastructure\Redis\RedisCacheAdapter:
+        tags:
+            - { name: doctrine.orm.entity_listener }

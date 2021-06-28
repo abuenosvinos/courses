@@ -17,6 +17,9 @@ final class DoctrineCourseLevelRepository extends DoctrineRepository implements 
 
     public function searchAll(): array
     {
-        return $this->repository(CourseLevel::class)->findAll();
+        $query= $this->repository(CourseLevel::class)->createQueryBuilder('c')->getQuery();
+        $query = $query->setCacheable(true)->setResultCacheId('CourseLevel||searchAll');
+
+        return $query->execute();
     }
 }

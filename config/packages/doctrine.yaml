@@ -26,3 +26,24 @@ doctrine:
                 prefix: 'App\Course\Domain\ValueObject'
                 alias: App\Course\Domain\ValueObject
 
+        #metadata_cache_driver:
+            #    type: pool
+            #    pool: doctrine.system_cache_pool
+        metadata_cache_driver: ~
+        query_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        result_cache_driver:
+            type: pool
+            pool: doctrine.result_cache_pool
+
+framework:
+    cache:
+        # Redis
+        app: cache.adapter.redis
+        default_redis_provider: "redis://%env(REDIS_HOST)%:%env(REDIS_PORT)%"
+        pools:
+            doctrine.result_cache_pool:
+                adapter: cache.adapter.redis
+            doctrine.system_cache_pool:
+                adapter: cache.adapter.redis
