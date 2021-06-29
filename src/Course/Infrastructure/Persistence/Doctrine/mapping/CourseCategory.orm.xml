@@ -13,5 +13,12 @@
         <field name="slug" type="string" column="slug" length="255" unique="true" nullable="false">
             <gedmo:slug unique="true" style="lower" updatable="false" separator="-" fields="name" />
         </field>
+
+        <entity-listeners>
+            <entity-listener class="App\Course\Infrastructure\Redis\RedisCacheAdapter">
+                <lifecycle-callback type="postPersist" method="cleanCourseCategory">
+                </lifecycle-callback>
+            </entity-listener>
+        </entity-listeners>
     </entity>
 </doctrine-mapping>
