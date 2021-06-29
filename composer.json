@@ -1,6 +1,16 @@
 {
+    "name": "abuenosvinos/courses",
+    "description": "Course management project to test software programming techniques",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antonio Buenosvinos",
+            "email": "antonio.buenosvinos@gmail.com",
+            "homepage": "http://www.antoniobuenosvinos.com/"
+        }
+    ],
+    "keywords": ["php", "clean code", "ddd", "cqrs", "event sourcing", "hexagonal architecture"],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
