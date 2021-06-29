@@ -41,7 +41,7 @@ final class EditCourse
         }
 
         $course = $this->courseRepository->findByCode($courseDto->code());
-        $course->syncData($courseDto->description(), [$courseCategory], $courseLevel);
+        $course->syncData($courseDto->description(), $courseLevel, $courseCategory);
 
         $this->bus->notify(...[new CourseModified(['course' => $course])]);
     }

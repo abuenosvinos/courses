@@ -37,8 +37,8 @@ class CourseFixtures extends Fixture
                 CourseId::random(),
                 'Título de prueba ' . $i,
                 'Descripción de prueba ' . $i,
-                [$categories[mt_rand(1, 3)]],
-                $levels[mt_rand(1, 3)]
+                $levels[mt_rand(1, 3)],
+                ...[$categories[mt_rand(1, 3)]]
             );
 
             foreach (Currency::values() as $currency) {

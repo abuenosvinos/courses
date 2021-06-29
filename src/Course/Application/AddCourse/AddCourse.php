@@ -52,8 +52,8 @@ final class AddCourse
             CourseId::random(),
             $courseDto->code(),
             $courseDto->description(),
-            [$courseCategory],
-            $courseLevel
+            $courseLevel,
+            $courseCategory
         );
 
         $validCodes = $this->pricesRepository->validCodes();

@@ -18,8 +18,8 @@ final class CourseMother
             CourseId::create($id ?? UuidMother::random()),
             $code ?? StringMother::random(),
             $description ?? StringMother::random(),
-            [CourseCategory::create($category ?? StringMother::random())],
-            CourseLevel::create($level ?? StringMother::random())
+            CourseLevel::create($level ?? StringMother::random()),
+            ...[CourseCategory::create($category ?? StringMother::random())]
         );
     }
 }

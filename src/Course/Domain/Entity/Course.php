@@ -22,17 +22,17 @@ final class Course extends AggregateRoot
     private CourseLevel $level;
     private Collection $prices;
 
-    private function __construct(CourseId $id, string $code, string $description, array $categories, CourseLevel $level)
+    private function __construct(CourseId $id, string $code, string $description, CourseLevel $level, CourseCategory...$categories)
     {
         $this->id = $id;
         $this->code = $code;
         $this->description = $description;
+        $this->prices = new ArrayCollection();
         $this->categories = new ArrayCollection();
         foreach ($categories as $category) {
             $this->categories->add($category);
         }
         $this->level = $level;
-        $this->prices = new ArrayCollection();
     }
 
     public function id(): CourseId
@@ -77,18 +77,18 @@ final class Course extends AggregateRoot
         $this->prices->add($price);
     }
 
-    public function syncData(string $description, array $categories, CourseLevel $level): void
+    public function syncData(string $description, CourseLevel $level, CourseCategory...$categories): void
     {
         $this->description = $description;
+        $this->level = $level;
         $this->categories->clear();
         foreach ($categories as $category) {
             $this->categories->add($category);
         }
-        $this->level = $level;
     }
 
-    public static function create(CourseId $id, string $code, string $description, array $categories, CourseLevel $level): self
+    public static function create(CourseId $id, string $code, string $description, CourseLevel $level, CourseCategory...$categories): self
     {
-        return new self($id, $code, $description, $categories, $level);
+        return new self($id, $code, $description, $level, ...$categories);
     }
 }
