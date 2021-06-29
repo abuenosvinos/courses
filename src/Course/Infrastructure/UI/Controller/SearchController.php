@@ -22,7 +22,7 @@ class SearchController
         $orderBy = null;
         try {
             $orderBy = OrderBy::create($request->query->get('orderBy', OrderBy::CATEGORY));
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
         $searchParams = new SearchParams(
             $request->query->get('category'),

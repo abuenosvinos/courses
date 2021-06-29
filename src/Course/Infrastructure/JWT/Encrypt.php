@@ -49,8 +49,7 @@ final class Encrypt
             ->build();
 
         $serializer = new CompactSerializer();
-        $token = $serializer->serialize($jwe, 0);
 
-        return $token;
+        return $serializer->serialize($jwe, 0);;
     }
 }

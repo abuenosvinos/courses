@@ -39,9 +39,7 @@ final class MessageLoggerMiddleware implements MiddlewareInterface
             );
         }
 
-        $envelope = $stack->next()->handle($envelope, $stack);
-
-        return $envelope;
+        return $stack->next()->handle($envelope, $stack);
     }
 
     private function nameOf(Request $request): string

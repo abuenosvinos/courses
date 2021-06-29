@@ -51,7 +51,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
         try {
             $dataUser = $this->decrypt->decrypt($credentials);
-        } catch (Exception $e) {
+        } catch (Exception) {
             return null;
         }
 

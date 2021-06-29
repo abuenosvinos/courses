@@ -16,10 +16,7 @@ class NewUserCommand extends Command
 
     private CommandBus $commandBus;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $io;
+    private SymfonyStyle $io;
 
     public function __construct(CommandBus $commandBus)
     {

@@ -16,10 +16,7 @@ class GetTokenUserCommand extends Command
 
     private QueryBus $queryBus;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $io;
+    private SymfonyStyle $io;
 
     public function __construct(QueryBus $queryBus)
     {

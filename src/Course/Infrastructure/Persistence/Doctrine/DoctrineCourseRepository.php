@@ -55,16 +55,11 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         }
 
         if ($searchParams->orderBy()) {
-            switch ($searchParams->orderBy()->value()) {
-                case 'category':
-                    $query = $query->orderBy('cat.name');
-                    break;
-                case 'price':
-                    $query = $query->orderBy('pri.money.amount');
-                    break;
-                default:
-                    $query = $query->orderBy('c.' . $searchParams->orderBy()->value());
-            }
+            $query = match ($searchParams->orderBy()->value()) {
+                'category' => $query->orderBy('cat.name'),
+                'price' => $query->orderBy('pri.money.amount'),
+                default => $query->orderBy('c.' . $searchParams->orderBy()->value()),
+            };
         }
 
         $query = $query

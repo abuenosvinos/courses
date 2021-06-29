@@ -30,12 +30,12 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      *
      * @throws UsernameNotFoundException if the user is not found
      */
-    public function loadUserByIdentifier(string $username)
+    public function loadUserByIdentifier(string $username): UserInterface
     {
         return $this->userRepository->findByUsername($username);
     }
 
-    public function loadUserByUsername(string $username)
+    public function loadUserByUsername(string $username): UserInterface
     {
         $this->loadUserByIdentifier($username);
     }
@@ -53,7 +53,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      *
      * @return UserInterface
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));

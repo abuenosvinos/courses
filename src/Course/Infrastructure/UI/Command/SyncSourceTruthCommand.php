@@ -18,10 +18,7 @@ class SyncSourceTruthCommand extends Command
     private SourceTruthRepository $sourceTruthRepository;
     private CommandBus $commandBus;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $io;
+    private SymfonyStyle $io;
 
     public function __construct(SourceTruthRepository $sourceTruthRepository, CommandBus $commandBus)
     {

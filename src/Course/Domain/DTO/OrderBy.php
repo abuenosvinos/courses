@@ -12,6 +12,9 @@ final class OrderBy extends Enum
     public const LEVEL = 'level';
     public const PRICE = 'price';
 
+    /**
+     * @throws \Exception
+     */
     protected function throwExceptionForInvalidValue($value)
     {
         throw new \Exception('El valor introducido no es válido');

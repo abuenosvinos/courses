@@ -23,7 +23,7 @@ class SymfonyCommandBus implements CommandBus
     {
         try {
             $this->bus->dispatch($command);
-        } catch (NoHandlerForMessageException $unused) {
+        } catch (NoHandlerForMessageException) {
             throw new CommandNotRegisteredError($command);
         }
     }

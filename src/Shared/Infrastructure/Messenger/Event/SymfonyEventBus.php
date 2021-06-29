@@ -26,7 +26,7 @@ class SymfonyEventBus implements EventBus
         try {
             $this->bus->dispatch((new Envelope($event))
                 ->with(new DispatchAfterCurrentBusStamp()));
-        } catch (NoHandlerForMessageException $unused) {
+        } catch (NoHandlerForMessageException) {
             throw new EventNotRegisteredError($event);
         }
     }

@@ -43,11 +43,11 @@ abstract class Event extends Request
     public function __call($method, $args)
     {
         $attributeName = $method;
-        if (0 === strpos($method, 'is')) {
+        if (str_starts_with($method, 'is')) {
             $attributeName = lcfirst(substr($method, 2));
         }
 
-        if (0 === strpos($method, 'has')) {
+        if (str_starts_with($method, 'has')) {
             $attributeName = lcfirst(substr($method, 3));
         }
 
