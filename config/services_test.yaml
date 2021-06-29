@@ -1,5 +1,14 @@
 parameters:
-    sourceTruth:
-        path: '%kernel.project_dir%/data/courses_test.txt'
-    prices:
-        url: 'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1'
+    sourceTruth.path: '%kernel.project_dir%/data/courses_test.txt'
+
+services:
+
+    App\Course\Infrastructure\JWT\Encrypt:
+        public: true
+        arguments:
+            - '%jwt.key%'
+
+    App\Course\Infrastructure\JWT\Decrypt:
+        public: true
+        arguments:
+            - '%jwt.key%'

@@ -22,6 +22,7 @@ use function Lambdish\Phunctional\apply;
 class AddCourseTest extends KernelTestCase
 {
     private EntityManager $entityManager;
+    private mixed $pricesUrl;
 
     protected function setUp(): void
     {
@@ -30,6 +31,8 @@ class AddCourseTest extends KernelTestCase
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+
+        $this->pricesUrl = $kernel->getContainer()->getParameter('prices.url');
 
         apply(new DatabaseCleaner(), [$this->entityManager]);
     }
@@ -40,7 +43,7 @@ class AddCourseTest extends KernelTestCase
         $courseCategoryRepository = new DoctrineCourseCategoryRepository($this->entityManager);
         $courseLevelRepository = new DoctrineCourseLevelRepository($this->entityManager);
         $pricesRepository = new ThirdPartyPricesRepository(
-            'http://www.randomnumberapi.com/api/v1.0/random?max=1000&count=1',
+            $this->pricesUrl,
             ['EUR','USD'],
             new CurlHttpClient()
         );

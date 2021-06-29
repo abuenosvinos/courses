@@ -18,7 +18,7 @@ class PriceTest extends KernelTestCase
         $kernel = self::bootKernel();
 
         $this->pathFile = $kernel->getContainer()
-            ->getParameter('sourceTruth')['path'];
+            ->getParameter('sourceTruth.path');
     }
 
     public function testValidValues()

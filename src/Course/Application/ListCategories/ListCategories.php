@@ -15,7 +15,7 @@ final class ListCategories
         $this->courseCategoryRepository = $courseCategoryRepository;
     }
 
-    public function __invoke()
+    public function __invoke(): array
     {
         return $this->courseCategoryRepository->searchAll();
     }

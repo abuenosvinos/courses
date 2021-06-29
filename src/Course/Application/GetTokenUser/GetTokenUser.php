@@ -18,7 +18,7 @@ final class GetTokenUser
         $this->encrypt = $encrypt;
     }
 
-    public function __invoke(string $username)
+    public function __invoke(string $username): ?string
     {
         $user = $this->userRepository->findByUsername($username);
 

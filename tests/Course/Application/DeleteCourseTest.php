@@ -50,6 +50,6 @@ class DeleteCourseTest extends KernelTestCase
         );
 
         $courseRecoveredB = $courseRepository->findByCode($courseToInsert->code());
-        $this->assertEquals($courseRecoveredB, null);
+        $this->assertEquals(null, $courseRecoveredB);
     }
 }

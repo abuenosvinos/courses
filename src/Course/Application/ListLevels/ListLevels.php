@@ -15,7 +15,7 @@ final class ListLevels
         $this->courseLevelRepository = $courseLevelRepository;
     }
 
-    public function __invoke()
+    public function __invoke(): array
     {
         return $this->courseLevelRepository->searchAll();
     }
