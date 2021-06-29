@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6ad636ab-fe80-4226-a30c-510eacab1414",
+		"_postman_id": "88bb821e-d1aa-41b9-90f6-889673625005",
 		"name": "Course",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -17,7 +17,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/courses?category=Deporte&orderBy=price",
+					"raw": "http://localhost:8080/courses?orderBy=price",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,8 @@
 					"query": [
 						{
 							"key": "category",
-							"value": "Deporte"
+							"value": "Deporte",
+							"disabled": true
 						},
 						{
 							"key": "level",
@@ -50,6 +51,81 @@
 							"key": "orderBy",
 							"value": "price"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-AUTH-TOKEN",
+						"type": "text",
+						"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/categories",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-AUTH-TOKEN",
+						"type": "text",
+						"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/levels",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-AUTH-TOKEN",
+						"type": "text",
+						"value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/levels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"levels"
 					]
 				}
 			},
