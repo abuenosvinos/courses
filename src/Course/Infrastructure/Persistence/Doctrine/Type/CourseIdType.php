@@ -17,7 +17,7 @@ class CourseIdType extends StringType
 
     public function convertToPHPValue($value, AbstractPlatform $platform): CourseId
     {
-        return new CourseId($value);
+        return CourseId::create($value);
     }
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string

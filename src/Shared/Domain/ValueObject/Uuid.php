@@ -11,16 +11,11 @@ class Uuid
 {
     private string $value;
 
-    public function __construct(string $value)
+    private function __construct(string $value)
     {
         $this->ensureIsValidUuid($value);
 
         $this->value = $value;
-    }
-
-    public static function random(): static
-    {
-        return new static(RamseyUuid::uuid4()->toString());
     }
 
     public function value(): string
@@ -41,4 +36,15 @@ class Uuid
     {
         return $this->value();
     }
+
+    public static function random(): static
+    {
+        return new static(RamseyUuid::uuid4()->toString());
+    }
+
+    public static function create(string $value): static
+    {
+        return new static($value);
+    }
+
 }

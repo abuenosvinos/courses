@@ -15,7 +15,7 @@ final class CourseMother
     public static function create(?Uuid $id = null, ?string $code = null, ?string $description = null, ?string $category = null, ?string $level = null): Course
     {
         return Course::create(
-            new CourseId($id ?? UuidMother::random()),
+            CourseId::create($id ?? UuidMother::random()),
             $code ?? StringMother::random(),
             $description ?? StringMother::random(),
             [CourseCategory::create($category ?? StringMother::random())],

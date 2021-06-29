@@ -17,7 +17,7 @@ class UserIdType extends StringType
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new UserId($value);
+        return UserId::create($value);
     }
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform)
