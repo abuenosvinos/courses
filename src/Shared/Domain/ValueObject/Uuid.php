@@ -46,5 +46,4 @@ class Uuid
     {
         return new static($value);
     }
-
 }

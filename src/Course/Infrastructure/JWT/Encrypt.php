@@ -50,6 +50,6 @@ final class Encrypt
 
         $serializer = new CompactSerializer();
 
-        return $serializer->serialize($jwe, 0);;
+        return $serializer->serialize($jwe, 0);
     }
 }
