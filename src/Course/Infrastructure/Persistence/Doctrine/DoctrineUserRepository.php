@@ -9,7 +9,7 @@ use App\Course\Domain\Entity\UserId;
 use App\Course\Domain\Repository\UserRepository;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineUserRepository extends DoctrineRepository implements UserRepository
+class DoctrineUserRepository extends DoctrineRepository implements UserRepository
 {
     public function save(User $user): void
     {

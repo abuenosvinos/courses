@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Course\Application;
+namespace App\Tests\Course\Application\Fixtures;
 
 use App\Course\Application\ListCategories\ListCategories;
 use App\Course\Domain\Entity\CourseCategory;

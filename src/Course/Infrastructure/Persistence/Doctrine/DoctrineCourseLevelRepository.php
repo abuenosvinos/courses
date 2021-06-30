@@ -8,7 +8,7 @@ use App\Course\Domain\Entity\CourseLevel;
 use App\Course\Domain\Repository\CourseLevelRepository;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineCourseLevelRepository extends DoctrineRepository implements CourseLevelRepository
+class DoctrineCourseLevelRepository extends DoctrineRepository implements CourseLevelRepository
 {
     public function findByName(string $name): ?CourseLevel
     {

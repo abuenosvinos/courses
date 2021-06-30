@@ -8,7 +8,7 @@ use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Domain\Repository\CourseCategoryRepository;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineCourseCategoryRepository extends DoctrineRepository implements CourseCategoryRepository
+class DoctrineCourseCategoryRepository extends DoctrineRepository implements CourseCategoryRepository
 {
     public function findByName(string $name): ?CourseCategory
     {
