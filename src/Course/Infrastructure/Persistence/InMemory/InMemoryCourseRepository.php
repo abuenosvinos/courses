@@ -31,6 +31,7 @@ final class InMemoryCourseRepository implements CourseRepository
 
     public function findByCode(string $code): ?Course
     {
+        /** @var Course $course */
         foreach ($this->courses as $course) {
             if ($course->code() === $code) {
                 return $course;
@@ -42,7 +43,7 @@ final class InMemoryCourseRepository implements CourseRepository
 
     public function findByCriteria(SearchParams $searchParams): Paginator
     {
-        return $this->courses;
+        return new Paginator(null);
     }
 
     public function searchAll(): array

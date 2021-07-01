@@ -28,7 +28,6 @@
         "predis/predis": "^1.1",
         "ramsey/uuid": "^4.1",
         "sensio/framework-extra-bundle": "^6.1",
-        "squizlabs/php_codesniffer": "^3.6",
         "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
@@ -65,6 +64,7 @@
         "web-token/jwt-encryption-algorithm-dir": "^2.2"
     },
     "require-dev": {
+        "ext-xdebug": "*",
         "behat/behat": "^3.8",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friends-of-behat/mink": "^1.9",
@@ -73,6 +73,7 @@
         "friends-of-behat/symfony-extension": "^2.0",
         "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
         "symfony/debug-bundle": "^5.3",
