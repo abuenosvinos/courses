@@ -1,0 +1,18 @@
+default:
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php
+      kernel:
+        class: App\Kernel
+    Behat\MinkExtension:
+      sessions:
+        symfony:
+          symfony: ~
+      base_url: ''
+
+  suites:
+    levels:
+      paths: [ tests/Shared/Infrastructure/Behat/ ]
+      contexts:
+        - Behat\MinkExtension\Context\MinkContext
+        - App\Tests\Shared\Infrastructure\Behat\SharedContext

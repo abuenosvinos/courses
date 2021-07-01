@@ -1,0 +1,2 @@
+imports:
+  - tests/Shared/Infrastructure/Behat/behat_course.yaml

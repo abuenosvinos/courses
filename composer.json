@@ -10,7 +10,7 @@
             "homepage": "http://www.antoniobuenosvinos.com/"
         }
     ],
-    "keywords": ["php", "clean code", "ddd", "cqrs", "event sourcing", "hexagonal architecture"],
+    "keywords": ["php", "clean code", "ddd", "cqrs", "event sourcing", "hexagonal architecture", "testing"],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -67,6 +67,10 @@
     "require-dev": {
         "behat/behat": "^3.8",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "friends-of-behat/mink": "^1.9",
+        "friends-of-behat/mink-browserkit-driver": "^1.5",
+        "friends-of-behat/mink-extension": "^2.5",
+        "friends-of-behat/symfony-extension": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
