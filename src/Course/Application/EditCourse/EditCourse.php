@@ -20,8 +20,12 @@ final class EditCourse
     private CourseLevelRepository $courseLevelRepository;
     private EventBus $bus;
 
-    public function __construct(CourseRepository $courseRepository, CourseCategoryRepository $courseCategoryRepository, CourseLevelRepository $courseLevelRepository, EventBus $bus)
-    {
+    public function __construct(
+        CourseRepository $courseRepository,
+        CourseCategoryRepository $courseCategoryRepository,
+        CourseLevelRepository $courseLevelRepository,
+        EventBus $bus
+    ) {
         $this->courseRepository = $courseRepository;
         $this->courseCategoryRepository = $courseCategoryRepository;
         $this->courseLevelRepository = $courseLevelRepository;

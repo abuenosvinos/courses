@@ -6,12 +6,12 @@ Feature: List of levels
   Background:
     Given the data of the fixtures is loaded
 
-  Scenario: Get al the levels in the application
+  Scenario: Get all the levels in the application
     Given I don't have a token to enter access to the system
     And I send a GET request to "/levels"
     Then the response status code should be 401
 
-  Scenario: Get al the levels in the application
+  Scenario: Get all the levels in the application
     Given I have a token to enter access to the system
     And I send a GET request to "/levels"
     Then the response status code should be 200

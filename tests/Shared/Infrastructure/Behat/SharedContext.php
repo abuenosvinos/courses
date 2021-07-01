@@ -34,9 +34,14 @@ class SharedContext extends RawMinkContext
      */
     public function iHaveATokenToEnterAccessToTheSystem()
     {
-        $this->session->getDriver()->getClient()->setServerParameter('HTTP_X-AUTH-TOKEN', 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA');
+        $this->session->
+            getDriver()->
+            getClient()->
+            setServerParameter(
+                'HTTP_X-AUTH-TOKEN',
+                'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA'
+            );
     }
-
 
     /**
      * @Given /^I don't have a token to enter access to the system$/

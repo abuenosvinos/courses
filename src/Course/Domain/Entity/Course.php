@@ -22,8 +22,13 @@ final class Course extends AggregateRoot
     private CourseLevel $level;
     private Collection $prices;
 
-    private function __construct(CourseId $id, string $code, string $description, CourseLevel $level, CourseCategory...$categories)
-    {
+    private function __construct(
+        CourseId $id,
+        string $code,
+        string $description,
+        CourseLevel $level,
+        CourseCategory...$categories
+    ) {
         $this->id = $id;
         $this->code = $code;
         $this->description = $description;
@@ -64,13 +69,7 @@ final class Course extends AggregateRoot
     {
         return $this->prices;
     }
-/*
-    public function addCategory(CourseCategory $category): void
-    {
-        //$category->setCourse($this);
-        $this->categories->add($category);
-    }
-*/
+
     public function addPrice(Price $price): void
     {
         $price->setCourse($this);
@@ -87,8 +86,13 @@ final class Course extends AggregateRoot
         }
     }
 
-    public static function create(CourseId $id, string $code, string $description, CourseLevel $level, CourseCategory...$categories): self
-    {
+    public static function create(
+        CourseId $id,
+        string $code,
+        string $description,
+        CourseLevel $level,
+        CourseCategory...$categories
+    ): self {
         return new self($id, $code, $description, $level, ...$categories);
     }
 }

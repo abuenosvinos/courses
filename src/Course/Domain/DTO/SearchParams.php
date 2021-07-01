@@ -14,8 +14,15 @@ final class SearchParams
     private ?int $limit;
     private ?int $page;
 
-    public function __construct(?string $category = null, ?string $level = null, ?int $priceMin = null, ?int $priceMax = null, ?OrderBy $orderBy = null, ?int $limit, ?int $page)
-    {
+    public function __construct(
+        ?string $category = null,
+        ?string $level = null,
+        ?int $priceMin = null,
+        ?int $priceMax = null,
+        ?OrderBy $orderBy = null,
+        ?int $limit,
+        ?int $page
+    ) {
         $this->category = $category;
         $this->level = $level;
         $this->priceMin = $priceMin;

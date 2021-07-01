@@ -32,10 +32,22 @@ docker exec -it docker_course_php_1 php bin/console doctrine:schema:update --for
 Para ejecutar la suite de pruebas ejecuta el siguiente comando.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-tests
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-unit-tests
+```
+
+```bash
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-acceptance-tests
 ```
 
 Para verificar la cálidad del código
+
+```bash
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
+```
+
+```bash
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
+```
 
 ```bash
 docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style

@@ -39,8 +39,8 @@ reload: composer-env-file
 .PHONY: test
 test: composer-env-file
 	docker exec docker_course_php_1 php /var/www/composer.phar check-style
-	docker exec docker_course_php_1 php /var/www/composer.phar run-tests
-	docker exec docker_course_php_1 ./vendor/bin/behat --format=progress -v
+	docker exec docker_course_php_1 php /var/www/composer.phar run-unit-tests
+	docker exec docker_course_php_1 php /var/www/composer.phar run-acceptance-tests
 
 .PHONY: static-analysis
 static-analysis: composer-env-file

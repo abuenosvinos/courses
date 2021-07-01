@@ -38,7 +38,11 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
         $limit = $searchParams->limit();
         $page = $searchParams->page();
 
-        $query = $this->repository(Course::class)->createQueryBuilder('c')->leftJoin('c.prices', 'pri')->leftJoin('c.categories', 'cat')->leftJoin('c.level', 'lev');
+        $query = $this->repository(Course::class)
+            ->createQueryBuilder('c')
+            ->leftJoin('c.prices', 'pri')
+            ->leftJoin('c.categories', 'cat')
+            ->leftJoin('c.level', 'lev');
 
         if ($searchParams->category()) {
             $query = $query->andWhere('cat.name = :category')->setParameter('category', $searchParams->category());
