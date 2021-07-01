@@ -9,6 +9,7 @@ use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 use function Lambdish\Phunctional\first;
 
 class ListLCategoriesTest extends KernelTestCase

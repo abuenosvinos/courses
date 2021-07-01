@@ -11,6 +11,7 @@ use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 use function Lambdish\Phunctional\first;
 
 class ListLevelsTest extends KernelTestCase
