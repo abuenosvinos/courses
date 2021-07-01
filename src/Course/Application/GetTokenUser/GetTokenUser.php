@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Course\Application\GetTokenUser;
 
+use App\Course\Domain\Adapter\EncryptionAdapter;
 use App\Course\Domain\Repository\UserRepository;
-use App\Course\Infrastructure\JWT\Encrypt;
 
 final class GetTokenUser
 {
     private UserRepository $userRepository;
-    private Encrypt $encrypt;
+    private EncryptionAdapter $encryptionAdapter;
 
-    public function __construct(UserRepository $userRepository, Encrypt $encrypt)
+    public function __construct(UserRepository $userRepository, EncryptionAdapter $encryptionAdapter)
     {
         $this->userRepository = $userRepository;
-        $this->encrypt = $encrypt;
+        $this->encryptionAdapter = $encryptionAdapter;
     }
 
     public function __invoke(string $username): ?string
@@ -23,7 +23,7 @@ final class GetTokenUser
         $user = $this->userRepository->findByUsername($username);
 
         if ($user) {
-            return $this->encrypt->encrypt(json_encode([
+            return $this->encryptionAdapter->encrypt(json_encode([
                 'username' => $user->getUsername()
             ]));
         }

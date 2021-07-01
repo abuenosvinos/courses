@@ -5,25 +5,22 @@ declare(strict_types=1);
 namespace App\Tests\Course\Application\Mock;
 
 use App\Course\Application\GetTokenUser\GetTokenUser;
+use App\Course\Domain\Adapter\EncryptionAdapter;
 use App\Course\Domain\Entity\User;
 use App\Course\Domain\Entity\UserId;
-use App\Course\Infrastructure\JWT\Decrypt;
-use App\Course\Infrastructure\JWT\Encrypt;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class GetTokenUserTest extends KernelTestCase
 {
-    private Encrypt $encrypt;
-    private Decrypt $decrypt;
+    private EncryptionAdapter $encryptionAdapter;
 
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
-        $this->encrypt = $kernel->getContainer()->get('App\Course\Infrastructure\JWT\Encrypt');
-        $this->decrypt = $kernel->getContainer()->get('App\Course\Infrastructure\JWT\Decrypt');
+        $this->encryptionAdapter = $kernel->getContainer()->get('App\Course\Domain\Adapter\EncryptionAdapter');
     }
 
     public function testValidValues()
@@ -47,11 +44,11 @@ class GetTokenUserTest extends KernelTestCase
 
         $service = new GetTokenUser(
             $userRepository,
-            $this->encrypt
+            $this->encryptionAdapter
         );
 
         $token = $service->__invoke('abuenosvinos');
 
-        $this->assertEquals(['username' => 'abuenosvinos'], $this->decrypt->decrypt($token));
+        $this->assertEquals(['username' => 'abuenosvinos'], $this->encryptionAdapter->decrypt($token));
     }
 }

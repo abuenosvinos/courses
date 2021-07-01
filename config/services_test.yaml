@@ -15,6 +15,10 @@ services:
         exclude:
             - '../tests/bootstrap.php'
 
+    App\Course\Domain\Adapter\EncryptionAdapter:
+        class: App\Course\Infrastructure\JWT\JwtEncryptionAdapter
+        public: true
+
     App\Course\Infrastructure\JWT\Encrypt:
         public: true
         arguments:
