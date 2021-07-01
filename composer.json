@@ -71,6 +71,7 @@
         "friends-of-behat/mink-browserkit-driver": "^1.5",
         "friends-of-behat/mink-extension": "^2.5",
         "friends-of-behat/symfony-extension": "^2.0",
+        "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
@@ -79,7 +80,8 @@
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "^5.3",
         "symfony/var-dumper": "^5.3",
-        "symfony/web-profiler-bundle": "^5.3"
+        "symfony/web-profiler-bundle": "^5.3",
+        "vimeo/psalm": "^4.8"
     },
     "config": {
         "optimize-autoloader": true,
@@ -117,7 +119,9 @@
         "run-tests" : "./vendor/bin/simple-phpunit",
         "check-style-inline": "./vendor/bin/phpcs --standard=PSR12 src tests --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
         "check-style": "./vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1",
-        "fix-style": "./vendor/bin/phpcbf"
+        "fix-style": "./vendor/bin/phpcbf",
+        "phpstan": "./vendor/bin/phpstan analyse src tests",
+        "psalm": "./vendor/bin/psalm"
     },
     "conflict": {
         "symfony/symfony": "*"
