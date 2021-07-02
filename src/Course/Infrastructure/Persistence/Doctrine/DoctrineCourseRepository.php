@@ -65,6 +65,7 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
                 default => $query->orderBy('c.' . $searchParams->orderBy()->value()),
             };
         }
+        $query->addOrderBy('c.code');
 
         $query = $query
             ->getQuery()->setFirstResult($limit * ($page - 1))

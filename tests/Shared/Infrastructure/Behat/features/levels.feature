@@ -3,8 +3,8 @@ Feature: List of levels
   As a user
   I need to see all the levels of the application
 
-  Background:
-    Given the data of the fixtures is loaded
+ # Background:
+ #   Given the data of the fixtures is loaded
 
   Scenario: Get all the levels in the application
     Given I don't have a token to enter access to the system

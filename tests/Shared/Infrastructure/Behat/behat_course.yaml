@@ -5,13 +5,19 @@ default:
       kernel:
         class: App\Kernel
     Behat\MinkExtension:
+      #base_url: 'http:\/\/localhost:8080'
       sessions:
         symfony:
           symfony: ~
-      base_url: ''
 
   suites:
-    levels:
+    init:
+      paths: [ tests/Shared/Infrastructure/Behat/ ]
+      contexts:
+        - App\Tests\Shared\Infrastructure\Behat\SharedContext
+      filters:
+        tags: '@init'
+    course:
       paths: [ tests/Shared/Infrastructure/Behat/ ]
       contexts:
         - Behat\MinkExtension\Context\MinkContext

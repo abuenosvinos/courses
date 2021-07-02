@@ -33,23 +33,31 @@ class CourseFixtures extends Fixture
         }
 
         for ($i = 1; $i <= 20; $i++) {
+            $levelCourse = $levels[1 + ($i % 3)];
+            $categoriesCourse = [];
+            for ($j = 1; $j <= ($i % 3); $j++) {
+                $categoriesCourse[] = $categories[$j];
+            }
+
             $course = Course::create(
                 CourseId::random(),
                 'Título de prueba ' . $i,
                 'Descripción de prueba ' . $i,
-                $levels[mt_rand(1, 3)],
-                ...[$categories[mt_rand(1, 3)]]
+                $levelCourse,
+                ...$categoriesCourse
             );
 
+            $j = 0;
             foreach (Currency::values() as $currency) {
                 $course->addPrice(
                     Price::create(
                         Money::create(
-                            mt_rand(5, 150),
+                            ($i * 100) + ($j * 10),
                             Currency::create($currency)
                         )
                     )
                 );
+                $j++;
             }
             $manager->persist($course);
         }

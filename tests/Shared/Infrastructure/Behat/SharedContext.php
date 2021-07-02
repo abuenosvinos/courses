@@ -30,6 +30,14 @@ class SharedContext extends RawMinkContext
     }
 
     /**
+     * @Given /^the data of the fixtures is loaded$/
+     */
+    public function theDataOfTheFixturesIsLoaded()
+    {
+        $this->executeFixtures($this->entityManager, new CourseFixtures(), new UserFixtures());
+    }
+
+    /**
      * @Given /^I have a token to enter access to the system$/
      */
     public function iHaveATokenToEnterAccessToTheSystem()
@@ -76,13 +84,5 @@ class SharedContext extends RawMinkContext
     private function sanitizeOutput(string $output): false|string
     {
         return json_encode(json_decode(trim($output), true));
-    }
-
-    /**
-     * @Given /^the data of the fixtures is loaded$/
-     */
-    public function theDataOfTheFixturesIsLoaded()
-    {
-        $this->executeFixtures($this->entityManager, new CourseFixtures(), new UserFixtures());
     }
 }

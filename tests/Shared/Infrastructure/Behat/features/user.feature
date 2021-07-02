@@ -3,8 +3,8 @@ Feature: User logged
   As a user logged
   I need to see all my information
 
-  Background:
-    Given the data of the fixtures is loaded
+ # Background:
+  #  Given the data of the fixtures is loaded
 
   Scenario: Get all my information
     Given I don't have a token to enter access to the system
