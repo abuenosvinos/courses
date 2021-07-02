@@ -50,7 +50,13 @@ class NewUserCommand extends Command
     {
         $username = $input->getArgument('username');
 
-        $this->commandBus->dispatch(new AddUserCommand($username));
+        $password = $this->io->askHidden('Password (your type will be hidden):', null);
+        if (!isset($password)) {
+            $this->io->note('You need to insert your password');
+            return self::FAILURE;
+        }
+
+        $this->commandBus->dispatch(new AddUserCommand($username, $password));
 
         $this->io->success('Se ha creado un nuevo usuario');
 

@@ -29,7 +29,6 @@ class GetTokenUserCommand extends Command
     {
         $this
             ->addArgument('username', InputArgument::REQUIRED, 'Username of the User')
-            ->addArgument('password', InputArgument::REQUIRED, 'Password of the User')
             ->setDescription('Get the token of a user to access the system')
             ->setHelp($this->getCommandHelp())
         ;
@@ -50,14 +49,19 @@ class GetTokenUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
-        $password = $input->getArgument('password');
+
+        $password = $this->io->askHidden('Password (your type will be hidden):', null);
+        if (!isset($password)) {
+            $this->io->note('You need to insert your password');
+            return self::FAILURE;
+        }
 
         $token = $this->queryBus->ask(new GetTokenUserQuery($username, $password));
 
         if ($token) {
             $this->io->success('Token: ' . $token);
         } else {
-            $this->io->success('No se ha podido obtener un token para el usuario indicado');
+            $this->io->error('No se ha podido obtener un token para el usuario indicado');
         }
 
         return Command::SUCCESS;
