@@ -46,11 +46,11 @@ docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /va
 ```
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar phpstan
 ```
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
+docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar psalm
 ```
 
 ## Usuarios
