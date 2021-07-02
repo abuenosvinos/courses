@@ -6,11 +6,11 @@ namespace App\Tests\Course\Application\Fixtures;
 
 use App\Course\Application\GetTokenUser\GetTokenUser;
 use App\Course\Domain\Adapter\EncryptionAdapter;
-use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\UserFixtures;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 
 class GetTokenUserTest extends KernelTestCase
 {
@@ -28,20 +28,27 @@ class GetTokenUserTest extends KernelTestCase
             ->getManager();
 
         $this->encryptionAdapter = $kernel->getContainer()->get('App\Course\Domain\Adapter\EncryptionAdapter');
+        $userFixtures = $kernel->getContainer()->get('App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\UserFixtures');
 
-        $this->executeFixtures($this->entityManager, new UserFixtures());
+        $this->executeFixtures($this->entityManager, $userFixtures);
     }
 
     public function testValidValues()
     {
         $userRepository = new DoctrineUserRepository($this->entityManager);
 
+        $userPasswordHasher = $this->createMock(UserPasswordHasher::class);
+        $userPasswordHasher->expects($this->any())
+            ->method('isPasswordValid')
+            ->willReturn(true);
+
         $service = new GetTokenUser(
             $userRepository,
-            $this->encryptionAdapter
+            $this->encryptionAdapter,
+            $userPasswordHasher
         );
 
-        $token = $service->__invoke('abuenosvinos');
+        $token = $service->__invoke('abuenosvinos', 'abuenosvinosPass');
 
         $this->assertEquals(['username' => 'abuenosvinos'], $this->encryptionAdapter->decrypt($token));
     }

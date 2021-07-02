@@ -23,7 +23,12 @@ class User extends SharedUser
 
     public function username(): string
     {
-        return $this->username;
+        return $this->getUserIdentifier();
+    }
+
+    public function password(): ?string
+    {
+        return $this->getPassword();
     }
 
     public static function create(UserId $id, string $username): self

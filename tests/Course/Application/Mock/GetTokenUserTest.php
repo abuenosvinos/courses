@@ -11,6 +11,7 @@ use App\Course\Domain\Entity\UserId;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 
 class GetTokenUserTest extends KernelTestCase
 {
@@ -42,12 +43,18 @@ class GetTokenUserTest extends KernelTestCase
             ->method('getRepository')
             ->willReturn($userRepository);
 
+        $userPasswordHasher = $this->createMock(UserPasswordHasher::class);
+        $userPasswordHasher->expects($this->any())
+            ->method('isPasswordValid')
+            ->willReturn(true);
+
         $service = new GetTokenUser(
             $userRepository,
-            $this->encryptionAdapter
+            $this->encryptionAdapter,
+            $userPasswordHasher
         );
 
-        $token = $service->__invoke('abuenosvinos');
+        $token = $service->__invoke('abuenosvinos', 'abuenosvinosPass');
 
         $this->assertEquals(['username' => 'abuenosvinos'], $this->encryptionAdapter->decrypt($token));
     }

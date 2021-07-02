@@ -10,24 +10,34 @@ use App\Shared\Infrastructure\Security\UserInterface;
 class User extends AggregateRoot implements UserInterface
 {
     protected string $username;
+    protected string $password;
     protected array $roles = [];
 
     /**
-     * @param string $username
+     * @see UserInterface
      */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
     public function setUsername(string $username): void
     {
         $this->username = $username;
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
      * @see UserInterface
+     * @see PasswordAuthenticatedUserInterface
      */
-    public function getUsername(): string
+    public function getPassword(): ?string
     {
-        return $this->username;
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
     }
 
     /**
@@ -46,18 +56,6 @@ class User extends AggregateRoot implements UserInterface
     }
 
     /**
-     * This method is not needed for apps that do not check user passwords.
-     *
-     * @see UserInterface
-     */
-    public function getPassword(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * This method is not needed for apps that do not check user passwords.
-     *
      * @see UserInterface
      */
     public function getSalt(): ?string

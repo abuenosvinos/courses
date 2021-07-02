@@ -7,6 +7,7 @@
     <entity name="App\Course\Domain\Entity\User" table="user">
         <id name="id" type="user_id" column="id" length="36" />
         <field name="username" type="string" column="username" length="255" unique="true" />
+        <field name="password" type="string" column="password" length="255" />
         <field name="roles" type="json" column="roles" />
     </entity>
 </doctrine-mapping>

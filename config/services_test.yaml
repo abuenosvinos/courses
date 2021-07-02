@@ -19,12 +19,5 @@ services:
         class: App\Course\Infrastructure\JWT\JwtEncryptionAdapter
         public: true
 
-    App\Course\Infrastructure\JWT\Encrypt:
+    App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\UserFixtures:
         public: true
-        arguments:
-            - '%jwt.key%'
-
-    App\Course\Infrastructure\JWT\Decrypt:
-        public: true
-        arguments:
-            - '%jwt.key%'

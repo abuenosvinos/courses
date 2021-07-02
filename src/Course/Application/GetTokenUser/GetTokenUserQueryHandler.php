@@ -17,6 +17,9 @@ final class GetTokenUserQueryHandler implements QueryHandler
 
     public function __invoke(GetTokenUserQuery $query)
     {
-        return $this->getTokenUser->__invoke($query->username());
+        return $this->getTokenUser->__invoke(
+            $query->username(),
+            $query->password()
+        );
     }
 }

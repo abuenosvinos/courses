@@ -12,13 +12,15 @@ default:
 
   suites:
     init:
-      paths: [ tests/Shared/Infrastructure/Behat/ ]
+      paths: [ tests/Shared/Infrastructure/Behat/features/ ]
       contexts:
-        - App\Tests\Shared\Infrastructure\Behat\SharedContext
+        - App\Tests\Shared\Infrastructure\Behat\InitContext
       filters:
         tags: '@init'
     course:
-      paths: [ tests/Shared/Infrastructure/Behat/ ]
+      paths: [ tests/Shared/Infrastructure/Behat/features/ ]
       contexts:
         - Behat\MinkExtension\Context\MinkContext
         - App\Tests\Shared\Infrastructure\Behat\SharedContext
+      filters:
+        tags: '~@init'

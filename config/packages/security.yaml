@@ -1,11 +1,17 @@
 security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         #users_in_memory: { memory: null }
         app_user_provider:
             id: App\Course\Infrastructure\UI\Security\UserProvider
+
+    password_hashers:
+        App\Course\Domain\Entity\User:
+            algorithm: auto
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

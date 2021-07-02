@@ -10,6 +10,8 @@ use App\Tests\Shared\Domain\StringMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use function Lambdish\Phunctional\apply;
 
@@ -31,15 +33,19 @@ class AddUserTest extends KernelTestCase
     public function testValidValues()
     {
         $userRepository = new DoctrineUserRepository($this->entityManager);
+        $passwordHasher = $this->createMock(UserPasswordHasher::class);
 
         $service = new AddUser(
-            $userRepository
+            $userRepository,
+            $passwordHasher
         );
 
         $username = StringMother::random();
+        $password = StringMother::random();
 
         $service->__invoke(
-            $username
+            $username,
+            $password
         );
 
         $user = $userRepository->findByUsername($username);

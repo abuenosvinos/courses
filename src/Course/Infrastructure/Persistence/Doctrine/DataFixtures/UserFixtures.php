@@ -8,17 +8,27 @@ use App\Course\Domain\Entity\User;
 use App\Course\Domain\Entity\UserId;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $userPasswordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+
     public function load(ObjectManager $manager)
     {
         $user = User::create(UserId::random(), 'abuenosvinos');
         $user->setRoles(['ROLE_USER']);
+        $user->setPassword($this->userPasswordHasher->hashPassword($user, 'abuenosvinosPass'));
         $manager->persist($user);
 
         $user = User::create(UserId::random(), 'manolo');
         $user->setRoles(['ROLE_USER']);
+        $user->setPassword($this->userPasswordHasher->hashPassword($user, 'manoloPass'));
         $manager->persist($user);
 
         $manager->flush();

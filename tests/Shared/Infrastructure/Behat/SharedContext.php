@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Shared\Infrastructure\Behat;
 
-use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\CourseFixtures;
-use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\UserFixtures;
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Behat\Mink\Session;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Gherkin\Node\PyStringNode;
-use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -20,21 +17,11 @@ class SharedContext extends RawMinkContext
 
     private Session $session;
     private RouterInterface $router;
-    private EntityManagerInterface $entityManager;
 
-    public function __construct(Session $minkSession, RouterInterface $router, EntityManagerInterface $entityManager)
+    public function __construct(Session $minkSession, RouterInterface $router)
     {
         $this->session = $minkSession;
         $this->router = $router;
-        $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @Given /^the data of the fixtures is loaded$/
-     */
-    public function theDataOfTheFixturesIsLoaded()
-    {
-        $this->executeFixtures($this->entityManager, new CourseFixtures(), new UserFixtures());
     }
 
     /**

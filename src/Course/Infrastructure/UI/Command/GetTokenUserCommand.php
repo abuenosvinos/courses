@@ -29,6 +29,7 @@ class GetTokenUserCommand extends Command
     {
         $this
             ->addArgument('username', InputArgument::REQUIRED, 'Username of the User')
+            ->addArgument('password', InputArgument::REQUIRED, 'Password of the User')
             ->setDescription('Get the token of a user to access the system')
             ->setHelp($this->getCommandHelp())
         ;
@@ -49,8 +50,9 @@ class GetTokenUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
+        $password = $input->getArgument('password');
 
-        $token = $this->queryBus->ask(new GetTokenUserQuery($username));
+        $token = $this->queryBus->ask(new GetTokenUserQuery($username, $password));
 
         if ($token) {
             $this->io->success('Token: ' . $token);
