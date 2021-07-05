@@ -39,6 +39,7 @@ reload: composer-env-file
 .PHONY: test
 test: composer-env-file
 	docker exec docker_course_php_1 php /var/www/composer.phar check-style
+	docker exec docker_course_php_1 php /var/www/composer.phar lint
 	docker exec docker_course_php_1 php /var/www/composer.phar run-unit-tests
 	docker exec docker_course_php_1 php /var/www/composer.phar run-acceptance-tests
 

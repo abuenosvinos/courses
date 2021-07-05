@@ -71,6 +71,8 @@
         "friends-of-behat/mink-extension": "^2.5",
         "friends-of-behat/symfony-extension": "^2.0",
         "phan/phan": "^4.0",
+        "php-parallel-lint/php-console-highlighter": "^0.5.0",
+        "php-parallel-lint/php-parallel-lint": "^1.3",
         "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.6",
@@ -124,7 +126,8 @@
         "fix-style": "./vendor/bin/phpcbf",
         "phpstan": "./vendor/bin/phpstan analyse src tests",
         "psalm": "./vendor/bin/psalm",
-        "phan": "./vendor/bin/phan --allow-polyfill-parser"
+        "phan": "./vendor/bin/phan --allow-polyfill-parser",
+        "lint": "./vendor/bin/parallel-lint --exclude vendor --exclude migrations --exclude config --exclude var ."
     },
     "conflict": {
         "symfony/symfony": "*"
