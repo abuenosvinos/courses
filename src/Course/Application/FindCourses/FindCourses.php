@@ -6,6 +6,7 @@ namespace App\Course\Application\FindCourses;
 
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Repository\CourseRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 final class FindCourses
 {
@@ -16,7 +17,7 @@ final class FindCourses
         $this->courseRepository = $courseRepository;
     }
 
-    public function __invoke(SearchParams $searchParams)
+    public function __invoke(SearchParams $searchParams): Paginator
     {
         return $this->courseRepository->findByCriteria($searchParams);
     }

@@ -15,7 +15,7 @@ final class AddUserCommandHandler implements CommandHandler
         $this->addUser = $addUser;
     }
 
-    public function __invoke(AddUserCommand $command)
+    public function __invoke(AddUserCommand $command): void
     {
         $this->addUser->__invoke(
             $command->username(),

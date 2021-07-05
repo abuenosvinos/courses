@@ -20,7 +20,7 @@ final class AddUser
         $this->userPasswordHasher = $userPasswordHasher;
     }
 
-    public function __invoke(string $username, string $password)
+    public function __invoke(string $username, string $password): void
     {
         $user = User::create(
             UserId::random(),

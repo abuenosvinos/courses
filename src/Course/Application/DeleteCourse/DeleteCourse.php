@@ -19,7 +19,7 @@ final class DeleteCourse
         $this->bus        = $bus;
     }
 
-    public function __invoke(string $code)
+    public function __invoke(string $code): void
     {
         $course = $this->courseRepository->findByCode($code);
 

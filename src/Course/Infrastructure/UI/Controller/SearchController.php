@@ -6,8 +6,7 @@ use App\Course\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
-use App\Course\Domain\Entity\CourseCategory;
-use App\Course\Domain\Entity\Price;
+use App\Course\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,6 +16,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController
 {
+    use ProcessCourse;
+
     public function index(Request $request, QueryBus $queryBus, UrlGeneratorInterface $router): JsonResponse
     {
         $orderBy = null;
@@ -76,30 +77,5 @@ class SearchController
         }
 
         return new JsonResponse($response);
-    }
-
-    private function processCategories(Course $course): array
-    {
-        $categories = [];
-        /** @var CourseCategory $category */
-        foreach ($course->categories() as $category) {
-            $categories[] = [
-                'name' => $category->name()
-            ];
-        }
-        return $categories;
-    }
-
-    private function processPrices(Course $course): array
-    {
-        $prices = [];
-        /** @var Price $price */
-        foreach ($course->prices() as $price) {
-            $prices[] = [
-                'price' => $price->money()->amount(),
-                'code' => $price->money()->currency()->value()
-            ];
-        }
-        return $prices;
     }
 }

@@ -15,7 +15,7 @@ final class DeleteCourseCommandHandler implements CommandHandler
         $this->deleteCourse = $deleteCourse;
     }
 
-    public function __invoke(DeleteCourseCommand $command)
+    public function __invoke(DeleteCourseCommand $command): void
     {
         $code = $command->code();
 

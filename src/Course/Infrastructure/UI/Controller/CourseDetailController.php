@@ -4,8 +4,7 @@ namespace App\Course\Infrastructure\UI\Controller;
 
 use App\Course\Application\GetCourse\GetCourseQuery;
 use App\Course\Domain\Entity\Course;
-use App\Course\Domain\Entity\CourseCategory;
-use App\Course\Domain\Entity\Price;
+use App\Course\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +14,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CourseDetailController
 {
+    use ProcessCourse;
+
     public function index(Request $request, QueryBus $queryBus, UrlGeneratorInterface $router): JsonResponse
     {
         $slug = $request->attributes->get('slug');
@@ -44,30 +45,5 @@ class CourseDetailController
         ];
 
         return new JsonResponse($response);
-    }
-
-    private function processCategories(Course $course): array
-    {
-        $categories = [];
-        /** @var CourseCategory $category */
-        foreach ($course->categories() as $category) {
-            $categories[] = [
-                'name' => $category->name()
-            ];
-        }
-        return $categories;
-    }
-
-    private function processPrices(Course $course): array
-    {
-        $prices = [];
-        /** @var Price $price */
-        foreach ($course->prices() as $price) {
-            $prices[] = [
-                'price' => $price->money()->amount(),
-                'code' => $price->money()->currency()->value()
-            ];
-        }
-        return $prices;
     }
 }

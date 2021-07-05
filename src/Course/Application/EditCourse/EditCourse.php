@@ -32,7 +32,7 @@ final class EditCourse
         $this->bus        = $bus;
     }
 
-    public function __invoke(CourseDTO $courseDto)
+    public function __invoke(CourseDTO $courseDto): void
     {
         $courseCategory = $this->courseCategoryRepository->findByName($courseDto->category());
         if (!$courseCategory) {

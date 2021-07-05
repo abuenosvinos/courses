@@ -15,7 +15,7 @@ final class SyncDataCommandHandler implements CommandHandler
         $this->syncData = $syncData;
     }
 
-    public function __invoke(SyncDataCommand $command)
+    public function __invoke(SyncDataCommand $command): void
     {
         $courses = $command->courses();
 

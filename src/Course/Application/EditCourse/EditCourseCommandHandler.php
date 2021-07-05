@@ -15,7 +15,7 @@ final class EditCourseCommandHandler implements CommandHandler
         $this->editCourse = $editCourse;
     }
 
-    public function __invoke(EditCourseCommand $command)
+    public function __invoke(EditCourseCommand $command): void
     {
         $course = $command->course();
 

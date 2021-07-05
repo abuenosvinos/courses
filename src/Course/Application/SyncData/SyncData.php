@@ -24,7 +24,7 @@ final class SyncData
         $this->bus        = $bus;
     }
 
-    public function __invoke(Courses $courses)
+    public function __invoke(Courses $courses): void
     {
         $coursesDatabase = $this->courseRepository->searchAll();
 
