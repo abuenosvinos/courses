@@ -16,8 +16,8 @@
     <file>src/</file>
     <file>tests/</file>
 
-    <exclude-pattern>src/Kernel\.php</exclude-pattern>
-    <exclude-pattern>tests/bootstrap\.php</exclude-pattern>
+    <exclude-pattern>src/Kernel.php$</exclude-pattern>
+    <exclude-pattern>tests/bootstrap.php$</exclude-pattern>
 
     <rule ref="PSR1"/>
     <rule ref="PSR2"/>

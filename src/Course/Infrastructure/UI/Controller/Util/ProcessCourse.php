@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Course\Infrastructure\UI\Controller\Util;
 
 use App\Course\Domain\Entity\Course;
