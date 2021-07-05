@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\StringType;
 
 class CourseIdType extends StringType
 {
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         return $value;
     }
