@@ -70,6 +70,7 @@
         "friends-of-behat/mink-browserkit-driver": "^1.5",
         "friends-of-behat/mink-extension": "^2.5",
         "friends-of-behat/symfony-extension": "^2.0",
+        "phan/phan": "^4.0",
         "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.6",
@@ -122,7 +123,8 @@
         "check-style": "./vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1",
         "fix-style": "./vendor/bin/phpcbf",
         "phpstan": "./vendor/bin/phpstan analyse src tests",
-        "psalm": "./vendor/bin/psalm"
+        "psalm": "./vendor/bin/psalm",
+        "phan": "./vendor/bin/phan --allow-polyfill-parser"
     },
     "conflict": {
         "symfony/symfony": "*"

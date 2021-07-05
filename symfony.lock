@@ -175,6 +175,9 @@
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
+    "microsoft/tolerant-php-parser": {
+        "version": "v0.0.23"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
@@ -189,6 +192,9 @@
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
+    },
+    "phan/phan": {
+        "version": "4.0.7"
     },
     "phar-io/manifest": {
         "version": "2.0.1"
@@ -266,6 +272,9 @@
     },
     "ramsey/uuid": {
         "version": "4.1.1"
+    },
+    "sabre/event": {
+        "version": "5.1.2"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"

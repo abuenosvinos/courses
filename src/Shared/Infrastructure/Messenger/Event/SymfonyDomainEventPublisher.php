@@ -13,7 +13,7 @@ class SymfonyDomainEventPublisher implements DomainEventPublisher
 
     public function publish(Event ...$events): void
     {
-        $this->events = array_merge($this->events, array_values($events));
+        $this->events = array_merge($this->events, $events);
     }
 
     public function release(): array
