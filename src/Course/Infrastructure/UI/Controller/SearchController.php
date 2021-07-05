@@ -64,6 +64,9 @@ class SearchController
         /** @var Course $course */
         foreach ($courses as $course) {
             $response['results'][] = [
+                '_links' => [
+                    'self' => $router->generate('course-detail', ['slug' => $course->slug()], UrlGenerator::ABSOLUTE_URL)
+                ],
                 'title' => $course->code(),
                 'description' => $course->description(),
                 'categories' => $this->processCategories($course),

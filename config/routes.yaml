@@ -10,6 +10,10 @@ courses:
     path: /courses
     controller: App\Course\Infrastructure\UI\Controller\SearchController::index
 
+course-detail:
+    path: /courses/{slug}
+    controller: App\Course\Infrastructure\UI\Controller\CourseDetailController::index
+
 categories:
     path: /categories
     controller: App\Course\Infrastructure\UI\Controller\CategoryController::index

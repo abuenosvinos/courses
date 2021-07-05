@@ -28,6 +28,9 @@ Feature: Search of courses
         "limit": 3,
         "results": [
             {
+                "_links": {
+                    "self": "http://localhost/courses/titulo-de-prueba-12"
+                },
                 "title": "Título de prueba 12",
                 "description": "Descripción de prueba 12",
                 "categories": [],
@@ -44,6 +47,9 @@ Feature: Search of courses
                 ]
             },
             {
+                "_links": {
+                    "self": "http://localhost/courses/titulo-de-prueba-15"
+                },
                 "title": "Título de prueba 15",
                 "description": "Descripción de prueba 15",
                 "categories": [],
@@ -60,6 +66,9 @@ Feature: Search of courses
                 ]
             },
             {
+                "_links": {
+                    "self": "http://localhost/courses/titulo-de-prueba-18"
+                },
                 "title": "Título de prueba 18",
                 "description": "Descripción de prueba 18",
                 "categories": [],

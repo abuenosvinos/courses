@@ -17,6 +17,8 @@ interface CourseRepository
 
     public function findById(CourseId $id): ?Course;
 
+    public function findBySlug(string $islug): ?Course;
+
     public function findByCode(string $code): ?Course;
 
     public function findByCriteria(SearchParams $searchParams): Paginator;

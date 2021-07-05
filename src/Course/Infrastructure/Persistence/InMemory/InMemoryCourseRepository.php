@@ -29,6 +29,18 @@ final class InMemoryCourseRepository implements CourseRepository
         return $this->courses[$id->value()] ?? null;
     }
 
+    public function findBySlug(string $slug): ?Course
+    {
+        /** @var Course $course */
+        foreach ($this->courses as $course) {
+            if ($course->slug() === $slug) {
+                return $course;
+            }
+        }
+
+        return null;
+    }
+
     public function findByCode(string $code): ?Course
     {
         /** @var Course $course */
