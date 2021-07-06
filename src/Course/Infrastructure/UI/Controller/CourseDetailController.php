@@ -41,6 +41,7 @@ class CourseDetailController
                 'categories' => $this->processCategories($course),
                 'level' => $course->level()->name(),
                 'prices' => $this->processPrices($course),
+                'sections' => $this->processSections($course),
             ]
         ];
 

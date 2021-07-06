@@ -30,6 +30,14 @@
                 <order-by-field name="money.amount" direction="ASC" />
             </order-by>
         </one-to-many>
+        <one-to-many field="sections" target-entity="App\Course\Domain\Entity\CourseSection" mapped-by="course" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <order-by>
+                <order-by-field name="sequence" direction="ASC" />
+            </order-by>
+        </one-to-many>
 
         <field name="createdAt" type="datetime" column="created_at">
             <gedmo:timestampable on="create"/>

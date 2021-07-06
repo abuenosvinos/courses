@@ -53,6 +53,42 @@ Feature: Get the detail of a course
                     "price": 110,
                     "code": "USD"
                 }
+            ],
+            "sections": [
+                {
+                    "title": "Título seccion 1",
+                    "description": "Descripción seccion 1",
+                    "duration": 7,
+                    "chapters": [
+                        {
+                            "title": "Título capítulo 1",
+                            "description": "Descripción capítulo 1",
+                            "duration": 3
+                        },
+                        {
+                            "title": "Título capítulo 2",
+                            "description": "Descripción capítulo 2",
+                            "duration": 4
+                        }
+                    ]
+                },
+                {
+                    "title": "Título seccion 2",
+                    "description": "Descripción seccion 2",
+                    "duration": 9,
+                    "chapters": [
+                        {
+                            "title": "Título capítulo 1",
+                            "description": "Descripción capítulo 1",
+                            "duration": 4
+                        },
+                        {
+                            "title": "Título capítulo 2",
+                            "description": "Descripción capítulo 2",
+                            "duration": 5
+                        }
+                    ]
+                }
             ]
         }
     }

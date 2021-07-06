@@ -8,6 +8,7 @@ use App\Course\Application\ListCategories\ListCategories;
 use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\CourseFixtures;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
+use App\Shared\Domain\Bus\Event\EventBus;
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -28,7 +29,9 @@ class ListCategoriesTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
 
-        $this->executeFixtures($this->entityManager, new CourseFixtures());
+
+        $eventBus = $this->createMock(EventBus::class);
+        $this->executeFixtures($this->entityManager, new CourseFixtures($eventBus));
     }
 
     public function testValidValues()

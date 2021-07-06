@@ -20,7 +20,8 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/Domain/Entity/'
+            - '../src/Course/Domain/Entity/'
+            - '../src/Course/Domain/ValueObject/'
             - '../src/Kernel.php'
             - '../src/Tests/'
 

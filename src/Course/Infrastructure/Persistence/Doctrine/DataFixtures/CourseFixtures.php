@@ -6,16 +6,27 @@ namespace App\Course\Infrastructure\Persistence\Doctrine\DataFixtures;
 
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseCategory;
+use App\Course\Domain\Entity\CourseChapter;
 use App\Course\Domain\Entity\CourseId;
 use App\Course\Domain\Entity\CourseLevel;
+use App\Course\Domain\Entity\CourseSection;
 use App\Course\Domain\Entity\Price;
 use App\Course\Domain\ValueObject\Currency;
 use App\Course\Domain\ValueObject\Money;
+use App\Shared\Domain\Bus\Event\Event;
+use App\Shared\Domain\Bus\Event\EventBus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class CourseFixtures extends Fixture
 {
+    private EventBus $eventBus;
+
+    public function __construct(EventBus $eventBus)
+    {
+        $this->eventBus = $eventBus;
+    }
+
     public function load(ObjectManager $manager)
     {
         $categories = [];
@@ -47,6 +58,27 @@ class CourseFixtures extends Fixture
                 ...$categoriesCourse
             );
 
+            for ($j = 1; $j <= 2; $j++) {
+                $section = CourseSection::create(
+                    'Título seccion ' . $j,
+                    'Descripción seccion ' . $j,
+                    $j
+                );
+
+                for ($k = 1; $k <= 2; $k++) {
+                    $chapter = CourseChapter::create(
+                        'Título capítulo ' . $k,
+                        'Descripción capítulo ' . $k,
+                        $k
+                    );
+                    $chapter->setDuration($i + $j + $k);
+
+                    $section->addChapter($chapter);
+                }
+
+                $course->addSection($section);
+            }
+
             $j = 0;
             foreach (Currency::values() as $currency) {
                 $course->addPrice(
@@ -59,7 +91,14 @@ class CourseFixtures extends Fixture
                 );
                 $j++;
             }
+
             $manager->persist($course);
+
+            $events = $course->pullDomainEvents();
+            /** @var Event $event */
+            foreach ($events as $event) {
+                $this->eventBus->notify($event);
+            }
         }
 
         $manager->flush();

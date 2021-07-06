@@ -7,7 +7,6 @@ namespace App\Tests\Shared\Infrastructure\Persistence\Doctrine;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 
-use function Lambdish\Phunctional\first;
 use function Lambdish\Phunctional\map;
 
 final class DatabaseCleaner
@@ -17,27 +16,43 @@ final class DatabaseCleaner
         $connection = $entityManager->getConnection();
 
         $tables            = $this->tables($connection);
-        $truncateTablesSql = $this->truncateDatabaseSql($tables);
+        $truncateTablesSql = $this->truncateDatabaseSql($connection, $tables);
 
-        $connection->exec($truncateTablesSql);
+        $connection->executeStatement($truncateTablesSql);
     }
 
-    private function truncateDatabaseSql(array $tables): string
+    private function truncateDatabaseSql(Connection $connection, array $tables): string
     {
-        $truncateTables = map($this->truncateTableSql(), $tables);
+        $driver = $connection->getParams()['driver'];
 
-        return sprintf('SET FOREIGN_KEY_CHECKS = 0; %s SET FOREIGN_KEY_CHECKS = 1;', implode(' ', $truncateTables));
+        $truncateCommand = '';
+        if ($driver === 'pdo_mysql') {
+            $truncateCommand .= 'SET FOREIGN_KEY_CHECKS = 0;';
+        } elseif ($driver === 'pdo_sqlite') {
+            $truncateCommand .= 'PRAGMA foreign_keys = OFF;';
+        }
+
+        $truncateTables = map($this->truncateTableSql($connection), $tables);
+        $truncateCommand .= implode(' ', $truncateTables);
+
+        if ($driver === 'pdo_mysql') {
+            $truncateCommand .= 'SET FOREIGN_KEY_CHECKS = 1;';
+        } elseif ($driver === 'pdo_sqlite') {
+            $truncateCommand .= 'PRAGMA foreign_keys = ON;';
+        }
+
+        return $truncateCommand;
     }
 
-    private function truncateTableSql(): callable
+    private function truncateTableSql(Connection $connection): callable
     {
-        return function (array $table): string {
-            return sprintf('TRUNCATE TABLE `%s`;', first($table));
+        return function (string $table) use ($connection): string {
+            return $connection->getSchemaManager()->getDatabasePlatform()->getTruncateTableSQL($table) . ';';
         };
     }
 
     private function tables(Connection $connection): array
     {
-        return $connection->query('SHOW TABLES')->fetchAll();
+        return $connection->getSchemaManager()->listTableNames();
     }
 }

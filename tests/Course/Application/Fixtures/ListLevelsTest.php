@@ -8,6 +8,7 @@ use App\Course\Application\ListLevels\ListLevels;
 use App\Course\Domain\Entity\CourseLevel;
 use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\CourseFixtures;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
+use App\Shared\Domain\Bus\Event\EventBus;
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -28,7 +29,8 @@ class ListLevelsTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
 
-        $this->executeFixtures($this->entityManager, new CourseFixtures());
+        $eventBus = $this->createMock(EventBus::class);
+        $this->executeFixtures($this->entityManager, new CourseFixtures($eventBus));
     }
 
     public function testValidValues()

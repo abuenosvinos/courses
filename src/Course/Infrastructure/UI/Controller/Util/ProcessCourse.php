@@ -4,6 +4,8 @@ namespace App\Course\Infrastructure\UI\Controller\Util;
 
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseCategory;
+use App\Course\Domain\Entity\CourseChapter;
+use App\Course\Domain\Entity\CourseSection;
 use App\Course\Domain\Entity\Price;
 
 trait ProcessCourse
@@ -31,5 +33,34 @@ trait ProcessCourse
             ];
         }
         return $prices;
+    }
+
+    private function processSections(Course $course): array
+    {
+        $sections = [];
+        /** @var CourseSection $section */
+        foreach ($course->sections() as $section) {
+            $sections[] = [
+                'title' => $section->title(),
+                'description' => $section->description(),
+                'duration' => $section->duration(),
+                'chapters' => $this->processChapters($section)
+            ];
+        }
+        return $sections;
+    }
+
+    private function processChapters(CourseSection $courseSection): array
+    {
+        $sections = [];
+        /** @var CourseChapter $chapter */
+        foreach ($courseSection->chapters() as $chapter) {
+            $sections[] = [
+                'title' => $chapter->title(),
+                'description' => $chapter->description(),
+                'duration' => $chapter->duration()
+            ];
+        }
+        return $sections;
     }
 }

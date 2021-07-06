@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Course\Domain\Entity\CourseSection" table="course_section">
+        <id name="id" column="id" type="integer">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="title" type="string" column="title" length="255" />
+        <field name="description" type="text" column="description" length="255" />
+        <field name="sequence" type="integer" column="sequence" />
+        <field name="duration" type="integer" column="duration" />
+        <many-to-one field="course" target-entity="App\Course\Domain\Entity\Course" inversed-by="sections">
+            <join-column name="course_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
+        <one-to-many field="chapters" target-entity="App\Course\Domain\Entity\CourseChapter" mapped-by="section" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <sequence-by>
+                <sequence-by-field name="sequence" direction="ASC" />
+            </sequence-by>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
