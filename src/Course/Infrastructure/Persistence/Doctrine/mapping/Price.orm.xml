@@ -12,9 +12,5 @@
             <join-column name="course_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
         <embedded name="money" class="App\Course\Domain\ValueObject\Money" use-column-prefix="false" />
-        <!--
-        <field name="value" type="integer" column="value" />
-        <embedded name="currency" class="App\Course\Domain\ValueObject\Currency" use-column-prefix="false" />
-        -->
     </entity>
 </doctrine-mapping>
