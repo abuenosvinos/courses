@@ -64,6 +64,7 @@
         "web-token/jwt-encryption-algorithm-dir": "^2.2"
     },
     "require-dev": {
+        "ext-xdebug": "*",
         "behat/behat": "^3.8",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friends-of-behat/mink": "^1.9",
