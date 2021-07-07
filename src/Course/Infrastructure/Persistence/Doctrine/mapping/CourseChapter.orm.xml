@@ -13,8 +13,16 @@
         <field name="sequence" type="integer" column="sequence" />
         <field name="duration" type="integer" column="duration" />
         <many-to-one field="section" target-entity="App\Course\Domain\Entity\CourseSection" inversed-by="chapters">
+            <cascade>
+                <cascade-all/>
+            </cascade>
             <join-column name="section_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
+        <one-to-one field="resource" target-entity="App\Course\Domain\Entity\Resource" orphan-removal="true" mapped-by="chapter" inversed-by="chapter">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-one>
     </entity>
 
 </doctrine-mapping>

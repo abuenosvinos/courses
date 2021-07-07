@@ -55,11 +55,16 @@ trait ProcessCourse
         $sections = [];
         /** @var CourseChapter $chapter */
         foreach ($courseSection->chapters() as $chapter) {
-            $sections[] = [
+            $dataChapter = [
                 'title' => $chapter->title(),
                 'description' => $chapter->description(),
                 'duration' => $chapter->duration()
             ];
+            $resource = $chapter->resource();
+            if ($resource) {
+                $dataChapter['resource'] = $resource->toArray();
+            }
+            $sections[] = $dataChapter;
         }
         return $sections;
     }

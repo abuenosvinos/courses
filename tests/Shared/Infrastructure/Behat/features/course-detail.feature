@@ -63,12 +63,20 @@ Feature: Get the detail of a course
                         {
                             "title": "Título capítulo 1",
                             "description": "Descripción capítulo 1",
-                            "duration": 3
+                            "duration": 3,
+                            "resource": {
+                                "type": "video",
+                                "url": "url_video_3"
+                            }
                         },
                         {
                             "title": "Título capítulo 2",
                             "description": "Descripción capítulo 2",
-                            "duration": 4
+                            "duration": 4,
+                            "resource": {
+                                "type": "audio",
+                                "url": "url_audio_4"
+                            }
                         }
                     ]
                 },
@@ -80,12 +88,21 @@ Feature: Get the detail of a course
                         {
                             "title": "Título capítulo 1",
                             "description": "Descripción capítulo 1",
-                            "duration": 4
+                            "duration": 4,
+                            "resource": {
+                                "type": "audio",
+                                "url": "url_audio_4"
+                            }
                         },
                         {
                             "title": "Título capítulo 2",
                             "description": "Descripción capítulo 2",
-                            "duration": 5
+                            "duration": 5,
+                            "resource": {
+                                "type": "pdf",
+                                "path": "path_pdf_5",
+                                "pages": 500
+                            }
                         }
                     ]
                 }

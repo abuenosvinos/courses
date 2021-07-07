@@ -11,6 +11,10 @@ use App\Course\Domain\Entity\CourseId;
 use App\Course\Domain\Entity\CourseLevel;
 use App\Course\Domain\Entity\CourseSection;
 use App\Course\Domain\Entity\Price;
+use App\Course\Domain\Entity\Resource;
+use App\Course\Domain\Entity\Resource\Audio;
+use App\Course\Domain\Entity\Resource\Pdf;
+use App\Course\Domain\Entity\Resource\Video;
 use App\Course\Domain\ValueObject\Currency;
 use App\Course\Domain\ValueObject\Money;
 use App\Shared\Domain\Bus\Event\Event;
@@ -72,6 +76,7 @@ class CourseFixtures extends Fixture
                         $k
                     );
                     $chapter->setDuration($i + $j + $k);
+                    $chapter->setResource($this->createResource($i + $j + $k));
 
                     $section->addChapter($chapter);
                 }
@@ -102,6 +107,18 @@ class CourseFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function createResource(int $index): Resource
+    {
+        switch ($index % 3) {
+            case 0:
+                return Video::create('url_video_' . $index);
+            case 1:
+                return Audio::create('url_audio_' . $index);
+            case 2:
+                return Pdf::create('path_pdf_' . $index, $index * 100);
+        }
     }
 
     public function getDependencies(): array

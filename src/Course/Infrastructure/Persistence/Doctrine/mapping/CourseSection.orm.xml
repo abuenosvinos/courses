@@ -19,9 +19,9 @@
             <cascade>
                 <cascade-all/>
             </cascade>
-            <sequence-by>
-                <sequence-by-field name="sequence" direction="ASC" />
-            </sequence-by>
+            <order-by>
+                <order-by-field name="sequence" direction="ASC" />
+            </order-by>
         </one-to-many>
     </entity>
 </doctrine-mapping>
