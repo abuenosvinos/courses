@@ -58,10 +58,10 @@ run-tests: composer-env-file
 start: CMD=-f ./docker/docker-compose.yml up --build -d
 
 .PHONY: stop
-stop: CMD=stop
+stop: CMD=-f ./docker/docker-compose.yml stop
 
 .PHONY: destroy
-destroy: CMD=down
+destroy: CMD=-f ./docker/docker-compose.yml down
 
 # Usage: `make doco CMD="ps --services"`
 # Usage: `make doco CMD="build --parallel --pull --force-rm --no-cache"`
@@ -78,3 +78,6 @@ rebuild: composer-env-file
 clean-cache:
 	@rm -rf apps/*/*/var
 	@docker exec docker_course_php_1 ./bin/console cache:warmup
+
+watch:
+	@docker exec -it docker_course_node_1 npm run watch
