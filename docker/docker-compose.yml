@@ -60,7 +60,6 @@ services:
     volumes:
       - db_course:/var/lib/mysql
       #- ./database/sql:/docker-entrypoint-initdb.d
-    user: ${DOCKERUSER}:${DOCKERGROUP}
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: course
@@ -73,7 +72,6 @@ services:
     build:
       context: ./database
     container_name: course_database_test
-    user: ${DOCKERUSER}:${DOCKERGROUP}
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: course_test
