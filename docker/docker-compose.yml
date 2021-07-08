@@ -8,6 +8,7 @@ services:
       replicas: 3
     volumes:
       - ..:/var/www
+    user: ${DOCKERUSER}:${DOCKERGROUP}
     depends_on:
       - database
     networks:
@@ -21,6 +22,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites/:/etc/nginx/sites-available
       - ./nginx/conf.d/:/etc/nginx/conf.d
+    user: ${DOCKERUSER}:${DOCKERGROUP}
     ports:
       - "8080:80"
       - "8443:443"
@@ -32,10 +34,22 @@ services:
   course_redis:
     image: redis:alpine
     container_name: course_redis
+    user: ${DOCKERUSER}:${DOCKERGROUP}
     ports:
       - "6379:6379"
        # volumes:
       #   - ../docker-volume/redisdata:/data
+    networks:
+      - course_network
+
+  course_node:
+    build:
+      context: ./node
+    volumes:
+      - ..:/app
+    user: ${DOCKERUSER}:${DOCKERGROUP}
+    depends_on:
+      - course_nginx
     networks:
       - course_network
 
@@ -46,6 +60,7 @@ services:
     volumes:
       - db_course:/var/lib/mysql
       #- ./database/sql:/docker-entrypoint-initdb.d
+    user: ${DOCKERUSER}:${DOCKERGROUP}
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: course
@@ -58,6 +73,7 @@ services:
     build:
       context: ./database
     container_name: course_database_test
+    user: ${DOCKERUSER}:${DOCKERGROUP}
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: course_test
