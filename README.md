@@ -12,7 +12,11 @@ docker-compose -f ./docker/docker-compose.yml up -d --build
 Instalación de las dependencias de la aplicación.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar install
+docker exec -it docker_course_php_1 php /var/www/composer.phar install
+```
+
+```bash
+docker exec -it docker_course_node_1 npm install
 ```
 
 Creación de la base de datos.
@@ -32,25 +36,25 @@ docker exec -it docker_course_php_1 php bin/console doctrine:schema:update --for
 Para ejecutar la suite de pruebas ejecuta el siguiente comando.
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-unit-tests
+docker exec -it docker_course_php_1 php /var/www/composer.phar run-unit-tests
 ```
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar run-acceptance-tests
+docker exec -it docker_course_php_1 php /var/www/composer.phar run-acceptance-tests
 ```
 
 Para verificar la cálidad del código
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar check-style
+docker exec -it docker_course_php_1 php /var/www/composer.phar check-style
 ```
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar phpstan
+docker exec -it docker_course_php_1 php /var/www/composer.phar phpstan
 ```
 
 ```bash
-docker exec -it -u $(id -u ${USER}):$(id -g ${USER}) docker_course_php_1 php /var/www/composer.phar psalm
+docker exec -it docker_course_php_1 php /var/www/composer.phar psalm
 ```
 
 ## Usuarios

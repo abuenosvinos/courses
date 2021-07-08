@@ -21,6 +21,8 @@
 
 ###> abuenosvinos ###
 /migrations/
+/public/dist/
+/node_modules/
 ###< abuenosvinos ###
 
 ###> friends-of-behat/symfony-extension ###

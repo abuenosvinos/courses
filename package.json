@@ -1,0 +1,33 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Course management project to test software programming techniques",
+  "main": "webpack.config.js",
+  "private": true,
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abuenosvinos/courses.git"
+  },
+  "keywords": [
+    "webpack",
+    "vuejs"
+  ],
+  "author": "antonio.buenosvinos@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abuenosvinos/courses/issues"
+  },
+  "homepage": "https://github.com/abuenosvinos/courses#readme",
+  "devDependencies": {
+    "webpack": "^5.43.0",
+    "webpack-cli": "^4.7.2"
+  }
+}
