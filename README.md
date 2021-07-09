@@ -19,6 +19,12 @@ docker exec -it docker_course_php_1 php /var/www/composer.phar install
 docker exec -it docker_course_node_1 npm install
 ```
 
+Generación de los assets.
+
+```bash
+docker exec -it docker_course_node_1 npm run build
+```
+
 Creación de la base de datos.
 
 ```bash

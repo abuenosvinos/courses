@@ -79,5 +79,8 @@ clean-cache:
 	@rm -rf apps/*/*/var
 	@docker exec docker_course_php_1 ./bin/console cache:warmup
 
-watch:
+assets-build:
+	@docker exec -it docker_course_node_1 npm run build
+
+assets-watch:
 	@docker exec -it docker_course_node_1 npm run watch
