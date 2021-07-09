@@ -8,8 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "dev": "cross-env NODE_ENV=development webpack serve --progress",
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "build": "cross-env NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +28,9 @@
   },
   "homepage": "https://github.com/abuenosvinos/courses#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "webpack": "^5.43.0",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   }
 }
