@@ -12,7 +12,10 @@ class DoctrineCourseLevelRepository extends DoctrineRepository implements Course
 {
     public function findByName(string $name): ?CourseLevel
     {
-        return $this->repository(CourseLevel::class)->findOneBy(['name' => $name]);
+        /** @var CourseLevel $level */
+        $level = $this->repository(CourseLevel::class)->findOneBy(['name' => $name]);
+
+        return $level;
     }
 
     public function searchAll(): array

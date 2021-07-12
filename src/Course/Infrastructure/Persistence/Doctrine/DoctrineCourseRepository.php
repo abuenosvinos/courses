@@ -25,17 +25,26 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
 
     public function findById(CourseId $id): ?Course
     {
-        return $this->repository(Course::class)->find($id);
+        /** @var Course $course */
+        $course = $this->repository(Course::class)->find($id);
+
+        return $course;
     }
 
     public function findBySlug(string $slug): ?Course
     {
-        return $this->repository(Course::class)->findOneBy(['slug' => $slug]);
+        /** @var Course $course */
+        $course = $this->repository(Course::class)->findOneBy(['slug' => $slug]);
+
+        return $course;
     }
 
     public function findByCode(string $code): ?Course
     {
-        return $this->repository(Course::class)->findOneBy(['code' => $code]);
+        /** @var Course $course */
+        $course = $this->repository(Course::class)->findOneBy(['code' => $code]);
+
+        return $course;
     }
 
     public function findByCriteria(SearchParams $searchParams): Paginator

@@ -12,7 +12,10 @@ class DoctrineCourseCategoryRepository extends DoctrineRepository implements Cou
 {
     public function findByName(string $name): ?CourseCategory
     {
-        return $this->repository(CourseCategory::class)->findOneBy(['name' => $name]);
+        /** @var CourseCategory $category */
+        $category = $this->repository(CourseCategory::class)->findOneBy(['name' => $name]);
+
+        return $category;
     }
 
     public function searchAll(): array
