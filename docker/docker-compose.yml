@@ -22,7 +22,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites/:/etc/nginx/sites-available
       - ./nginx/conf.d/:/etc/nginx/conf.d
-    user: ${DOCKERUSER}:${DOCKERGROUP}
+    #user: ${DOCKERUSER}:${DOCKERGROUP}
     ports:
       - "8080:80"
       - "8443:443"
