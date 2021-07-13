@@ -1,49 +1,15 @@
-const path = require('path');
+const { merge } = require('webpack-merge');
+const baseConfigGenerator = require('./webpack.config.base.js');
+const prodConfig = require('./webpack.config.prod.js');
+const devConfig = require('./webpack.config.dev.js');
 
-const appConfig = {
-    mode: process.env.NODE_ENV,
-    devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
-    entry: {
-        app: './resources/js/app.js'
-    },
-    output: {
-        path: path.resolve(__dirname, 'public/dist/app'),
-        filename: '[name].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
-            },
-        ],
-    },
-};
+function webpackEnviromentSelector() {
+    let configEnv =  (process.env.NODE_ENV === 'production') ? prodConfig : devConfig;
+    const baseConfig = baseConfigGenerator();
+    for (let conf of baseConfig) {
+        conf = merge(conf, configEnv);
+    }
+    return baseConfig;
+}
 
-const adminConfig = {
-    mode: process.env.NODE_ENV,
-    devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
-    entry: {
-        app: './resources/js/admin.js'
-    },
-    output: {
-        path: path.resolve(__dirname, 'public/dist/admin'),
-        filename: '[name].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
-            },
-        ],
-    },
-};
-
-module.exports = [
-    appConfig,
-    adminConfig
-];
-module.exports.parallelism = 2;
+module.exports = webpackEnviromentSelector;
