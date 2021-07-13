@@ -8,18 +8,18 @@ Feature: List of levels
 
   Scenario: Get all the levels in the application
     Given I don't have a token to enter access to the system
-    And I send a GET request to "/levels"
+    And I send a GET request to "/api/levels"
     Then the response status code should be 401
 
   Scenario: Get all the levels in the application
     Given I have a token to enter access to the system
-    And I send a GET request to "/levels"
+    And I send a GET request to "/api/levels"
     Then the response status code should be 200
     And the response content should be:
     """
     {
         "_links": {
-            "self": "http://localhost/levels"
+            "self": "http://localhost/api/levels"
         },
         "total": 3,
         "results": [

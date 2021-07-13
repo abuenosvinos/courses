@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller;
+namespace App\Course\Infrastructure\UI\Controller\Api;
 
 use App\Course\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
@@ -52,9 +52,9 @@ class SearchController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('courses', $allParams, UrlGenerator::ABSOLUTE_URL),
-                'prev' => $router->generate('courses', $allParamsPrev, UrlGenerator::ABSOLUTE_URL),
-                'next' => $router->generate('courses', $allParamsNext, UrlGenerator::ABSOLUTE_URL),
+                'self' => $router->generate('api-courses', $allParams, UrlGenerator::ABSOLUTE_URL),
+                'prev' => $router->generate('api-courses', $allParamsPrev, UrlGenerator::ABSOLUTE_URL),
+                'next' => $router->generate('api-courses', $allParamsNext, UrlGenerator::ABSOLUTE_URL),
             ],
             'total' => $courses->count(),
             'page' => $searchParams->page(),
@@ -66,7 +66,7 @@ class SearchController
         foreach ($courses as $course) {
             $response['results'][] = [
                 '_links' => [
-                    'self' => $router->generate('course-detail', ['slug' => $course->slug()], UrlGenerator::ABSOLUTE_URL)
+                    'self' => $router->generate('api-course-detail', ['slug' => $course->slug()], UrlGenerator::ABSOLUTE_URL)
                 ],
                 'title' => $course->code(),
                 'description' => $course->description(),

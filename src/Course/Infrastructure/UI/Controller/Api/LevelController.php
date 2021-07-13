@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller;
+namespace App\Course\Infrastructure\UI\Controller\Api;
 
 use App\Course\Application\ListLevels\ListLevelsQuery;
 use App\Course\Domain\Entity\CourseLevel;
@@ -17,7 +17,7 @@ class LevelController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('levels', [], UrlGenerator::ABSOLUTE_URL)
+                'self' => $router->generate('api-levels', [], UrlGenerator::ABSOLUTE_URL)
             ],
             'total' => count($levels),
             'results' => []

@@ -8,18 +8,18 @@ Feature: List of categories
 
   Scenario: Get all the categories in the application
     Given I don't have a token to enter access to the system
-    And I send a GET request to "/categories"
+    And I send a GET request to "/api/categories"
     Then the response status code should be 401
 
   Scenario: Get all the levels in the application
     Given I have a token to enter access to the system
-    And I send a GET request to "/categories"
+    And I send a GET request to "/api/categories"
     Then the response status code should be 200
     And the response content should be:
     """
     {
         "_links": {
-            "self": "http://localhost/categories"
+            "self": "http://localhost/api/categories"
         },
         "total": 3,
         "results": [

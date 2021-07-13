@@ -1,23 +1,8 @@
-index:
+home:
     path: /
-    controller: App\Course\Infrastructure\UI\Controller\IndexController::index
+    controller: App\Course\Infrastructure\UI\Controller\HomeController::index
 
-user:
-    path: /user
-    controller: App\Course\Infrastructure\UI\Controller\UserController::index
-
-courses:
-    path: /courses
-    controller: App\Course\Infrastructure\UI\Controller\SearchController::index
-
-course-detail:
-    path: /courses/{slug}
-    controller: App\Course\Infrastructure\UI\Controller\CourseDetailController::index
-
-categories:
-    path: /categories
-    controller: App\Course\Infrastructure\UI\Controller\CategoryController::index
-
-levels:
-    path: /levels
-    controller: App\Course\Infrastructure\UI\Controller\LevelController::index
+api:
+    resource: 'routes/include/api.yaml'
+    name_prefix: api-
+    prefix: api

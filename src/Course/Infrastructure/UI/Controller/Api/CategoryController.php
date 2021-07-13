@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller;
+namespace App\Course\Infrastructure\UI\Controller\Api;
 
 use App\Course\Application\ListCategories\ListCategoriesQuery;
 use App\Course\Domain\Entity\CourseCategory;
@@ -17,7 +17,7 @@ class CategoryController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('categories', [], UrlGenerator::ABSOLUTE_URL)
+                'self' => $router->generate('api-categories', [], UrlGenerator::ABSOLUTE_URL)
             ],
             'total' => count($categories),
             'results' => []

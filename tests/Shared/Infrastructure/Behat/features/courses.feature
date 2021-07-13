@@ -8,20 +8,20 @@ Feature: Search of courses
 
   Scenario: Get all the courses
     Given I don't have a token to enter access to the system
-    And I send a GET request to "/courses"
+    And I send a GET request to "/api/courses"
     Then the response status code should be 401
 
   Scenario: Get all the courses
     Given I have a token to enter access to the system
-    And I send a GET request to "/courses"
+    And I send a GET request to "/api/courses"
     Then the response status code should be 200
     And the response content should be:
     """
     {
         "_links": {
-            "self": "http://localhost/courses",
-            "prev": "http://localhost/courses",
-            "next": "http://localhost/courses?page=2"
+            "self": "http://localhost/api/courses",
+            "prev": "http://localhost/api/courses",
+            "next": "http://localhost/api/courses?page=2"
         },
         "total": 20,
         "page": 1,
@@ -29,7 +29,7 @@ Feature: Search of courses
         "results": [
             {
                 "_links": {
-                    "self": "http://localhost/courses/titulo-de-prueba-12"
+                    "self": "http://localhost/api/courses/titulo-de-prueba-12"
                 },
                 "title": "Título de prueba 12",
                 "description": "Descripción de prueba 12",
@@ -48,7 +48,7 @@ Feature: Search of courses
             },
             {
                 "_links": {
-                    "self": "http://localhost/courses/titulo-de-prueba-15"
+                    "self": "http://localhost/api/courses/titulo-de-prueba-15"
                 },
                 "title": "Título de prueba 15",
                 "description": "Descripción de prueba 15",
@@ -67,7 +67,7 @@ Feature: Search of courses
             },
             {
                 "_links": {
-                    "self": "http://localhost/courses/titulo-de-prueba-18"
+                    "self": "http://localhost/api/courses/titulo-de-prueba-18"
                 },
                 "title": "Título de prueba 18",
                 "description": "Descripción de prueba 18",

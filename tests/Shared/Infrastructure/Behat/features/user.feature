@@ -8,12 +8,12 @@ Feature: User logged
 
   Scenario: Get all my information
     Given I don't have a token to enter access to the system
-    And I send a GET request to "/user"
+    And I send a GET request to "/api/user"
     Then the response status code should be 401
 
   Scenario: Get all my information
     Given I have a token to enter access to the system
-    And I send a GET request to "/user"
+    And I send a GET request to "/api/user"
     Then the response status code should be 200
     And the response content should be:
     """

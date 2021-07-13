@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller;
+namespace App\Course\Infrastructure\UI\Controller\Api;
 
 use App\Course\Application\GetCourse\GetCourseQuery;
 use App\Course\Domain\Entity\Course;
@@ -33,7 +33,7 @@ class CourseDetailController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('course-detail', ['slug' => $slug], UrlGenerator::ABSOLUTE_URL),
+                'self' => $router->generate('api-course-detail', ['slug' => $slug], UrlGenerator::ABSOLUTE_URL),
             ],
             'data' => [
                 'title' => $course->code(),
