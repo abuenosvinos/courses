@@ -2,16 +2,15 @@
 
 namespace App\Course\Infrastructure\UI\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 class HomeController
 {
-    public function index(UrlGeneratorInterface $router): JsonResponse
+    public function index(Environment $twig): Response
     {
-        return new JsonResponse(
-            []
+        return new Response(
+            $twig->render('pages/home.html.twig')
         );
     }
 }

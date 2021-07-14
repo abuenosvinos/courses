@@ -6,7 +6,7 @@ namespace App\Course\Application\FindCourses;
 
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Repository\CourseRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Shared\Application\Paginator;
 
 final class FindCourses
 {

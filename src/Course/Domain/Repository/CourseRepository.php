@@ -7,7 +7,7 @@ namespace App\Course\Domain\Repository;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseId;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Shared\Application\Paginator;
 
 interface CourseRepository
 {

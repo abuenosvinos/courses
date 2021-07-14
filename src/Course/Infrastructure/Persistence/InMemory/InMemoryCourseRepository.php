@@ -8,7 +8,7 @@ use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseId;
 use App\Course\Domain\Repository\CourseRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Shared\Application\Paginator;
 
 final class InMemoryCourseRepository implements CourseRepository
 {
@@ -55,7 +55,7 @@ final class InMemoryCourseRepository implements CourseRepository
 
     public function findByCriteria(SearchParams $searchParams): Paginator
     {
-        return new Paginator(null);
+        return new Paginator(null, 0);
     }
 
     public function searchAll(): array

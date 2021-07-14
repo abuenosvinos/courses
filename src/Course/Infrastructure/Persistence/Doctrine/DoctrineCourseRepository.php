@@ -8,8 +8,9 @@ use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseId;
 use App\Course\Domain\Repository\CourseRepository;
+use App\Shared\Application\Paginator;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as PaginatorDoctrine;
 
 final class DoctrineCourseRepository extends DoctrineRepository implements CourseRepository
 {
@@ -85,7 +86,12 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
             ->getQuery()->setFirstResult($limit * ($page - 1))
             ->setMaxResults($limit);
 
-        return new Paginator($query);
+        $paginatorDoctrine = new PaginatorDoctrine($query);
+
+        return new Paginator(
+            $paginatorDoctrine->getIterator(),
+            $paginatorDoctrine->count()
+        );
     }
 
     public function searchAll(): array

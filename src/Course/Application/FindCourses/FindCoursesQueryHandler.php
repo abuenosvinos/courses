@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Course\Application\FindCourses;
 
+use App\Shared\Application\Paginator;
 use App\Shared\Domain\Bus\Query\QueryHandler;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 final class FindCoursesQueryHandler implements QueryHandler
 {
