@@ -1,4 +1,4 @@
-GET http://localhost:8080/categories
+GET http://localhost:8080/api/categories
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA
 ###

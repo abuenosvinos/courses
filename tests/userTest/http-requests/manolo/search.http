@@ -1,4 +1,4 @@
-GET http://localhost:8080/courses?level=Básico&priceMin=200&priceMax=400&orderBy=price
+GET http://localhost:8080/api/courses?level=Básico&priceMin=200&priceMax=400&orderBy=price
 Content-Type: application/json
 X-AUTH-TOKEN: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..gT0KWRpZUPvYn5Pi.Q2UA32wGieoCGv3mit_Gh3uJBNj36xU.jX52q88ynWfzhGA3ZbDoYQ
 ###
