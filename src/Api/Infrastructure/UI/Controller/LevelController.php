@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller\Api;
+namespace App\Api\Infrastructure\UI\Controller;
 
 use App\Course\Application\ListLevels\ListLevelsQuery;
 use App\Course\Domain\Entity\CourseLevel;

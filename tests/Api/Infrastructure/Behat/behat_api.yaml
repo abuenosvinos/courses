@@ -1,0 +1,26 @@
+api:
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php
+      kernel:
+        class: App\ApiKernel
+    Behat\MinkExtension:
+      #base_url: 'http:\/\/localhost:8080'
+      sessions:
+        symfony:
+          symfony: ~
+
+  suites:
+    init:
+      paths: [ tests/Api/Infrastructure/Behat/features/ ]
+      contexts:
+        - App\Tests\Shared\Infrastructure\Behat\InitContext
+      filters:
+        tags: '@init'
+    test:
+      paths: [ tests/Api/Infrastructure/Behat/features/ ]
+      contexts:
+        - Behat\MinkExtension\Context\MinkContext
+        - App\Tests\Shared\Infrastructure\Behat\SharedContext
+      filters:
+        tags: '~@init'

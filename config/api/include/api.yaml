@@ -1,0 +1,24 @@
+
+index:
+    path: /
+    controller: App\Api\Infrastructure\UI\Controller\IndexController::index
+
+user:
+    path: /user
+    controller: App\Api\Infrastructure\UI\Controller\UserController::index
+
+courses:
+    path: /courses
+    controller: App\Api\Infrastructure\UI\Controller\SearchController::index
+
+course-detail:
+    path: /courses/{slug}
+    controller: App\Api\Infrastructure\UI\Controller\CourseDetailController::index
+
+categories:
+    path: /categories
+    controller: App\Api\Infrastructure\UI\Controller\CategoryController::index
+
+levels:
+    path: /levels
+    controller: App\Api\Infrastructure\UI\Controller\LevelController::index

@@ -54,7 +54,7 @@ function webpackConfigGenerator() {
             admin: './resources/js/admin.js'
         },
         output: {
-            path: path.resolve(__dirname, 'public/dist'),
+            path: path.resolve(__dirname, 'apps/courses/public/dist'),
             filename: '[name]/app.js',
         },
         module: {

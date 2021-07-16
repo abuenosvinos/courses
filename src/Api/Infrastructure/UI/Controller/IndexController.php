@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller\Api;
+namespace App\Api\Infrastructure\UI\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGenerator;

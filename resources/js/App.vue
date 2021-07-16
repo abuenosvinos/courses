@@ -35,7 +35,7 @@ export default {
     loadCourses: async function () {
       try {
         this.error = false;
-        const response = await fetch('http://localhost:8080/api/courses?page=3', {
+        const response = await fetch('http://api.courses.local:8080/api/courses?page=3', {
           headers: {
             'Content-Type': 'application/json',
             'X-AUTH-TOKEN': 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA'

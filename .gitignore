@@ -21,7 +21,7 @@
 
 ###> abuenosvinos ###
 /migrations/
-/public/dist/
+/apps/courses/public/dist/
 /node_modules/
 ###< abuenosvinos ###
 

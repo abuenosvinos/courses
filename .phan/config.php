@@ -40,6 +40,8 @@ return [
     "exclude_analysis_directory_list" => [
         'vendor/',
         'src/Kernel.php',
+        'src/ApiKernel.php',
+        'src/CoursesKernel.php',
     ],
 
     // A list of plugin files to execute.

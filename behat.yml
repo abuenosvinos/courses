@@ -1,2 +1,3 @@
 imports:
-  - tests/Shared/Infrastructure/Behat/behat_course.yaml
+  - tests/Api/Infrastructure/Behat/behat_api.yaml
+  - tests/Course/Infrastructure/Behat/behat_course.yaml

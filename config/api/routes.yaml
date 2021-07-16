@@ -1,0 +1,5 @@
+
+api:
+    resource: './include/api.yaml'
+    name_prefix: api-
+    prefix: api

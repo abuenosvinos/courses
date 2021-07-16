@@ -1,8 +1,3 @@
 home:
     path: /
     controller: App\Course\Infrastructure\UI\Controller\HomeController::index
-
-api:
-    resource: 'routes/include/api.yaml'
-    name_prefix: api-
-    prefix: api

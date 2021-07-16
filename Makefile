@@ -51,7 +51,7 @@ static-analysis: composer-env-file
 run-tests: composer-env-file
 	mkdir -p build/test_results/phpunit
 	./vendor/bin/simple-phpunit --exclude-group='disabled' --log-junit build/test_results/phpunit/junit.xml
-	./vendor/bin/behat --format=progress -v
+	./vendor/bin/behat -p api -p course --format=progress -v
 
 # 🐳 Docker Compose
 .PHONY: start

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller\Util;
+namespace App\Api\Infrastructure\UI\Controller\Util;
 
 use App\Course\Domain\Entity\Course;
 use App\Course\Domain\Entity\CourseCategory;

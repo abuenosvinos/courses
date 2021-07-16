@@ -37,6 +37,12 @@ Creación de la base de datos de test.
 docker exec -it docker_course_php_1 php bin/console doctrine:schema:update --force --env=test
 ```
 
+Adicionalmente para poder separar las distintas aplicaciones que se ejecutan en el proyecto debes añadir los siguiente a tu fichero `/etc/hosts`
+
+```
+127.0.0.1       courses.local api.courses.local admin.courses.local teacher.courses.local
+```
+
 ## Pruebas
 
 Para ejecutar la suite de pruebas ejecuta el siguiente comando.

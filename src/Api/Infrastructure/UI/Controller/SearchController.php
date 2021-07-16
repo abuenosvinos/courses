@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Controller\Api;
+namespace App\Api\Infrastructure\UI\Controller;
 
+use App\Api\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Course\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
-use App\Course\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Shared\Application\Paginator;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
