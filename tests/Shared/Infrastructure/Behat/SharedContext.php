@@ -59,8 +59,8 @@ class SharedContext extends RawMinkContext
      */
     public function theResponseContentShouldBe(PyStringNode $expectedResponse)
     {
-        $expected = $this->sanitizeOutput($expectedResponse->getRaw());
-        $actual = $this->sanitizeOutput($this->session->getPage()->getContent());
+        $expected = $this->sanitizeJson($expectedResponse->getRaw());
+        $actual = $this->sanitizeJson($this->session->getPage()->getContent());
         if ($expected !== $actual) {
             throw new RuntimeException(
                 sprintf("The outputs does not match!\n\n-- Expected:\n%s\n\n-- Actual:\n%s", $expected, $actual)
@@ -68,8 +68,27 @@ class SharedContext extends RawMinkContext
         }
     }
 
-    private function sanitizeOutput(string $output): false|string
+    /**
+     * @Then the response content should has :text:
+     */
+    public function theResponseContentShouldHas(string $text)
+    {
+        $expected = $this->sanitizeString($text);
+        $actual = $this->sanitizeString($this->session->getPage()->getContent());
+        if (!str_contains($actual, $expected)) {
+            throw new RuntimeException(
+                sprintf("The outputs does not match!\n\n-- Expected:\n%s\n\n-- Actual:\n%s", $expected, $actual)
+            );
+        }
+    }
+
+    private function sanitizeJson(string $output): false|string
     {
         return json_encode(json_decode(trim($output), true));
+    }
+
+    private function sanitizeString(string $output): false|string
+    {
+        return trim($output);
     }
 }

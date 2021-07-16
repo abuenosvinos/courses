@@ -22,5 +22,6 @@ course:
       contexts:
         - Behat\MinkExtension\Context\MinkContext
         - App\Tests\Shared\Infrastructure\Behat\SharedContext
+        - App\Tests\Course\Infrastructure\Behat\CoursesContext
       filters:
         tags: '~@init'

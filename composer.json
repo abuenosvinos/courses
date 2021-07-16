@@ -121,7 +121,7 @@
             "@auto-scripts"
         ],
         "run-unit-tests" : "./vendor/bin/simple-phpunit",
-        "run-acceptance-tests" : "./vendor/bin/behat -p api -p course --format=progress -v",
+        "run-acceptance-tests" : "./vendor/bin/behat -p api --format=progress -v; ./vendor/bin/behat -p course --format=progress -v",
         "check-style-inline": "./vendor/bin/phpcs --standard=PSR12 src tests --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
         "check-style": "./vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1",
         "fix-style": "./vendor/bin/phpcbf",
