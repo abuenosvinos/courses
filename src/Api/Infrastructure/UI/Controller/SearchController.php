@@ -3,7 +3,7 @@
 namespace App\Api\Infrastructure\UI\Controller;
 
 use App\Api\Infrastructure\UI\Controller\Util\ProcessCourse;
-use App\Course\Application\FindCourses\FindCoursesQuery;
+use App\Api\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;

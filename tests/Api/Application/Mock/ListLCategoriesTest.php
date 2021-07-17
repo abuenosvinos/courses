@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Course\Application\Mock;
+namespace App\Tests\Api\Application\Mock;
 
-use App\Course\Application\ListCategories\ListCategories;
+use App\Api\Application\ListCategories\ListCategories;
 use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use Doctrine\ORM\EntityManager;

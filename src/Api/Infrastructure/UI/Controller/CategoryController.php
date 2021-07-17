@@ -2,7 +2,7 @@
 
 namespace App\Api\Infrastructure\UI\Controller;
 
-use App\Course\Application\ListCategories\ListCategoriesQuery;
+use App\Api\Application\ListCategories\ListCategoriesQuery;
 use App\Course\Domain\Entity\CourseCategory;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Course\Application\FindCourses;
+namespace App\Api\Application\FindCourses;
 
 use App\Shared\Application\Paginator;
 use App\Shared\Domain\Bus\Query\QueryHandler;

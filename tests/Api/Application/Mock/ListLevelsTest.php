@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Course\Application\Mock;
+namespace App\Tests\Api\Application\Mock;
 
-use App\Course\Application\ListLevels\ListLevels;
+use App\Api\Application\ListLevels\ListLevels;
 use App\Course\Domain\Entity\CourseLevel;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
 use Doctrine\ORM\EntityManager;

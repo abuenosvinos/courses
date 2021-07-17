@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Course\Application\Fixtures;
+namespace App\Tests\Api\Application\Fixtures;
 
-use App\Course\Application\ListLevels\ListLevels;
-use App\Course\Domain\Entity\CourseLevel;
+use App\Api\Application\ListCategories\ListCategories;
+use App\Course\Domain\Entity\CourseCategory;
 use App\Course\Infrastructure\Persistence\Doctrine\DataFixtures\CourseFixtures;
-use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
+use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Tests\Shared\Infrastructure\Fixtures\LoadFixtures;
 use Doctrine\ORM\EntityManager;
@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 use function Lambdish\Phunctional\first;
 
-class ListLevelsTest extends KernelTestCase
+class ListCategoriesTest extends KernelTestCase
 {
     use LoadFixtures;
 
@@ -29,24 +29,26 @@ class ListLevelsTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
 
+
         $eventBus = $this->createMock(EventBus::class);
         $this->executeFixtures($this->entityManager, new CourseFixtures($eventBus));
     }
 
     public function testValidValues()
     {
-        $courseLevelRepository = new DoctrineCourseLevelRepository($this->entityManager);
+        $courseCategoryRepository = new DoctrineCourseCategoryRepository($this->entityManager);
 
-        $service = new ListLevels(
-            $courseLevelRepository
+        $service = new ListCategories(
+            $courseCategoryRepository
         );
 
-        $listLevels = $service->__invoke();
-        /** @var CourseLevel $firstLevel */
-        $firstLevel = first($listLevels);
+        $listCategories = $service->__invoke();
 
-        $this->assertEquals(3, count($listLevels));
-        $this->assertEquals('Nivel 1', $firstLevel->name());
-        $this->assertEquals('nivel-1', $firstLevel->slug());
+        /** @var CourseCategory $firstCategory */
+        $firstCategory = first($listCategories);
+
+        $this->assertEquals(3, count($listCategories));
+        $this->assertEquals('Categoría 1', $firstCategory->name());
+        $this->assertEquals('categoria-1', $firstCategory->slug());
     }
 }

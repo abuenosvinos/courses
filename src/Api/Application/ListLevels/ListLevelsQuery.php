@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Course\Application\ListLevels;
+namespace App\Api\Application\ListLevels;
 
 use App\Shared\Domain\Bus\Query\Query;
 
