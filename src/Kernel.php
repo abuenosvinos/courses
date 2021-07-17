@@ -13,26 +13,36 @@ class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->import('../config/{packages}/*.yaml');
-        $container->import('../config/{packages}/'.$this->environment.'/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/services.yaml')) {
-            $container->import('../config/services.yaml');
-            $container->import('../config/{services}_'.$this->environment.'.yaml');
-        } else {
-            $container->import('../config/{services}.php');
-        }
+        $this->relativeConfigureContainer($container);
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import('../config/{routes}/*.yaml');
+        $this->relativeConfigureRoutes($routes);
+    }
 
-        if (is_file(\dirname(__DIR__).'/config/routes.yaml')) {
-            $routes->import('../config/routes.yaml');
+    protected function relativeConfigureContainer(ContainerConfigurator $container, string $path = ''): void
+    {
+        $container->import('../config/'.$path.'{packages}/*.yaml');
+        $container->import('../config/'.$path.'{packages}/'.$this->environment.'/*.yaml');
+
+        if (is_file(\dirname(__DIR__).'/config/'.$path.'services.yaml')) {
+            $container->import('../config/'.$path.'services.yaml');
+            $container->import('../config/'.$path.'{services}_'.$this->environment.'.yaml');
         } else {
-            $routes->import('../config/{routes}.php');
+            $container->import('../config/'.$path.'{services}.php');
+        }
+    }
+
+    protected function relativeConfigureRoutes(RoutingConfigurator $routes, string $path = ''): void
+    {
+        $routes->import('../config/'.$path.'{routes}/'.$this->environment.'/*.yaml');
+        $routes->import('../config/'.$path.'{routes}/*.yaml');
+
+        if (is_file(\dirname(__DIR__).'/config/'.$path.'routes.yaml')) {
+            $routes->import('../config/'.$path.'routes.yaml');
+        } else {
+            $routes->import('../config/'.$path.'{routes}.php');
         }
     }
 }

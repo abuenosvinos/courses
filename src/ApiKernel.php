@@ -11,29 +11,14 @@ class ApiKernel extends Kernel
     {
         parent::configureContainer($container);
 
-        $container->import('../config/api/{packages}/*.yaml');
-        $container->import('../config/api/{packages}/'.$this->environment.'/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/api/services.yaml')) {
-            $container->import('../config/api/services.yaml');
-            $container->import('../config/api/{services}_'.$this->environment.'.yaml');
-        } else {
-            $container->import('../config/api/{services}.php');
-        }
+        $this->relativeConfigureContainer($container, 'api/');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         parent::configureRoutes($routes);
 
-        $routes->import('../config/api/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import('../config/api/{routes}/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/api/routes.yaml')) {
-            $routes->import('../config/api/routes.yaml');
-        } else {
-            $routes->import('../config/api/{routes}.php');
-        }
+        $this->relativeConfigureRoutes($routes, 'api/');
     }
 
     public function getCacheDir(): string

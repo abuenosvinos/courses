@@ -11,29 +11,14 @@ class CoursesKernel extends Kernel
     {
         parent::configureContainer($container);
 
-        $container->import('../config/courses/{packages}/*.yaml');
-        $container->import('../config/courses/{packages}/'.$this->environment.'/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/courses/services.yaml')) {
-            $container->import('../config/courses/services.yaml');
-            $container->import('../config/courses/{services}_'.$this->environment.'.yaml');
-        } else {
-            $container->import('../config/courses/{services}.php');
-        }
+        $this->relativeConfigureContainer($container, 'courses/');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         parent::configureRoutes($routes);
 
-        $routes->import('../config/courses/{routes}/'.$this->environment.'/*.yaml');
-        $routes->import('../config/courses/{routes}/*.yaml');
-
-        if (is_file(\dirname(__DIR__).'/config/courses/routes.yaml')) {
-            $routes->import('../config/courses/routes.yaml');
-        } else {
-            $routes->import('../config/courses/{routes}.php');
-        }
+        $this->relativeConfigureRoutes($routes, 'courses/');
     }
 
     public function getCacheDir(): string
