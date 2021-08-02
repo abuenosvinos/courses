@@ -8,13 +8,15 @@ final class Course
 {
     private string $code;
     private string $description;
+    private string $startAt;
     private string $category;
     private string $level;
 
-    public function __construct(string $code, string $description, string $category, string $level)
+    public function __construct(string $code, string $description, string $startAt, string $category, string $level)
     {
         $this->code = $code;
         $this->description = $description;
+        $this->startAt = $startAt;
         $this->category = $category;
         $this->level = $level;
     }
@@ -27,6 +29,11 @@ final class Course
     public function description(): string
     {
         return $this->description;
+    }
+
+    public function startAt(): string
+    {
+        return $this->startAt;
     }
 
     public function category(): string

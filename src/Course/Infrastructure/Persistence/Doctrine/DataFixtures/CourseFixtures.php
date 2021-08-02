@@ -19,6 +19,7 @@ use App\Course\Domain\ValueObject\Currency;
 use App\Course\Domain\ValueObject\Money;
 use App\Shared\Domain\Bus\Event\Event;
 use App\Shared\Domain\Bus\Event\EventBus;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -58,6 +59,7 @@ class CourseFixtures extends Fixture
                 CourseId::random(),
                 'Título de prueba ' . $i,
                 'Descripción de prueba ' . $i,
+                DateTime::createFromFormat('Y-m-d H:i:s', '2021-10-25 10:00:00'),
                 $levelCourse,
                 ...$categoriesCourse
             );

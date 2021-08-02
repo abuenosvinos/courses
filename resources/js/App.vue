@@ -50,6 +50,7 @@ export default {
                   id: index,
                   title: valor.title,
                   description: valor.description,
+                  startAt: valor.startAt,
                   level: valor.level,
                   categories: valor.categories,
                   prices: valor.prices

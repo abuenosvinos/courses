@@ -33,6 +33,7 @@ Feature: Search of courses
                 },
                 "title": "Título de prueba 12",
                 "description": "Descripción de prueba 12",
+                "startAt": "2021-10-25 10:00:00",
                 "categories": [],
                 "level": "Nivel 1",
                 "prices": [
@@ -52,6 +53,7 @@ Feature: Search of courses
                 },
                 "title": "Título de prueba 15",
                 "description": "Descripción de prueba 15",
+                "startAt": "2021-10-25 10:00:00",
                 "categories": [],
                 "level": "Nivel 1",
                 "prices": [
@@ -71,6 +73,7 @@ Feature: Search of courses
                 },
                 "title": "Título de prueba 18",
                 "description": "Descripción de prueba 18",
+                "startAt": "2021-10-25 10:00:00",
                 "categories": [],
                 "level": "Nivel 1",
                 "prices": [

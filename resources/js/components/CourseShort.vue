@@ -2,6 +2,7 @@
   <div>
     <p>{{ course.title }}</p>
     <p>{{ course.description }}</p>
+    <p>{{ course.startAt }}</p>
     <p>{{ course.level }}</p>
     <ul>
       <li v-for="category in course.categories">

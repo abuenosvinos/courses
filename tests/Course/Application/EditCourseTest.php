@@ -11,6 +11,7 @@ use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Tests\Shared\Domain\CourseMother;
+use App\Tests\Shared\Domain\DatetimeMother;
 use App\Tests\Shared\Domain\StringMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
@@ -46,6 +47,7 @@ class EditCourseTest extends KernelTestCase
         $courseDto = new CourseDto(
             $courseToInsert->code(),
             StringMother::random(),
+            DatetimeMother::random()->format('Y-m-d H:i:s'),
             StringMother::random(),
             StringMother::random()
         );

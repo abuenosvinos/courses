@@ -16,6 +16,7 @@ final class CourseMother
         ?Uuid $id = null,
         ?string $code = null,
         ?string $description = null,
+        ?string $startAt = null,
         ?string $category = null,
         ?string $level = null
     ): Course {
@@ -23,6 +24,7 @@ final class CourseMother
             CourseId::create($id ?? UuidMother::random()),
             $code ?? StringMother::random(),
             $description ?? StringMother::random(),
+            $startAt ?? DatetimeMother::random(),
             CourseLevel::create($level ?? StringMother::random()),
             ...[CourseCategory::create($category ?? StringMother::random())]
         );

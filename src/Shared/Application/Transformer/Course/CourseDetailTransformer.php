@@ -35,6 +35,7 @@ class CourseDetailTransformer implements DataTransformer
         return [
             'title' => $this->course->code(),
             'description' => $this->course->description(),
+            'startAt' => $this->course->startAt()->format('Y-m-d H:i:s'),
             'categories' => $this->courseCategoryTransformer->read(),
             'level' => $this->course->level()->name(),
             'prices' => $this->coursePricesTransformer->read(),

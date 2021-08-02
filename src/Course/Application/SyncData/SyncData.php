@@ -52,6 +52,7 @@ final class SyncData
                 $this->bus->dispatch(new EditCourseCommand(new CourseDTO(
                     $course->code(),
                     $course->description(),
+                    $course->startAt(),
                     $course->category(),
                     $course->level()
                 )));
@@ -59,6 +60,7 @@ final class SyncData
                 $this->bus->dispatch(new AddCourseCommand(new CourseDTO(
                     $course->code(),
                     $course->description(),
+                    $course->startAt(),
                     $course->category(),
                     $course->level()
                 )));

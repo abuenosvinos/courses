@@ -32,6 +32,7 @@ class FileSystemSourceTruthRepository implements SourceTruthRepository
                     $data[1],
                     $data[2],
                     $data[3],
+                    $data[4],
                 ));
             }
             fclose($fp);

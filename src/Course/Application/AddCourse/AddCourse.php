@@ -18,6 +18,7 @@ use App\Course\Domain\DTO\Course as CourseDTO;
 use App\Course\Domain\Repository\PricesRepository;
 use App\Course\Domain\ValueObject\Money;
 use App\Shared\Domain\Bus\Event\EventBus;
+use DateTime;
 
 final class AddCourse
 {
@@ -57,6 +58,7 @@ final class AddCourse
             CourseId::random(),
             $courseDto->code(),
             $courseDto->description(),
+            DateTime::createFromFormat('Y-m-d H:i:s', $courseDto->startAt()),
             $courseLevel,
             $courseCategory
         );

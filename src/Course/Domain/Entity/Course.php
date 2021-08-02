@@ -7,6 +7,7 @@ namespace App\Course\Domain\Entity;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Trait\Sluggable;
 use App\Shared\Domain\Trait\Timestampable;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -18,6 +19,7 @@ final class Course extends AggregateRoot
     private CourseId $id;
     private string $code;
     private string $description;
+    private DateTime $startAt;
     private Collection $categories;
     private CourseLevel $level;
     private Collection $prices;
@@ -27,12 +29,14 @@ final class Course extends AggregateRoot
         CourseId $id,
         string $code,
         string $description,
+        DateTime $startAt,
         CourseLevel $level,
         CourseCategory...$categories
     ) {
         $this->id = $id;
         $this->code = $code;
         $this->description = $description;
+        $this->startAt = $startAt;
         $this->prices = new ArrayCollection();
         $this->categories = new ArrayCollection();
         foreach ($categories as $category) {
@@ -55,6 +59,11 @@ final class Course extends AggregateRoot
     public function description(): string
     {
         return $this->description;
+    }
+
+    public function startAt(): DateTime
+    {
+        return $this->startAt;
     }
 
     public function categories(): Collection
@@ -103,9 +112,10 @@ final class Course extends AggregateRoot
         CourseId $id,
         string $code,
         string $description,
+        DateTime $startAt,
         CourseLevel $level,
         CourseCategory...$categories
     ): self {
-        return new self($id, $code, $description, $level, ...$categories);
+        return new self($id, $code, $description, $startAt, $level, ...$categories);
     }
 }

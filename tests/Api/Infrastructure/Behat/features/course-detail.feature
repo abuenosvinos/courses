@@ -38,6 +38,7 @@ Feature: Get the detail of a course
         "data": {
             "title": "Título de prueba 1",
             "description": "Descripción de prueba 1",
+            "startAt": "2021-10-25 10:00:00",
             "categories": [
                 {
                     "name": "Categoría 1"

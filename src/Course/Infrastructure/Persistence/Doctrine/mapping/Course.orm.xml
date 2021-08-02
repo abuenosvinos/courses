@@ -12,6 +12,7 @@
             <gedmo:slug unique="true" style="lower" updatable="false" separator="-" fields="code" />
         </field>
         <field name="description" type="text" column="description" />
+        <field name="startAt" type="datetime" column="start_at" />
         <many-to-many field="categories" target-entity="App\Course\Domain\Entity\CourseCategory">
             <cascade>
                 <cascade-persist/>
