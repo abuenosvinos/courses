@@ -6,7 +6,6 @@ use App\Api\Application\ListLevels\ListLevelsQuery;
 use App\Course\Domain\Entity\CourseLevel;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LevelController
@@ -17,7 +16,7 @@ class LevelController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('api-levels', [], UrlGenerator::ABSOLUTE_URL)
+                'self' => $router->generate('api-levels', [], UrlGeneratorInterface::ABSOLUTE_URL)
             ],
             'total' => count($levels),
             'results' => []

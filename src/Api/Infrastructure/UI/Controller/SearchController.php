@@ -2,23 +2,20 @@
 
 namespace App\Api\Infrastructure\UI\Controller;
 
-use App\Api\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Api\Application\FindCourses\FindCoursesQuery;
 use App\Course\Domain\DTO\OrderBy;
 use App\Course\Domain\DTO\SearchParams;
 use App\Course\Domain\Entity\Course;
 use App\Shared\Application\Paginator;
+use App\Shared\Application\Transformer\Course\CourseListTransformer;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchController
 {
-    use ProcessCourse;
-
-    public function index(Request $request, QueryBus $queryBus, UrlGeneratorInterface $router): JsonResponse
+    public function index(Request $request, QueryBus $queryBus, UrlGeneratorInterface $router, CourseListTransformer $courseListTransformer): JsonResponse
     {
         $orderBy = null;
         try {
@@ -52,9 +49,9 @@ class SearchController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('api-courses', $allParams, UrlGenerator::ABSOLUTE_URL),
-                'prev' => $router->generate('api-courses', $allParamsPrev, UrlGenerator::ABSOLUTE_URL),
-                'next' => $router->generate('api-courses', $allParamsNext, UrlGenerator::ABSOLUTE_URL),
+                'self' => $router->generate('api-courses', $allParams, UrlGeneratorInterface::ABSOLUTE_URL),
+                'prev' => $router->generate('api-courses', $allParamsPrev, UrlGeneratorInterface::ABSOLUTE_URL),
+                'next' => $router->generate('api-courses', $allParamsNext, UrlGeneratorInterface::ABSOLUTE_URL),
             ],
             'total' => $courses->count(),
             'page' => $searchParams->page(),
@@ -64,16 +61,16 @@ class SearchController
 
         /** @var Course $course */
         foreach ($courses as $course) {
-            $response['results'][] = [
-                '_links' => [
-                    'self' => $router->generate('api-course-detail', ['slug' => $course->slug()], UrlGenerator::ABSOLUTE_URL)
+            $courseListTransformer->write($course);
+
+            $response['results'][] = array_merge(
+                [
+                    '_links' => [
+                        'self' => $router->generate('api-course-detail', ['slug' => $course->slug()], UrlGeneratorInterface::ABSOLUTE_URL)
+                    ]
                 ],
-                'title' => $course->code(),
-                'description' => $course->description(),
-                'categories' => $this->processCategories($course),
-                'level' => $course->level()->name(),
-                'prices' => $this->processPrices($course),
-            ];
+                $courseListTransformer->read()
+            );
         }
 
         return new JsonResponse($response);

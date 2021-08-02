@@ -2,22 +2,23 @@
 
 namespace App\Api\Infrastructure\UI\Controller;
 
-use App\Api\Infrastructure\UI\Controller\Util\ProcessCourse;
 use App\Api\Application\GetCourse\GetCourseQuery;
 use App\Course\Domain\Entity\Course;
+use App\Shared\Application\Transformer\Course\CourseDetailTransformer;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CourseDetailController
 {
-    use ProcessCourse;
-
-    public function index(Request $request, QueryBus $queryBus, UrlGeneratorInterface $router): JsonResponse
-    {
+    public function index(
+        Request $request,
+        QueryBus $queryBus,
+        UrlGeneratorInterface $router,
+        CourseDetailTransformer $courseDetailTransformer,
+    ): JsonResponse {
         $slug = $request->attributes->get('slug');
         /** @var Course $course */
         $course = $queryBus->ask(new GetCourseQuery($slug));
@@ -31,18 +32,15 @@ class CourseDetailController
             ], Response::HTTP_NOT_FOUND);
         }
 
+        $courseDetailTransformer->write($course);
+
         $response = [
             '_links' => [
-                'self' => $router->generate('api-course-detail', ['slug' => $slug], UrlGenerator::ABSOLUTE_URL),
+                'self' => $router->generate('api-course-detail', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL),
             ],
-            'data' => [
-                'title' => $course->code(),
-                'description' => $course->description(),
-                'categories' => $this->processCategories($course),
-                'level' => $course->level()->name(),
-                'prices' => $this->processPrices($course),
-                'sections' => $this->processSections($course),
-            ]
+            'data' =>
+                $courseDetailTransformer->read()
+
         ];
 
         return new JsonResponse($response);

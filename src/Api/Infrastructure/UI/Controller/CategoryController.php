@@ -6,7 +6,6 @@ use App\Api\Application\ListCategories\ListCategoriesQuery;
 use App\Course\Domain\Entity\CourseCategory;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CategoryController
@@ -17,7 +16,7 @@ class CategoryController
 
         $response = [
             '_links' => [
-                'self' => $router->generate('api-categories', [], UrlGenerator::ABSOLUTE_URL)
+                'self' => $router->generate('api-categories', [], UrlGeneratorInterface::ABSOLUTE_URL)
             ],
             'total' => count($categories),
             'results' => []

@@ -3,7 +3,6 @@
 namespace App\Api\Infrastructure\UI\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class IndexController
@@ -12,7 +11,7 @@ class IndexController
     {
         return new JsonResponse(
             [
-                'user' => $router->generate('api-user', [], UrlGenerator::ABSOLUTE_URL)
+                'user' => $router->generate('api-user', [], UrlGeneratorInterface::ABSOLUTE_URL)
             ]
         );
     }
