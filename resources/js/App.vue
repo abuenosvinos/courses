@@ -1,16 +1,30 @@
 <template>
   <div class="content">
     <Header />
-    <div class="dashboard">
-      <h1>Listado de Cursos</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Listado de Cursos</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <CourseList v-if="courses.length && !error" :courses="courses" />
+        </div>
+      </div>
+      <div v-if="!courses.length && !error" class="row alert alert-info" role="alert">
+        <div class="col">
+          No hay cursos
+        </div>
+      </div>
+      <div v-if="error" class="row alert alert-danger" role="alert">
+        <div class="col">
+          Error al obtener los cursos
+        </div>
+      </div>
     </div>
-    <CourseList v-if="courses.length && !error" :courses="courses" />
-    <div v-if="!courses.length && !error" class="alert alert-info" role="alert">
-      No hay cursos
-    </div>
-    <div v-if="error" class="alert alert-danger" role="alert">
-      Error al obtener los cursos
-    </div>
+
     <Footer />
   </div>
 </template>
