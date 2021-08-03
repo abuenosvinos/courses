@@ -6,10 +6,12 @@ namespace App\Tests\Course\Application;
 
 use App\Course\Application\AddCourse\AddCourse;
 use App\Course\Domain\DTO\Course;
+use App\Course\Domain\Event\CourseAdded;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseCategoryRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseLevelRepository;
 use App\Course\Infrastructure\Persistence\Doctrine\DoctrineCourseRepository;
 use App\Course\Infrastructure\ThirdParty\ThirdPartyPricesRepository;
+use App\Shared\Domain\Bus\Event\Event;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Tests\Shared\Domain\DatetimeMother;
 use App\Tests\Shared\Domain\StringMother;
@@ -48,7 +50,7 @@ class AddCourseTest extends KernelTestCase
             ['EUR','USD'],
             new CurlHttpClient()
         );
-        $eventBus = $this->createMock(EventBus::class);
+        $eventBus = $this->assembleEventBus();
 
         $service = new AddCourse(
             $courseRepository,
@@ -76,5 +78,23 @@ class AddCourseTest extends KernelTestCase
         $this->assertEquals($course->description(), $courseDto->description());
         $this->assertEquals(($course->categories()[0])->name(), $courseDto->category());
         $this->assertEquals($course->level()->name(), $courseDto->level());
+        $this->assertTrue($eventBus->isCalled());
+    }
+
+    private function assembleEventBus(): EventBus
+    {
+        return new class () implements EventBus {
+            private bool $isCalled = false;
+
+            public function notify(Event $event): void
+            {
+                $this->isCalled = ($event instanceof CourseAdded);
+            }
+
+            public function isCalled(): bool
+            {
+                return $this->isCalled;
+            }
+        };
     }
 }
