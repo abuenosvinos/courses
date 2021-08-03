@@ -8,25 +8,24 @@ use App\Shared\Domain\Bus\Query\Query;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use App\Shared\Domain\Bus\Query\QueryNotRegisteredError;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
+use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class SymfonyQueryBus implements QueryBus
 {
-    private MessageBusInterface $bus;
+    use HandleTrait {
+        handle as handleQuery;
+    }
 
     public function __construct(MessageBusInterface $queryBus)
     {
-        $this->bus = $queryBus;
+        $this->messageBus = $queryBus;
     }
 
     public function ask(Query $query)//: ?Response
     {
         try {
-            /** @var HandledStamp $stamp */
-            $stamp = $this->bus->dispatch($query)->last(HandledStamp::class);
-
-            return $stamp->getResult();
+            return $this->handleQuery($query);
         } catch (NoHandlerForMessageException) {
             throw new QueryNotRegisteredError($query);
         }
