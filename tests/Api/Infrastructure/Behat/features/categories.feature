@@ -11,7 +11,7 @@ Feature: List of categories
     And I send a GET request to "/api/categories"
     Then the response status code should be 401
 
-  Scenario: Get all the levels in the application
+  Scenario: Get all the categories in the application
     Given I have a token to enter access to the system
     And I send a GET request to "/api/categories"
     Then the response status code should be 200
