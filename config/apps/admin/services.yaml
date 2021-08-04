@@ -1,0 +1,10 @@
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\Admin\Infrastructure\UI\Controller\:
+        resource: '../../../src/Admin/Infrastructure/UI/Controller/' # Hay que poner un ../.. adicional
+        tags: ['controller.service_arguments']

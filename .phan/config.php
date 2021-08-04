@@ -41,6 +41,7 @@ return [
         'vendor/',
         'src/Kernel.php',
         'src/ApiKernel.php',
+        'src/AdminKernel.php',
         'src/CoursesKernel.php',
     ],
 

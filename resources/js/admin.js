@@ -1,3 +1,10 @@
-import menu from './menu.js';
+require('jquery')
+//require('jquery-ui-bundle')
+require('bootstrap')
+require('admin-lte')
+require('overlayscrollbars')
 
-menu();
+import "../css/admin.css";
+
+//import menu from './menu.js';
+//menu();

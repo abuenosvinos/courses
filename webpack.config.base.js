@@ -1,6 +1,6 @@
 const path = require('path');
 const { VueLoaderPlugin } = require("vue-loader");
-const MiniCSSExtract = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function webpackConfigGenerator() {
 /*
@@ -8,7 +8,7 @@ function webpackConfigGenerator() {
         mode: process.env.NODE_ENV,
         devtool: process.env.NODE_ENV === 'production' ? 'eval' : 'source-map',
         entry: {
-            app: './resources/js/web.js'
+            app: './resources/js/courses.js'
         },
         output: {
             path: path.resolve(__dirname, 'public/dist/app'),
@@ -50,12 +50,12 @@ function webpackConfigGenerator() {
         mode: process.env.NODE_ENV,
         devtool: process.env.NODE_ENV === 'production' ? 'eval' : 'source-map',
         entry: {
-            web: './resources/js/web.js',
+            courses: './resources/js/courses.js',
             admin: './resources/js/admin.js'
         },
         output: {
-            path: path.resolve(__dirname, 'apps/courses/public/dist'),
-            filename: '[name]/app.js',
+            path: path.resolve(__dirname, 'apps'),
+            filename: '[name]/public/dist/app.js'
         },
         module: {
             rules: [
@@ -75,12 +75,29 @@ function webpackConfigGenerator() {
                     test: /\.(scss|css)$/,
                     use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
                 },
+                {
+                    test: /\.css$/i,
+                    use: [MiniCssExtractPlugin.loader, "css-loader"],
+                },
+                {
+                    test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[ext]',
+                                outputPath: 'admin/public/dist/fonts/',
+                                publicPath: 'fonts/'
+                            }
+                        }
+                    ]
+                },
             ],
         },
         plugins: [
             new VueLoaderPlugin(),
-            new MiniCSSExtract({
-                filename: '[name].css',
+            new MiniCssExtractPlugin({
+                filename: '[name]/public/dist/app.css',
                 chunkFilename: '[id].css',
             }),
         ],

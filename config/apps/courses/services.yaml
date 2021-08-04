@@ -5,6 +5,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    App\Api\Infrastructure\UI\Controller\:
-        resource: '../../src/Api/Infrastructure/UI/Controller/' # Hay que poner un .. adicional
+    App\Course\Infrastructure\UI\Controller\:
+        resource: '../../../src/Course/Infrastructure/UI/Controller/' # Hay que poner un ../.. adicional
         tags: ['controller.service_arguments']

@@ -1,0 +1,16 @@
+
+app_login_form:
+    path: /login
+    controller: App\Admin\Infrastructure\UI\Controller\SecurityController::form
+    methods:    GET
+    defaults:
+        action: login
+
+app_login_action:
+    path: /login
+    controller: App\Admin\Infrastructure\UI\Controller\SecurityController::login
+    methods:    POST
+
+app_logout:
+    path: /logout
+    controller: App\Admin\Infrastructure\UI\Controller\SecurityController::logout

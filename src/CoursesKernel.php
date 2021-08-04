@@ -11,14 +11,14 @@ class CoursesKernel extends Kernel
     {
         parent::configureContainer($container);
 
-        $this->relativeConfigureContainer($container, 'courses/');
+        $this->relativeConfigureContainer($container, 'apps/courses/');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         parent::configureRoutes($routes);
 
-        $this->relativeConfigureRoutes($routes, 'courses/');
+        $this->relativeConfigureRoutes($routes, 'apps/courses/');
     }
 
     public function getCacheDir(): string
