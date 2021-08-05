@@ -5,7 +5,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         app_user_provider:
-            id: App\Course\Infrastructure\UI\Security\UserProvider
+            id: App\Shared\Infrastructure\Security\UserProvider
 
     password_hashers:
         App\Course\Domain\Entity\User:
@@ -23,7 +23,7 @@ security:
             logout: ~
             guard:
                 authenticators:
-                    - App\Course\Infrastructure\UI\Security\TokenAuthenticator
+                    - App\Api\Infrastructure\UI\Security\TokenAuthenticator
         admin:
             host: ^admin\.courses\.([local|com]+)$
             lazy: true

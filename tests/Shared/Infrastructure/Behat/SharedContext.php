@@ -34,7 +34,7 @@ class SharedContext extends RawMinkContext
             getClient()->
             setServerParameter(
                 'HTTP_X-AUTH-TOKEN',
-                'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA'
+                'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..7loEvj9wdQ5fGpRB.KDBqffJlOy7mG3rvga2yTo8NREbMgVyxI9R0hF12_Kj9sXp30MSO.KLeY4O9wwx4GrtG0pXeEug'
             );
     }
 

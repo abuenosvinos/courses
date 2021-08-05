@@ -21,12 +21,12 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $user = User::create(UserId::random(), 'abuenosvinos');
+        $user = User::create(UserId::random(), 'abuenosvinos@courses.com');
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->userPasswordHasher->hashPassword($user, 'abuenosvinosPass'));
         $manager->persist($user);
 
-        $user = User::create(UserId::random(), 'manolo');
+        $user = User::create(UserId::random(), 'manolo@courses.com');
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->userPasswordHasher->hashPassword($user, 'manoloPass'));
         $manager->persist($user);

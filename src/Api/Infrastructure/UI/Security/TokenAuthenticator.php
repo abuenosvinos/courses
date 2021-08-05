@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Security;
+namespace App\Api\Infrastructure\UI\Security;
 
 use App\Course\Infrastructure\JWT\Decrypt;
 use Exception;
@@ -51,14 +51,14 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
         try {
             $dataUser = $this->decrypt->decrypt($credentials);
+
+            // The user identifier in this case is the apiToken, see the key `property`
+            // of `your_db_provider` in `security.yaml`.
+            // If this returns a user, checkCredentials() is called next:
+            return $userProvider->loadUserByUsername($dataUser['username']);
         } catch (Exception) {
             return null;
         }
-
-        // The user identifier in this case is the apiToken, see the key `property`
-        // of `your_db_provider` in `security.yaml`.
-        // If this returns a user, checkCredentials() is called next:
-        return $userProvider->loadUserByIdentifier($dataUser['username']);
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool

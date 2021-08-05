@@ -52,7 +52,7 @@ export default {
         const response = await fetch('http://api.courses.local:8080/api/courses?page=3', {
           headers: {
             'Content-Type': 'application/json',
-            'X-AUTH-TOKEN': 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..RDn-WnSMJOSJi7cN.05c4S6csHFt9Szawt5u8gnCIOysyakz5zZLI.tgxBHwroAzVZoNMel6j5aA'
+            'X-AUTH-TOKEN': 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiemlwIjoiREVGIn0..7loEvj9wdQ5fGpRB.KDBqffJlOy7mG3rvga2yTo8NREbMgVyxI9R0hF12_Kj9sXp30MSO.KLeY4O9wwx4GrtG0pXeEug'
           }
         });
         let responseJson = await response.json();

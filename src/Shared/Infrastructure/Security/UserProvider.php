@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Course\Infrastructure\UI\Security;
+namespace App\Shared\Infrastructure\Security;
 
 use App\Course\Domain\Entity\User;
 use App\Course\Domain\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,25 +19,14 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * Symfony calls this method if you use features like switch_user
-     * or remember_me.
-     *
-     * If you're not using these features, you do not need to implement
-     * this method.
-     *
-     * @return UserInterface
-     *
-     * @throws UsernameNotFoundException if the user is not found
-     */
-    public function loadUserByIdentifier(string $username): UserInterface
-    {
-        return $this->userRepository->findByUsername($username);
-    }
-
     public function loadUserByUsername(string $username): UserInterface
     {
-        return $this->loadUserByIdentifier($username);
+        $user = $this->userRepository->findByUsername($username);
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        return $user;
     }
 
     /**

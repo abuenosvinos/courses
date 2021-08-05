@@ -28,7 +28,7 @@ class GetTokenUserTest extends KernelTestCase
     {
         $userMock = User::create(
             UserId::random(),
-            'abuenosvinos'
+            'abuenosvinos@courses.com'
         );
 
         $userRepository = $this->createMock(DoctrineUserRepository::class);
@@ -54,8 +54,8 @@ class GetTokenUserTest extends KernelTestCase
             $userPasswordHasher
         );
 
-        $token = $service->__invoke('abuenosvinos', 'abuenosvinosPass');
+        $token = $service->__invoke('abuenosvinos@courses.com', 'abuenosvinosPass');
 
-        $this->assertEquals(['username' => 'abuenosvinos'], $this->encryptionAdapter->decrypt($token));
+        $this->assertEquals(['username' => 'abuenosvinos@courses.com'], $this->encryptionAdapter->decrypt($token));
     }
 }

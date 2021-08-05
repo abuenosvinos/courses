@@ -80,8 +80,8 @@ Dentro de la carpeta `tests/userTest` se pueden encontrar tres formas de ejecuta
 Para crear los usuarios de prueba que contienen estas urls hay que ejecutar los siguientes comandos:
 
 ```bash
-docker exec -it docker_course_php_1 php bin/console app:new-user abuenosvinos
-docker exec -it docker_course_php_1 php bin/console app:new-user manolo
+docker exec -it docker_course_php_1 php bin/console app:new-user abuenosvinos@courses.com
+docker exec -it docker_course_php_1 php bin/console app:new-user manolo@courses.com
 ```
 
 Se puede crear cualquier usuario que se considere.

@@ -18,6 +18,6 @@ Feature: User logged
     And the response content should be:
     """
     {
-        "username": "abuenosvinos"
+        "username": "abuenosvinos@courses.com"
     }
     """
