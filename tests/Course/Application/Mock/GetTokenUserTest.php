@@ -6,9 +6,9 @@ namespace App\Tests\Course\Application\Mock;
 
 use App\Course\Application\GetTokenUser\GetTokenUser;
 use App\Course\Domain\Adapter\EncryptionAdapter;
-use App\Course\Domain\Entity\User;
-use App\Course\Domain\Entity\UserId;
-use App\Course\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
+use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\ValueObject\UserId;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;

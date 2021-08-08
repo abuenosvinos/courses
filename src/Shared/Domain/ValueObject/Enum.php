@@ -19,6 +19,11 @@ abstract class Enum
 
     abstract protected function throwExceptionForInvalidValue($value);
 
+    public static function __callStatic(string $name, $args)
+    {
+        return new static(self::values()[$name]);
+    }
+
     public static function values(): array
     {
         $class = static::class;
@@ -44,6 +49,11 @@ abstract class Enum
     public function equals(Enum $other): bool
     {
         return $other === $this;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->value();
     }
 
     private function ensureIsBetweenAcceptedValues($value): void

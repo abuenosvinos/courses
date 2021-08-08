@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Course\Domain\Repository;
+namespace App\Shared\Domain\Repository;
 
-use App\Course\Domain\Entity\User;
-use App\Course\Domain\Entity\UserId;
+use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\ValueObject\UserId;
 
 interface UserRepository
 {

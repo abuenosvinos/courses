@@ -2,7 +2,7 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            user_id: 'App\Course\Infrastructure\Persistence\Doctrine\Type\UserIdType'
+            user_id: 'App\Shared\Infrastructure\Persistence\Doctrine\Type\UserIdType'
             course_id: 'App\Course\Infrastructure\Persistence\Doctrine\Type\CourseIdType'
 
         # IMPORTANT: You MUST configure your server version,
@@ -13,6 +13,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
+            App\Shared\Domain\Entity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/mapping'
+                prefix: 'App\Shared\Domain\Entity'
+                alias: App\Shared\Domain\Entity
+            App\Shared\Domain\ValueObject:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/mappingVO'
+                prefix: 'App\Shared\Domain\ValueObject'
+                alias: App\Shared\Domain\ValueObject
             App\Course\Domain\Entity:
                 is_bundle: false
                 type: xml
@@ -25,6 +37,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Course/Infrastructure/Persistence/Doctrine/mappingVO'
                 prefix: 'App\Course\Domain\ValueObject'
                 alias: App\Course\Domain\ValueObject
+            App\Admin\Domain\Entity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Admin/Infrastructure/Persistence/Doctrine/mapping'
+                prefix: 'App\Admin\Domain\Entity'
+                alias: App\Admin\Domain\Entity
 
         #metadata_cache_driver:
             #    type: pool

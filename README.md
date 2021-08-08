@@ -89,7 +89,7 @@ Se puede crear cualquier usuario que se considere.
 Para obtener su clave de acceso hay que lanzar el comando:
 
 ```bash
-docker exec -it docker_course_php_1 php bin/console app:get-token-user abuenosvinos
+docker exec -it docker_course_php_1 php bin/console app:get-token-user abuenosvinos@courses.com
 ```
 
 Dicho token deberá ser utilizado como valor de la cabecera `X-AUTH-TOKEN`

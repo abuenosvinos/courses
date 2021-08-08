@@ -1,3 +1,17 @@
 home:
     path: /
     controller: App\Admin\Infrastructure\UI\Controller\HomeController::index
+
+user-list:
+    path: /user/list
+    controller: App\Admin\Infrastructure\UI\Controller\User\ListController::index
+
+user-form:
+    path: /user/list
+    controller: App\Admin\Infrastructure\UI\Controller\User\FormController::index
+    methods: GET
+
+user-save:
+    path: /user/list
+    controller: App\Admin\Infrastructure\UI\Controller\User\FormController::save
+    methods: GET

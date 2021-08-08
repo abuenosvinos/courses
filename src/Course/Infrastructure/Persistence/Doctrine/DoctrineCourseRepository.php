@@ -90,7 +90,9 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
 
         return new Paginator(
             $paginatorDoctrine->getIterator(),
-            $paginatorDoctrine->count()
+            $paginatorDoctrine->count(),
+            ($page - 1) * $limit,
+            $limit
         );
     }
 

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Course\Application;
 
 use App\Course\Application\AddUser\AddUser;
-use App\Course\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use App\Tests\Shared\Domain\StringMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use function Lambdish\Phunctional\apply;
 

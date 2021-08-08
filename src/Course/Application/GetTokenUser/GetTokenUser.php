@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Course\Application\GetTokenUser;
 
 use App\Course\Domain\Adapter\EncryptionAdapter;
-use App\Course\Domain\Repository\UserRepository;
+use App\Shared\Domain\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class GetTokenUser

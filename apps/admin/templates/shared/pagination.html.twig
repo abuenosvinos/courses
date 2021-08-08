@@ -1,0 +1,48 @@
+{% set startPagination = 1 %}
+{% set endPagination = results.numPages %}
+
+{% if results.numPages > 10 %}
+    {% if (results.numPages - results.page) > 4 %}
+        {% set startPagination = max(1, results.page - 4) %}
+    {% else %}
+        {% set startPagination = max(1, results.page - (4 + (5 - (results.numPages - results.page)))) %}
+    {% endif %}
+    {% set endPagination = min(startPagination + 9, results.numPages) %}
+{% endif %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example2_info" role="status"
+             aria-live="polite">Showing {{ results.firstShowed }} to {{ results.lastShowed }} of {{ results.total }}
+            entries
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-7">
+        {% if results.numPages > 1 %}
+            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                <ul class="pagination">
+                    <li class="paginate_button page-item previous {% if results.page == 1 %}disabled{% endif %}"
+                        id="example2_previous">
+                        <a href="{{ path(path, params|merge({'page': (results.page - 1)})) }}" aria-controls="example2"
+                           data-dt-idx="0"
+                           tabindex="0" class="page-link">Previous</a>
+                    </li>
+                    {% for i in startPagination..endPagination %}
+                        <li class="paginate_button page-item {% if results.page == i %}active{% endif %}">
+                            <a href="{{ path(path, params|merge({'page': i})) }}"
+                               aria-controls="example2"
+                               data-dt-idx="{{ i }}" tabindex="0"
+                               class="page-link">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+                    <li class="paginate_button page-item next {% if results.page == results.numPages %}disabled{% endif %}"
+                        id="example2_next">
+                        <a href="{{ path(path, params|merge({'page': (results.page + 1)})) }}" aria-controls="example2"
+                           data-dt-idx="7" tabindex="0"
+                           class="page-link">Next</a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>

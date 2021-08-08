@@ -53,14 +53,14 @@ class SearchController
                 'prev' => $router->generate('api-courses', $allParamsPrev, UrlGeneratorInterface::ABSOLUTE_URL),
                 'next' => $router->generate('api-courses', $allParamsNext, UrlGeneratorInterface::ABSOLUTE_URL),
             ],
-            'total' => $courses->count(),
+            'total' => $courses->total(),
             'page' => $searchParams->page(),
             'limit' => $searchParams->limit(),
             'results' => []
         ];
 
         /** @var Course $course */
-        foreach ($courses as $course) {
+        foreach ($courses->results() as $course) {
             $courseListTransformer->write($course);
 
             $response['results'][] = array_merge(

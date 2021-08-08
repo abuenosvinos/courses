@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Course\Infrastructure\Persistence\Doctrine\Type;
+namespace App\Shared\Infrastructure\Persistence\Doctrine\Type;
 
-use App\Course\Domain\Entity\UserId;
+use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 

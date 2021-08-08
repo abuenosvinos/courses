@@ -55,7 +55,7 @@ final class InMemoryCourseRepository implements CourseRepository
 
     public function findByCriteria(SearchParams $searchParams): Paginator
     {
-        return new Paginator(null, 0);
+        return new Paginator(null, 0, 0, 0);
     }
 
     public function searchAll(): array

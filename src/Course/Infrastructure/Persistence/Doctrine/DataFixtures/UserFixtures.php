@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Course\Infrastructure\Persistence\Doctrine\DataFixtures;
 
-use App\Course\Domain\Entity\User;
-use App\Course\Domain\Entity\UserId;
+use App\Admin\Domain\Entity\Admin;
+use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\ValueObject\UserId;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -21,8 +22,8 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $user = User::create(UserId::random(), 'abuenosvinos@courses.com');
-        $user->setRoles(['ROLE_USER']);
+        $user = Admin::create(UserId::random(), 'abuenosvinos@courses.com');
+        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
         $user->setPassword($this->userPasswordHasher->hashPassword($user, 'abuenosvinosPass'));
         $manager->persist($user);
 

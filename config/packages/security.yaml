@@ -8,7 +8,7 @@ security:
             id: App\Shared\Infrastructure\Security\UserProvider
 
     password_hashers:
-        App\Course\Domain\Entity\User:
+        App\Shared\Domain\Entity\User:
             algorithm: auto
 
     firewalls:

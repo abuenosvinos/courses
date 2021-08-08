@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Course\Application\AddUser;
 
-use App\Course\Domain\Entity\User;
-use App\Course\Domain\Entity\UserId;
-use App\Course\Domain\Repository\UserRepository;
+use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\Repository\UserRepository;
+use App\Shared\Domain\ValueObject\UserId;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class AddUser
