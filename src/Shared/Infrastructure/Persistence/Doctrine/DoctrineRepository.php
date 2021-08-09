@@ -22,16 +22,16 @@ abstract class DoctrineRepository
         return $this->entityManager;
     }
 
-    protected function persist(AggregateRoot $entity): void
+    protected function persistAndFlush(AggregateRoot $entity): void
     {
-        $this->entityManager()->persist($entity);
-        $this->entityManager()->flush();
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
-    protected function remove(AggregateRoot $entity): void
+    protected function removeAndFlush(AggregateRoot $entity): void
     {
-        $this->entityManager()->remove($entity);
-        $this->entityManager()->flush();
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
 
     protected function repository(string $entityClass): ObjectRepository

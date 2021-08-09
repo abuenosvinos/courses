@@ -16,12 +16,12 @@ final class DoctrineCourseRepository extends DoctrineRepository implements Cours
 {
     public function save(Course $course): void
     {
-        $this->persist($course);
+        $this->persistAndFlush($course);
     }
 
-    public function delete(Course $course): void
+    public function remove(Course $course): void
     {
-        $this->remove($course);
+        $this->removeAndFlush($course);
     }
 
     public function findById(CourseId $id): ?Course

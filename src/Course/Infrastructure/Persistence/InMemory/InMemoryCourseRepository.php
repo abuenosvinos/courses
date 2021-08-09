@@ -19,7 +19,7 @@ final class InMemoryCourseRepository implements CourseRepository
         $this->courses[$course->id()->value()] = $course;
     }
 
-    public function delete(Course $course): void
+    public function remove(Course $course): void
     {
         unset($this->courses[$course->id()->value()]);
     }

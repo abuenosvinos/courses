@@ -13,15 +13,16 @@ use Twig\Environment;
 
 class ListController
 {
-    public function index(Request $request, Environment $twig, UserAdminRepository $userAdminRepository): Response
+    public function list(Request $request, Environment $twig, UserAdminRepository $userAdminRepository): Response
     {
         $page = $request->query->get('page', 1);
         $limit = 10;
+        $offset = (($page - 1) * $limit);
 
         $criteria = new Criteria(
             new Filters([]),
             Order::createDesc(new OrderBy('id')),
-            (($page - 1) * $limit),
+            $offset,
             $limit
         );
         $users = $userAdminRepository->search($criteria);

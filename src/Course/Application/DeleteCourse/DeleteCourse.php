@@ -23,7 +23,7 @@ final class DeleteCourse
     {
         $course = $this->courseRepository->findByCode($code);
 
-        $this->courseRepository->delete($course);
+        $this->courseRepository->remove($course);
 
         $this->bus->notify(...[new CourseDeleted(['course' => $course])]);
     }

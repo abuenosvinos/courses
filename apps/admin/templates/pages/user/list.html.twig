@@ -3,17 +3,18 @@
 {% block title %}List of Users{% endblock %}
 
 {% block body %}
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <h1 class="m-0">List of Users</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+                <div class="col-sm-6">
+                    <a href="{{ path('user-new-form') }}" class="btn btn-success float-sm-right">New</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
 
     <section class="content">
         <div class="container-fluid">
@@ -52,7 +53,11 @@
                                                 <tr class="{% if loop.index % 2 == 0 %}even{% else %}odd{% endif %}">
                                                     <td class="sorting_1 dtr-control">{{ user.id }}</td>
                                                     <td>{{ user.username }}</td>
-                                                    <td>{# <a href="">Edit</a><a href="">Delete</a> #}</td>
+                                                    <td>
+                                                        <a href="{{ path('user-edit-form',{'id':user.id}) }}" class="btn btn-primary">Edit</a>
+                                                        <a href="{{ path('user-password-form',{'id':user.id}) }}" class="btn btn-primary">Change Password</a>
+                                                        <a href="{{ path('user-delete',{'id':user.id}) }}" class="btn btn-primary btn-danger">Delete</a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>

@@ -12,7 +12,12 @@ class DoctrineUserRepository extends DoctrineRepository implements UserRepositor
 {
     public function save(User $user): void
     {
-        $this->persist($user);
+        $this->persistAndFlush($user);
+    }
+
+    public function remove(User $user): void
+    {
+        $this->removeAndFlush($user);
     }
 
     public function findById(UserId $id): ?User

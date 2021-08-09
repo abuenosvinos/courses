@@ -13,7 +13,7 @@ interface CourseRepository
 {
     public function save(Course $course): void;
 
-    public function delete(Course $course): void;
+    public function remove(Course $course): void;
 
     public function findById(CourseId $id): ?Course;
 
