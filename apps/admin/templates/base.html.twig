@@ -60,7 +60,6 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ path('home') }}" class="brand-link">
-            &nbsp;&nbsp;&nbsp;
             <span class="brand-text font-weight-light">CRM Courses</span>
         </a>
 
@@ -101,6 +100,39 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         {% block body %}
+
+            {% block bodyHeader %}
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        {% block bodyHeaderContent %}
+                        <div class="col-sm-6">
+                            {% block bodyHeaderContentLeft %}
+                            <h1 class="m-0">{{ title }}</h1>
+                            {% endblock bodyHeaderContentLeft %}
+                        </div>
+                        <div class="col-sm-6">
+                            {% block bodyHeaderContentRight %}
+                            {% endblock bodyHeaderContentRight %}
+                        </div>
+                        {% endblock bodyHeaderContent %}
+                    </div>
+                </div>
+            </div>
+            {% endblock bodyHeader %}
+
+            {% block bodySection %}
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                {% block bodySectionContent %}
+                                {% endblock bodySectionContent %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endblock bodySection %}
         {% endblock %}
     </div>
     <!-- /.content-wrapper -->
