@@ -21,7 +21,7 @@ class ListController
 
         $criteria = new Criteria(
             new Filters([]),
-            Order::createDesc(new OrderBy('id')),
+            Order::createDesc(OrderBy::create('id')),
             $offset,
             $limit
         );

@@ -5,8 +5,10 @@ namespace App\Admin\Infrastructure\UI\Controller\User;
 use App\Admin\Domain\Entity\Admin;
 use App\Shared\Domain\Repository\UserRepository;
 use App\Shared\Domain\ValueObject\UserId;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -19,17 +21,21 @@ class EditController extends AbstractController
         $user = $userRepository->findById(UserId::create($id));
 
         $form = $this->createFormBuilder($user)
-            ->add('username', TextType::class)
+            ->add('username', EmailType::class)
             ->getForm();
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Admin $user */
-            $user = $form->getData();
+        try {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                /** @var Admin $user */
+                $user = $form->getData();
 
-            $userRepository->save($user);
+                $userRepository->save($user);
 
-            return $this->redirectToRoute('user-list');
+                return $this->redirectToRoute('user-list');
+            }
+        } catch (InvalidArgumentException $exception) {
+            $form->get('username')->addError(new FormError($exception->getMessage()));
         }
 
         return new Response(

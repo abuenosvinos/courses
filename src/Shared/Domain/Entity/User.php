@@ -47,7 +47,7 @@ class User extends AggregateRoot implements UserInterface
 
     public function setUsername(string $username): void
     {
-        $this->username = $username;
+        $this->username = EmailAddress::create($username);
     }
 
     /**
@@ -101,7 +101,7 @@ class User extends AggregateRoot implements UserInterface
         return $this->username->value();
     }
 
-    public static function create(UserId $id, EmailAddress $username = null): static
+    public static function create(UserId $id, EmailAddress $username): static
     {
         return new static($id, $username);
     }
