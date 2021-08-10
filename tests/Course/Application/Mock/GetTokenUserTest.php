@@ -7,6 +7,7 @@ namespace App\Tests\Course\Application\Mock;
 use App\Course\Application\GetTokenUser\GetTokenUser;
 use App\Course\Domain\Adapter\EncryptionAdapter;
 use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\ValueObject\EmailAddress;
 use App\Shared\Domain\ValueObject\UserId;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use Doctrine\ORM\EntityManager;
@@ -28,7 +29,7 @@ class GetTokenUserTest extends KernelTestCase
     {
         $userMock = User::create(
             UserId::random(),
-            'abuenosvinos@courses.com'
+            EmailAddress::create('abuenosvinos@courses.com')
         );
 
         $userRepository = $this->createMock(DoctrineUserRepository::class);

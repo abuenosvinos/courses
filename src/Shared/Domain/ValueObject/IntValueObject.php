@@ -6,7 +6,7 @@ namespace App\Shared\Domain\ValueObject;
 
 abstract class IntValueObject
 {
-    public function __construct(protected int $value)
+    protected function __construct(protected int $value)
     {
     }
 
@@ -18,5 +18,15 @@ abstract class IntValueObject
     public function isBiggerThan(IntValueObject $other): bool
     {
         return $this->value() > $other->value();
+    }
+
+    public function __toString()
+    {
+        return $this->value();
+    }
+
+    public static function create(int $value): static
+    {
+        return new static($value);
     }
 }

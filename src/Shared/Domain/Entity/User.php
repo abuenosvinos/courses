@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace App\Shared\Domain\Entity;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
+use App\Shared\Domain\ValueObject\EmailAddress;
 use App\Shared\Domain\ValueObject\UserId;
 use App\Shared\Infrastructure\Security\UserInterface;
 
 class User extends AggregateRoot implements UserInterface
 {
     private UserId $id;
-    protected string $username;
+    protected EmailAddress $username;
     protected string $password;
     protected array $roles = [];
 
-    private function __construct(UserId $id, string $username)
+    private function __construct(UserId $id, EmailAddress $username)
     {
         $this->id = $id;
         $this->username = $username;
@@ -26,9 +27,9 @@ class User extends AggregateRoot implements UserInterface
         return $this->id;
     }
 
-    public function username(): string
+    public function username(): EmailAddress
     {
-        return $this->getUserIdentifier();
+        return $this->username;
     }
 
     public function password(): ?string
@@ -36,17 +37,12 @@ class User extends AggregateRoot implements UserInterface
         return $this->getPassword();
     }
 
-    public static function create(UserId $id, string $username): static
-    {
-        return new static($id, $username);
-    }
-
     /**
      * @see UserInterface
      */
     public function getUsername(): string
     {
-        return $this->username;
+        return $this->username->value();
     }
 
     public function setUsername(string $username): void
@@ -102,6 +98,11 @@ class User extends AggregateRoot implements UserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->username->value();
+    }
+
+    public static function create(UserId $id, EmailAddress $username = null): static
+    {
+        return new static($id, $username);
     }
 }

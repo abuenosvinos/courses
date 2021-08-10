@@ -7,20 +7,13 @@ namespace App\Shared\Domain\ValueObject;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid
+class Uuid extends StringValueObject
 {
-    private string $value;
-
     private function __construct(string $value)
     {
         $this->ensureIsValidUuid($value);
 
-        $this->value = $value;
-    }
-
-    public function value(): string
-    {
-        return $this->value;
+        parent::__construct($value);
     }
 
     private function ensureIsValidUuid(string $id): void
@@ -30,11 +23,6 @@ class Uuid
                 sprintf('<%s> does not allow the value <%s>.', static::class, $id)
             );
         }
-    }
-
-    public function __toString()
-    {
-        return $this->value();
     }
 
     public static function random(): static

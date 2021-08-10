@@ -31,7 +31,7 @@ class DoctrineUserRepository extends DoctrineRepository implements UserRepositor
     public function findByUsername(string $username): ?User
     {
         /** @var User $user */
-        $user = $this->repository(User::class)->findOneBy(['username' => $username]);
+        $user = $this->repository(User::class)->findOneBy(['username.value' => $username]);
 
         return $user;
     }

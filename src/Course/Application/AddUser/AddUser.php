@@ -6,6 +6,7 @@ namespace App\Course\Application\AddUser;
 
 use App\Shared\Domain\Entity\User;
 use App\Shared\Domain\Repository\UserRepository;
+use App\Shared\Domain\ValueObject\EmailAddress;
 use App\Shared\Domain\ValueObject\UserId;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -24,7 +25,7 @@ final class AddUser
     {
         $user = User::create(
             UserId::random(),
-            $username,
+            EmailAddress::create($username),
         );
         $user->setPassword($this->userPasswordHasher->hashPassword($user, $password));
         $user->setRoles(['ROLE_USER']);

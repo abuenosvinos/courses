@@ -11,7 +11,8 @@
             <discriminator-mapping value="user" class="App\Shared\Domain\Entity\User" />
             <discriminator-mapping value="admin" class="App\Admin\Domain\Entity\Admin" />
         </discriminator-map>
-        <field name="username" type="string" column="username" length="255" unique="true" />
+        <!--<field name="username" type="string" column="username" length="255" unique="true" />-->
+        <embedded name="username" class="App\Shared\Domain\ValueObject\EmailAddress" use-column-prefix="false" />
         <field name="password" type="string" column="password" length="255" />
         <field name="roles" type="json" column="roles" />
     </entity>

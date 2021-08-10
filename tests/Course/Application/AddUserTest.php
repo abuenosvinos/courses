@@ -6,6 +6,7 @@ namespace App\Tests\Course\Application;
 
 use App\Course\Application\AddUser\AddUser;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
+use App\Tests\Shared\Domain\EmailAddressMother;
 use App\Tests\Shared\Domain\StringMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
@@ -39,7 +40,7 @@ class AddUserTest extends KernelTestCase
             $passwordHasher
         );
 
-        $username = StringMother::random();
+        $username = EmailAddressMother::random();
         $password = StringMother::random();
 
         $service->__invoke(
@@ -49,6 +50,6 @@ class AddUserTest extends KernelTestCase
 
         $user = $userRepository->findByUsername($username);
 
-        $this->assertEquals($user->username(), $username);
+        $this->assertEquals($user->username()->value(), $username);
     }
 }

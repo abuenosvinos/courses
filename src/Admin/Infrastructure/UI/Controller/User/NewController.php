@@ -18,7 +18,7 @@ class NewController extends AbstractController
 {
     public function form(Request $request, Environment $twig, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $form = $this->createFormBuilder(Admin::create(UserId::random(), ''))
+        $form = $this->createFormBuilder(Admin::create(UserId::random()))
             ->add('username', TextType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,

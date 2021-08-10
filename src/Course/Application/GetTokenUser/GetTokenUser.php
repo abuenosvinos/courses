@@ -28,7 +28,7 @@ final class GetTokenUser
         if ($user) {
             if ($this->userPasswordHasher->isPasswordValid($user, $password)) {
                 return $this->encryptionAdapter->encrypt(json_encode([
-                    'username' => $user->username()
+                    'username' => $user->username()->value()
                 ]));
             }
         }
