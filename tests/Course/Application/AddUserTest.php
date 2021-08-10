@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Course\Application;
 
 use App\Course\Application\AddUser\AddUser;
+use App\Shared\Domain\Repository\PasswordRepository;
+use App\Shared\Domain\ValueObject\Password;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUserRepository;
 use App\Tests\Shared\Domain\EmailAddressMother;
+use App\Tests\Shared\Domain\PasswordMother;
 use App\Tests\Shared\Domain\StringMother;
 use App\Tests\Shared\Infrastructure\Persistence\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
@@ -32,20 +35,23 @@ class AddUserTest extends KernelTestCase
 
     public function testValidValues()
     {
+        $username = EmailAddressMother::random();
+        $password = Password::create(PasswordMother::random());
+
         $userRepository = new DoctrineUserRepository($this->entityManager);
-        $passwordHasher = $this->createMock(UserPasswordHasher::class);
+        $userPasswordHasher = $this->createMock(PasswordRepository::class);
+        $userPasswordHasher->expects($this->any())
+            ->method('create')
+            ->willReturn($password);
 
         $service = new AddUser(
             $userRepository,
-            $passwordHasher
+            $userPasswordHasher
         );
-
-        $username = EmailAddressMother::random();
-        $password = StringMother::random();
 
         $service->__invoke(
             $username,
-            $password
+            $password->value()
         );
 
         $user = $userRepository->findByUsername($username);

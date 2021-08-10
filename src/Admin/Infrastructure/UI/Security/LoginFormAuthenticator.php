@@ -2,6 +2,7 @@
 
 namespace App\Admin\Infrastructure\UI\Security;
 
+use App\Shared\Domain\Repository\PasswordRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -25,14 +26,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private UserProviderInterface $userProvider;
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
-    private UserPasswordHasherInterface $userPasswordHasher;
+    private PasswordRepository $passwordRepository;
 
-    public function __construct(UserProviderInterface $userProvider, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(UserProviderInterface $userProvider, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, PasswordRepository $passwordRepository)
     {
         $this->userProvider = $userProvider;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->userPasswordHasher = $userPasswordHasher;
+        $this->passwordRepository = $passwordRepository;
     }
 
     public function supports(Request $request)
@@ -75,7 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->userPasswordHasher->isPasswordValid($user, $credentials['password']);
+        return $this->passwordRepository->create($user, $credentials['password']);
     }
 
     /**

@@ -55,7 +55,7 @@ class GetTokenUserTest extends KernelTestCase
             $userPasswordHasher
         );
 
-        $token = $service->__invoke('abuenosvinos@courses.com', 'abuenosvinosPass');
+        $token = $service->__invoke('abuenosvinos@courses.com', 'abuenosvinosPass1');
 
         $this->assertEquals(['username' => 'abuenosvinos@courses.com'], $this->encryptionAdapter->decrypt($token));
     }

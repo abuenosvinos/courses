@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace App\Course\Application\AddUser;
 
 use App\Shared\Domain\Entity\User;
+use App\Shared\Domain\Repository\PasswordRepository;
 use App\Shared\Domain\Repository\UserRepository;
 use App\Shared\Domain\ValueObject\EmailAddress;
 use App\Shared\Domain\ValueObject\UserId;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class AddUser
 {
     private UserRepository $userRepository;
-    private UserPasswordHasherInterface $userPasswordHasher;
+    private PasswordRepository $passwordRepository;
 
-    public function __construct(UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(UserRepository $userRepository, PasswordRepository $passwordRepository)
     {
         $this->userRepository = $userRepository;
-        $this->userPasswordHasher = $userPasswordHasher;
+        $this->passwordRepository = $passwordRepository;
     }
 
     public function __invoke(string $username, string $password): void
@@ -27,7 +27,8 @@ final class AddUser
             UserId::random(),
             EmailAddress::create($username),
         );
-        $user->setPassword($this->userPasswordHasher->hashPassword($user, $password));
+
+        $user->setPassword($this->passwordRepository->create($user, $password));
         $user->setRoles(['ROLE_USER']);
         $this->userRepository->save($user);
     }

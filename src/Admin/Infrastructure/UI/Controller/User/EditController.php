@@ -3,9 +3,9 @@
 namespace App\Admin\Infrastructure\UI\Controller\User;
 
 use App\Admin\Domain\Entity\Admin;
+use App\Shared\Domain\Exception\NotValidEmailAddressException;
 use App\Shared\Domain\Repository\UserRepository;
 use App\Shared\Domain\ValueObject\UserId;
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormError;
@@ -34,7 +34,7 @@ class EditController extends AbstractController
 
                 return $this->redirectToRoute('user-list');
             }
-        } catch (InvalidArgumentException $exception) {
+        } catch (NotValidEmailAddressException $exception) {
             $form->get('username')->addError(new FormError($exception->getMessage()));
         }
 

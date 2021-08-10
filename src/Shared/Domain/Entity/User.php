@@ -6,6 +6,7 @@ namespace App\Shared\Domain\Entity;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\ValueObject\EmailAddress;
+use App\Shared\Domain\ValueObject\Password;
 use App\Shared\Domain\ValueObject\UserId;
 use App\Shared\Infrastructure\Security\UserInterface;
 
@@ -13,7 +14,7 @@ class User extends AggregateRoot implements UserInterface
 {
     private UserId $id;
     protected EmailAddress $username;
-    protected string $password;
+    protected Password $password;
     protected array $roles = [];
 
     private function __construct(UserId $id, EmailAddress $username)
@@ -32,9 +33,9 @@ class User extends AggregateRoot implements UserInterface
         return $this->username;
     }
 
-    public function password(): ?string
+    public function password(): ?Password
     {
-        return $this->getPassword();
+        return $this->password;
     }
 
     /**
@@ -45,9 +46,9 @@ class User extends AggregateRoot implements UserInterface
         return $this->username->value();
     }
 
-    public function setUsername(string $username): void
+    public function setUsername(EmailAddress $username): void
     {
-        $this->username = EmailAddress::create($username);
+        $this->username = $username;
     }
 
     /**
@@ -56,10 +57,10 @@ class User extends AggregateRoot implements UserInterface
      */
     public function getPassword(): ?string
     {
-        return $this->password;
+        return $this->password->value();
     }
 
-    public function setPassword(string $password): void
+    public function setPassword(Password $password): void
     {
         $this->password = $password;
     }
