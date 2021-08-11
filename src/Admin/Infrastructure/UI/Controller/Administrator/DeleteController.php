@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Infrastructure\UI\Controller\User;
+namespace App\Admin\Infrastructure\UI\Controller\Administrator;
 
 use App\Shared\Domain\Repository\UserRepository;
 use App\Shared\Domain\ValueObject\UserId;
@@ -20,7 +20,7 @@ class DeleteController
 
         return new Response(
             $twig->render(
-                'pages/user/list.html.twig',
+                'pages/administrator/list.html.twig',
                 [
                 ]
             )

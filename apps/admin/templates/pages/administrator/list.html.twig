@@ -1,11 +1,11 @@
-{% set title = 'List of Users' %}
+{% set title = 'List of Administrators' %}
 
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block bodyHeaderContentRight %}
-    <a href="{{ path('user-new-form') }}" class="btn btn-success float-sm-right">New</a>
+    <a href="{{ path('administrator-new-form') }}" class="btn btn-success float-sm-right">New</a>
 {% endblock %}
 
 {% block bodySectionContent %}
@@ -44,9 +44,9 @@
                                     <td class="sorting_1 dtr-control">{{ user.id }}</td>
                                     <td>{{ user.username }}</td>
                                     <td>
-                                        <a href="{{ path('user-edit-form',{'id':user.id}) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ path('user-password-form',{'id':user.id}) }}" class="btn btn-primary">Change Password</a>
-                                        <a href="{{ path('user-delete',{'id':user.id}) }}" class="btn btn-primary btn-danger">Delete</a>
+                                        <a href="{{ path('administrator-edit-form',{'id':user.id}) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ path('administrator-password-form',{'id':user.id}) }}" class="btn btn-primary">Change Password</a>
+                                        <a href="{{ path('administrator-delete',{'id':user.id}) }}" class="btn btn-primary btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}

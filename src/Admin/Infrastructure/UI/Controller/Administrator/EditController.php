@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Infrastructure\UI\Controller\User;
+namespace App\Admin\Infrastructure\UI\Controller\Administrator;
 
 use App\Admin\Domain\Entity\Admin;
 use App\Shared\Domain\Exception\NotValidEmailAddressException;
@@ -32,7 +32,7 @@ class EditController extends AbstractController
 
                 $userRepository->save($user);
 
-                return $this->redirectToRoute('user-list');
+                return $this->redirectToRoute('administrator-list');
             }
         } catch (NotValidEmailAddressException $exception) {
             $form->get('username')->addError(new FormError($exception->getMessage()));
@@ -40,7 +40,7 @@ class EditController extends AbstractController
 
         return new Response(
             $twig->render(
-                'pages/user/edit.html.twig',
+                'pages/administrator/edit.html.twig',
                 [
                     'form' => $form->createView()
                 ]

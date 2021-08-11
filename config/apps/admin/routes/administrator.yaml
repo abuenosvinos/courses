@@ -1,0 +1,40 @@
+
+administrator-new-form:
+    path: /administrator
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\NewController::form
+    methods: GET
+
+administrator-new-save:
+    path: /administrator
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\NewController::form
+    methods: POST
+
+administrator-list:
+    path: /administrator/list
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\ListController::list
+
+administrator-edit-form:
+    path: /administrator/{id}
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\EditController::form
+    methods: GET
+
+administrator-edit-save:
+    path: /administrator/{id}
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\EditController::form
+    methods: POST
+
+administrator-password-form:
+    path: /administrator/{id}/password
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\EditPasswordController::form
+    methods: GET
+
+administrator-password-save:
+    path: /administrator/{id}/password
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\EditPasswordController::form
+    methods: POST
+
+administrator-delete:
+    path: /administrator/{id}
+    controller: App\Admin\Infrastructure\UI\Controller\Administrator\DeleteController::delete
+    methods: DELETE
+

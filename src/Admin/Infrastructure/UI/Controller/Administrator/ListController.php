@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Infrastructure\UI\Controller\User;
+namespace App\Admin\Infrastructure\UI\Controller\Administrator;
 
 use App\Admin\Domain\Repository\UserAdminRepository;
 use App\Shared\Domain\Criteria\Criteria;
@@ -33,7 +33,7 @@ class ListController
 
         return new Response(
             $twig->render(
-                'pages/user/list.html.twig',
+                'pages/administrator/list.html.twig',
                 [
                     'users' => $users,
                     'path' => $path,

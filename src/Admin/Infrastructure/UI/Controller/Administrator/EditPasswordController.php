@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Infrastructure\UI\Controller\User;
+namespace App\Admin\Infrastructure\UI\Controller\Administrator;
 
 use App\Admin\Domain\Entity\Admin;
 use App\Admin\Infrastructure\UI\Form\DataTransformer\PasswordDataTransformer;
@@ -55,7 +55,7 @@ class EditPasswordController extends AbstractController
 
                 $userRepository->save($user);
 
-                return $this->redirectToRoute('user-list');
+                return $this->redirectToRoute('administrator-list');
             }
         } catch (NotValidPasswordException $exception) {
             $form->get('password')->get('first')->addError(new FormError($exception->getMessage()));
@@ -63,7 +63,7 @@ class EditPasswordController extends AbstractController
 
         return new Response(
             $twig->render(
-                'pages/user/edit-password.html.twig',
+                'pages/administrator/edit-password.html.twig',
                 [
                     'form' => $form->createView()
                 ]

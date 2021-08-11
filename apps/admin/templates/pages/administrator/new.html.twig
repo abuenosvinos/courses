@@ -1,11 +1,11 @@
-{% set title = 'Change Password' %}
+{% set title = 'New Administrator' %}
 
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block bodyHeaderContentRight %}
-    <a href="{{ path('user-list') }}" class="btn float-sm-right">Back</a>
+    <a href="{{ path('administrator-list') }}" class="btn float-sm-right">Back</a>
 {% endblock %}
 
 {% block bodySectionContent %}
@@ -14,6 +14,7 @@
 
         {{ form_start(form) }}
         <div class="card-body">
+            {{ form_row(form.username) }}
             {{ form_row(form.password.first) }}
             {{ form_row(form.password.second) }}
         </div>
