@@ -44,9 +44,11 @@
                                     <td class="sorting_1 dtr-control">{{ user.id }}</td>
                                     <td>{{ user.username }}</td>
                                     <td>
-                                        <a href="{{ path('administrator-edit-form',{'id':user.id}) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ path('administrator-edit-form',{'id':user.id}) }}" class="btn btn-info"><i class="fas fa-pencil-alt">
+                                            </i> Edit</a>
                                         <a href="{{ path('administrator-password-form',{'id':user.id}) }}" class="btn btn-primary">Change Password</a>
-                                        <a href="{{ path('administrator-delete',{'id':user.id}) }}" class="btn btn-primary btn-danger">Delete</a>
+                                        <a href="{{ path('administrator-delete',{'id':user.id}) }}" class="btn btn-danger"><i class="fas fa-trash">
+                                            </i> Delete</a>
                                     </td>
                                 </tr>
                             {% endfor %}
