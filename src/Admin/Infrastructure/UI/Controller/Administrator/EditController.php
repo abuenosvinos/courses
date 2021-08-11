@@ -3,6 +3,7 @@
 namespace App\Admin\Infrastructure\UI\Controller\Administrator;
 
 use App\Admin\Domain\Entity\Admin;
+use App\Admin\Infrastructure\UI\Form\DataTransformer\EmailAddressDataTransformer;
 use App\Shared\Domain\Exception\NotValidEmailAddressException;
 use App\Shared\Domain\Repository\UserRepository;
 use App\Shared\Domain\ValueObject\UserId;
@@ -15,14 +16,22 @@ use Twig\Environment;
 
 class EditController extends AbstractController
 {
-    public function form(Request $request, Environment $twig, UserRepository $userRepository): Response
+    public function form(
+        Request $request,
+        Environment $twig,
+        UserRepository $userRepository,
+        EmailAddressDataTransformer $emailAddressDataTransformer
+    ): Response
     {
         $id = $request->attributes->get('id');
         $user = $userRepository->findById(UserId::create($id));
 
-        $form = $this->createFormBuilder($user)
-            ->add('username', EmailType::class)
-            ->getForm();
+        $formBuilder = $this->createFormBuilder($user)
+            ->add('username', EmailType::class);
+
+        $formBuilder->get('username')->addModelTransformer($emailAddressDataTransformer);
+
+        $form = $formBuilder->getForm();
 
         try {
             $form->handleRequest($request);
