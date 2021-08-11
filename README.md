@@ -119,3 +119,11 @@ docker-compose -f ./docker/docker-compose.yml down
 - Permitir marcar como favoritos los cursos
 - Crear un admin para la gestión de la información
 - Crear una web para la visualización de la información
+
+## Referencias
+
+- https://codely.tv/
+- https://leanpub.com/ddd-in-php
+- https://herbertograca.com/
+- https://symfony.com/doc/current/index.html
+
