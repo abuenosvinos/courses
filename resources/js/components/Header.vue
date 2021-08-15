@@ -7,9 +7,9 @@
         </div>
         <div class="col-1">
           <ul>
-            <li><a href="/">US</a></li>
-            <li><a href="/mx">Mexico</a></li>
-            <li><a href="/es">Spain</a></li>
+            <li><span data-lang="en" v-on:click="ChangeLang('en')">US</span></li>
+            <li><span data-lang="mx" v-on:click="ChangeLang('mx')">Mexico</span></li>
+            <li><span data-lang="es" v-on:click="ChangeLang('es')">Spain</span></li>
           </ul>
         </div>
       </div>
@@ -19,7 +19,15 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    ChangeLang: function (lang) {
+      if (document.documentElement.lang !== lang) {
+        document.documentElement.lang = lang;
+        this.$root.$emit('change_language', lang);
+      }
+    }
+  }
 }
 </script>
 

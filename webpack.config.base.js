@@ -2,6 +2,14 @@ const path = require('path');
 const { VueLoaderPlugin } = require("vue-loader");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+/*
+const webpack = require("webpack");
+new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+});
+*/
+
 function webpackConfigGenerator() {
 /*
     const appConfig = {
@@ -104,6 +112,8 @@ function webpackConfigGenerator() {
         resolve: {
             alias: {
                 vue$: "vue/dist/vue.runtime.esm.js",
+                'node_modules': path.join(__dirname, 'node_modules'),
+                'bower_modules': path.join(__dirname, 'bower_modules'),
             },
             extensions: ["*", ".js", ".vue", ".json"],
         },
