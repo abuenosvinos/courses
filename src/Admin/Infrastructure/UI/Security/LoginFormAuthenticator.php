@@ -26,14 +26,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private UserProviderInterface $userProvider;
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
-    private PasswordRepository $passwordRepository;
+    private UserPasswordHasherInterface $userPasswordHasher;
 
-    public function __construct(UserProviderInterface $userProvider, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, PasswordRepository $passwordRepository)
+    public function __construct(UserProviderInterface $userProvider, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->userProvider = $userProvider;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordRepository = $passwordRepository;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function supports(Request $request)
@@ -76,7 +76,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordRepository->create($user, $credentials['password']);
+        return $this->userPasswordHasher->isPasswordValid($user, $credentials['password']);
     }
 
     /**
