@@ -7,7 +7,7 @@ namespace App\Shared\Domain\Criteria;
 final class Criteria
 {
     public function __construct(
-        private Filters $filters,
+        private ?Filters $filters,
         private Order $order,
         private ?int $offset,
         private ?int $limit
@@ -16,7 +16,7 @@ final class Criteria
 
     public function hasFilters(): bool
     {
-        return $this->filters->count() > 0;
+        return isset($this->filters) && $this->filters->count() > 0;
     }
 
     public function hasOrder(): bool
@@ -26,10 +26,10 @@ final class Criteria
 
     public function plainFilters(): array
     {
-        return $this->filters->filters();
+        return isset($this->filters) ? $this->filters->filters() : [];
     }
 
-    public function filters(): Filters
+    public function filters(): ?Filters
     {
         return $this->filters;
     }

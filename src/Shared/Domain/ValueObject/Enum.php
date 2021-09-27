@@ -12,7 +12,7 @@ abstract class Enum
 {
     protected static array $cache = [];
 
-    private function __construct(protected $value)
+    public function __construct(protected $value)
     {
         $this->ensureIsBetweenAcceptedValues($value);
     }

@@ -13,10 +13,21 @@
     <div class="card">
         <div class="card-body">
             <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6"></div>
-                    <div class="col-sm-12 col-md-6"></div>
+
+                <div class="form-group">
+                    {{ form_start(filterForm, {'attr': {'class': ''}}) }}
+                    <div class="form-row align-items-center">
+                        <div class="col-sm-8 input-group">
+                            {{ form_label(filterForm.username_value) }}
+                            {{ form_widget(filterForm.username_value) }}
+                        </div>
+                        <div class="col-sm-2 input-group">
+                            {{ form_widget(filterForm.filter) }}
+                        </div>
+                    </div>
+                    {{ form_end(filterForm) }}
                 </div>
+
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="example2"
@@ -44,10 +55,13 @@
                                     <td class="sorting_1 dtr-control">{{ user.id }}</td>
                                     <td>{{ user.username }}</td>
                                     <td>
-                                        <a href="{{ path('administrator-edit-form',{'id':user.id}) }}" class="btn btn-info"><i class="fas fa-pencil-alt">
+                                        <a href="{{ path('administrator-edit-form',{'id':user.id}) }}"
+                                           class="btn btn-info"><i class="fas fa-pencil-alt">
                                             </i> Edit</a>
-                                        <a href="{{ path('administrator-password-form',{'id':user.id}) }}" class="btn btn-primary">Change Password</a>
-                                        <a href="{{ path('administrator-delete',{'id':user.id}) }}" class="btn btn-danger"><i class="fas fa-trash">
+                                        <a href="{{ path('administrator-password-form',{'id':user.id}) }}"
+                                           class="btn btn-primary">Change Password</a>
+                                        <a href="{{ path('administrator-delete',{'id':user.id}) }}"
+                                           class="btn btn-danger"><i class="fas fa-trash">
                                             </i> Delete</a>
                                     </td>
                                 </tr>
